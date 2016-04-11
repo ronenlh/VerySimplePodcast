@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +23,11 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
 
     private ArrayList<PodcastFeed> podcastFeedList;
     private TextView plusButton, playButton;
-    boolean playing = false;
-    MediaPlayer mediaPlayer = null;
+    private SeekBar progressBar = null;
+    private boolean isPlayButton = false;
+    private MediaPlayer mediaPlayer = null;
+    private int fileDuration;
+    private Handler progressBarHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
     }
 
     private void startViews() {
+
         plusButton = (TextView) findViewById(R.id.plus_textView);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,18 +67,21 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
+        /** TODO: release and set to null MediaPlayer */
         playButton = (TextView) findViewById(R.id.play_textView);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playing = !playing;
-                if(playing) {
+                isPlayButton = !isPlayButton;
+                if(isPlayButton) {
                     playButton.setText(R.string.fa_pause);
                     // sample stream
                     String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
                     if (mediaPlayer == null) {
                         mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
                         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        fileDuration = mediaPlayer.getDuration();
                         try {
                             mediaPlayer.setDataSource(url);
                             mediaPlayer.prepareAsync(); // might take long! (for buffering, etc)
@@ -84,10 +94,44 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
                         mediaPlayer.start();
                     }
 
+                    new Runnable() {
+                        // he's responsible: http://stackoverflow.com/questions/17168215/seekbar-and-media-player-in-android
+                        @Override
+                        public void run() {
+                            if(mediaPlayer != null){
+                                int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                                progressBar.setProgress(currentPosition);
+                            }
+                            progressBarHandler.postDelayed(this, 1000);
+                        }
+                    };
                 } else {
                     playButton.setText(R.string.fa_play);
                     mediaPlayer.pause();
                 }
+            }
+        });
+
+        progressBar = (SeekBar) findViewById(R.id.progressBar);
+        progressBar.setMax(fileDuration);
+        progressBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChanged = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChanged = progress;
+                if(mediaPlayer != null && fromUser){
+                    mediaPlayer.seekTo(progress * 1000);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });
