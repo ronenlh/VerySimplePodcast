@@ -2,20 +2,26 @@ package com.example.studio08.verysimplepodcast;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FeedSelectorActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<PodcastFeed> podcastFeedList;
-    private TextView plusButton;
+    private TextView plusButton, playButton;
+    boolean playing = false;
+    MediaPlayer mediaPlayer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,38 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FeedSelectorActivity.this, AddPodcastActivity.class));
+            }
+        });
+
+        playButton = (TextView) findViewById(R.id.play_textView);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playing = !playing;
+                if(playing) {
+                    playButton.setText(R.string.fa_pause);
+                    // sample stream
+                    String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
+                    if (mediaPlayer == null) {
+                        mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        try {
+                            mediaPlayer.setDataSource(url);
+                            mediaPlayer.prepareAsync(); // might take long! (for buffering, etc)
+                            mediaPlayer.start();
+                        } catch (IOException e) {
+                            Toast.makeText(FeedSelectorActivity.this, "Oops! " + e.toString(), Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    } else {
+                        mediaPlayer.start();
+                    }
+
+                } else {
+                    playButton.setText(R.string.fa_play);
+                    mediaPlayer.pause();
+                }
+
             }
         });
     }
