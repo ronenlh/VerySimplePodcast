@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -22,7 +24,7 @@ import java.util.Arrays;
 public class FeedSelectorActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<PodcastFeed> podcastFeedList;
-    private TextView plusButton, playButton;
+    private ImageView plusButton, playButton;
     private SeekBar progressBar = null;
     private boolean isPlayButton = false;
     private MediaPlayer mediaPlayer = null;
@@ -33,17 +35,17 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_selector);
-        startFontManager();
+//        startFontManager();
         startAdapter();
         startViews();
     }
 
-    private void startFontManager() {
-        /** The FontManager from http://code.tutsplus.com/tutorials/how-to-use-fontawesome-in-an-android-app--cms-24167 */
-        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
-        FontManager.markAsIconContainer(findViewById(R.id.icons_container), iconFont);
-        FontManager.markAsIconContainer(findViewById(R.id.miniplayer_container), iconFont);
-    }
+//    private void startFontManager() {
+//        /** The FontManager from http://code.tutsplus.com/tutorials/how-to-use-fontawesome-in-an-android-app--cms-24167 */
+//        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
+//        FontManager.markAsIconContainer(findViewById(R.id.icons_container), iconFont);
+//        FontManager.markAsIconContainer(findViewById(R.id.miniplayer_container), iconFont);
+//    }
 
     private void startAdapter() {
         // sets sample array
@@ -59,7 +61,7 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
 
     private void startViews() {
 
-        plusButton = (TextView) findViewById(R.id.plus_textView);
+        plusButton = (ImageView) findViewById(R.id.plus_imageView);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,28 +70,19 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
         });
 
         /** TODO: release and set to null MediaPlayer */
-        playButton = (TextView) findViewById(R.id.play_textView);
+        playButton = (ImageView) findViewById(R.id.play_imageView);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isPlayButton = !isPlayButton;
                 if(isPlayButton) {
-                    playButton.setText(R.string.fa_pause);
+                    playButton.setImageResource(R.drawable.ic_pause_24dp);
                     // sample stream
                     String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
                     if (mediaPlayer == null) {
-                        mediaPlayer = new MediaPlayer();
-                        mediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
-                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        mediaPlayer = MediaPlayer.create(FeedSelectorActivity.this, Uri.parse(url));
                         fileDuration = mediaPlayer.getDuration();
-                        try {
-                            mediaPlayer.setDataSource(url);
-                            mediaPlayer.prepareAsync(); // might take long! (for buffering, etc)
-                            mediaPlayer.start();
-                        } catch (IOException e) {
-                            Toast.makeText(FeedSelectorActivity.this, "Oops! " + e.toString(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
+                        mediaPlayer.start();
                     } else {
                         mediaPlayer.start();
                     }
@@ -106,7 +99,7 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
                         }
                     };
                 } else {
-                    playButton.setText(R.string.fa_play);
+                    playButton.setImageResource(R.drawable.ic_play_arrow_24dp);
                     mediaPlayer.pause();
                 }
             }

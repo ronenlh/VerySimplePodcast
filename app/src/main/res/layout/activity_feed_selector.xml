@@ -15,14 +15,14 @@
             android:id="@+id/icons_container"
             android:background="#d4d4d4">
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/plus_textView"
-                android:text="@string/fa_plus"
+                android:id="@+id/plus_imageView"
                 android:layout_margin="10dp"
                 android:textSize="30sp"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:src="@drawable/ic_add_24dp" />
         </LinearLayout>
 
         <ListView
@@ -50,30 +50,30 @@
                 android:layout_gravity="center_horizontal"
             android:id="@+id/miniplayer_container"
                 android:gravity="center_horizontal">
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/backward_textView"
-                    android:text="@string/fa_step_backward"
+                    android:id="@+id/backward_imageView"
                     android:layout_margin="10dp"
                     android:textSize="30sp"
-                    android:textColor="#000000" />
-                <TextView
+                    android:textColor="#000000"
+                    android:src="@drawable/ic_rotate_left_24dp" />
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/play_textView"
-                    android:text="@string/fa_play"
+                    android:id="@+id/play_imageView"
                     android:layout_margin="10dp"
                     android:textSize="30sp"
-                    android:textColor="#000000" />
-                <TextView
+                    android:textColor="#000000"
+                    android:src="@drawable/ic_play_arrow_24dp" />
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/forward_textView"
-                    android:text="@string/fa_step_forward"
+                    android:id="@+id/forward_imageView"
                     android:layout_margin="10dp"
                     android:textSize="30sp"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:src="@drawable/ic_rotate_right_24dp" />
             </LinearLayout>
     </LinearLayout>
 
