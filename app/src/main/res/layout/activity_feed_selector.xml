@@ -32,56 +32,12 @@
             android:id="@+id/podcasts_listView"
             android:layout_weight="1.14"/>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <fragment
+        android:name="com.example.studio08.verysimplepodcast.MiniPlayerFragment"
+        android:id="@+id/miniplayer_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E0E0E0"
-        android:elevation="4dp">
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:indeterminate="false" />
-
-        <RelativeLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-            android:id="@+id/miniplayer_container"
-                android:gravity="center_horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/backward_imageView"
-                    android:textSize="30sp"
-                    android:textColor="#000000"
-                    android:src="@drawable/ic_rotate_left_24dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/play_imageView"
-                    android:layout_toStartOf="@+id/play_imageView" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/play_imageView"
-                    android:textSize="30sp"
-                    android:textColor="#000000"
-                    android:src="@drawable/ic_play_arrow_24dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/forward_imageView"
-                    android:textSize="30sp"
-                    android:textColor="#000000"
-                    android:src="@drawable/ic_rotate_right_24dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/play_imageView"
-                    android:layout_toEndOf="@+id/play_imageView" />
-            </RelativeLayout>
-    </LinearLayout>
+        />
 
 </LinearLayout>
 

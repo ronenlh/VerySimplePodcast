@@ -24,12 +24,7 @@ import java.util.Arrays;
 public class FeedSelectorActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<PodcastFeed> podcastFeedList;
-    private ImageView plusButton, playButton;
-    private SeekBar progressBar = null;
-    private boolean isPlayButton = false;
-    private MediaPlayer mediaPlayer = null;
-    private int fileDuration;
-    private Handler progressBarHandler = new Handler();
+    private ImageView plusButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +32,17 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_feed_selector);
 //        startFontManager();
         startAdapter();
-        startViews();
+        startBar();
+    }
+
+    private void startBar() {
+        plusButton = (ImageView) findViewById(R.id.plus_imageView);
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FeedSelectorActivity.this, AddPodcastActivity.class));
+            }
+        });
     }
 
 //    private void startFontManager() {
@@ -59,76 +64,6 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
         podcastFeedListView.setOnItemClickListener(this);
     }
 
-    private void startViews() {
-
-        plusButton = (ImageView) findViewById(R.id.plus_imageView);
-        plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FeedSelectorActivity.this, AddPodcastActivity.class));
-            }
-        });
-
-        /** TODO: release and set to null MediaPlayer */
-        playButton = (ImageView) findViewById(R.id.play_imageView);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isPlayButton = !isPlayButton;
-                if(isPlayButton) {
-                    playButton.setImageResource(R.drawable.ic_pause_24dp);
-                    // sample stream
-                    String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
-                    if (mediaPlayer == null) {
-                        mediaPlayer = MediaPlayer.create(FeedSelectorActivity.this, Uri.parse(url));
-                        fileDuration = mediaPlayer.getDuration();
-                        mediaPlayer.start();
-                    } else {
-                        mediaPlayer.start();
-                    }
-
-                    new Runnable() {
-                        // he's responsible: http://stackoverflow.com/questions/17168215/seekbar-and-media-player-in-android
-                        @Override
-                        public void run() {
-                            if(mediaPlayer != null){
-                                int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
-                                progressBar.setProgress(currentPosition);
-                            }
-                            progressBarHandler.postDelayed(this, 1000);
-                        }
-                    };
-                } else {
-                    playButton.setImageResource(R.drawable.ic_play_arrow_24dp);
-                    mediaPlayer.pause();
-                }
-            }
-        });
-
-        progressBar = (SeekBar) findViewById(R.id.progressBar);
-        progressBar.setMax(fileDuration);
-        progressBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChanged = 0;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progressChanged = progress;
-                if(mediaPlayer != null && fromUser){
-                    mediaPlayer.seekTo(progress * 1000);
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
 
 
     @Override
