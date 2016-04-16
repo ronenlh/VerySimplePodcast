@@ -1,11 +1,13 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by studio08 on 4/10/2016.
  */
-public class PodcastFeedAdapter extends BaseAdapter {
+public class PodcastFeedAdapter implements ListAdapter {
 
     Context context;
     ArrayList<PodcastFeed> podcastFeeds;
@@ -21,6 +23,16 @@ public class PodcastFeedAdapter extends BaseAdapter {
     public PodcastFeedAdapter(Context context, ArrayList<PodcastFeed> podcastFeeds) {
         this.context = context;
         this.podcastFeeds = podcastFeeds;
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+
     }
 
     @Override
@@ -36,6 +48,11 @@ public class PodcastFeedAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return 0;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
     }
 
     @Override
@@ -60,6 +77,31 @@ public class PodcastFeedAdapter extends BaseAdapter {
         holder.thumbnail.setImageResource(getItem(position).getThumbnailId());
 
         return row;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return 0;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 1;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return podcastFeeds.isEmpty();
+    }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
     }
 
     class Holder {

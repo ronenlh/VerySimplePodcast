@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,17 +22,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FeedSelectorActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class FeedSelectorActivity extends AppCompatActivity {
 
-    private ArrayList<PodcastFeed> podcastFeedList;
     private ImageView plusButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_selector);
-//        startFontManager();
-        startAdapter();
+
         startBar();
     }
 
@@ -52,26 +51,9 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
 //        FontManager.markAsIconContainer(findViewById(R.id.miniplayer_container), iconFont);
 //    }
 
-    private void startAdapter() {
-        // sets sample array
-        PodcastFeed[] podcastFeedTestArray = {new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed()};
-        podcastFeedList = new ArrayList<>(Arrays.asList(podcastFeedTestArray));
-
-        ListView podcastFeedListView = (ListView) findViewById(R.id.podcasts_listView);
-        PodcastFeedAdapter podcastFeedAdapter = new PodcastFeedAdapter(this, podcastFeedList);
-        podcastFeedListView.setAdapter(podcastFeedAdapter);
-
-        podcastFeedListView.setOnItemClickListener(this);
-    }
 
 
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, PodcastFeedActivity.class);
-        intent.putExtra("name", podcastFeedList.get(position).getTitle());
-        intent.putExtra("description", podcastFeedList.get(position).getDescription());
-        intent.putExtra("thumbnailId", podcastFeedList.get(position).getThumbnailId());
-        startActivity(intent);
-    }
+
+
 }
