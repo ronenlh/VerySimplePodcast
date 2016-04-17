@@ -10,6 +10,7 @@ import android.os.PowerManager;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -18,9 +19,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.studio08.verysimplepodcast.model.Feed;
+import com.example.studio08.verysimplepodcast.retrofit.ApiService;
+import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FeedSelectorActivity extends AppCompatActivity {
 
@@ -32,7 +41,9 @@ public class FeedSelectorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed_selector);
 
         startBar();
+        simpleXML();
     }
+
 
     private void startBar() {
         plusButton = (ImageView) findViewById(R.id.plus_imageView);
@@ -44,16 +55,25 @@ public class FeedSelectorActivity extends AppCompatActivity {
         });
     }
 
-//    private void startFontManager() {
-//        /** The FontManager from http://code.tutsplus.com/tutorials/how-to-use-fontawesome-in-an-android-app--cms-24167 */
-//        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
-//        FontManager.markAsIconContainer(findViewById(R.id.icons_container), iconFont);
-//        FontManager.markAsIconContainer(findViewById(R.id.miniplayer_container), iconFont);
-//    }
+    private void simpleXML() {
 
+        ApiService service =  ServiceGenerator.createService(ApiService.class);
+        Call<Feed> call = service.feed("CloudJazz");
+        call.enqueue(new Callback<Feed>() {
+            @Override
+            public void onResponse(Call<Feed> call, Response<Feed> response) {
+                Feed feed = response.body();
+                if (feed != null)
+                    Log.d("feed", feed.toString());
+                else
+                    Log.d("feed", "feed is null, maybe 400 error");
+            }
 
+            @Override
+            public void onFailure(Call<Feed> call, Throwable t) {
 
-
-
+            }
+        });
+    }
 
 }
