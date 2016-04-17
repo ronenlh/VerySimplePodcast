@@ -2,6 +2,9 @@ package com.example.studio08.verysimplepodcast;
 
 import com.example.studio08.verysimplepodcast.model.Feed;
 
+import java.util.List;
+
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 
@@ -11,5 +14,5 @@ import retrofit2.http.GET;
 public interface ApiService
 {
     @GET("format=xml")
-    Call<Feed> createUser(@Body Feed feed);
+    Call<List<Feed>> createUser();
 }

@@ -62,15 +62,6 @@ public class Channel
         this.description = description;
     }
 
-    public Item[] getItem ()
-    {
-        return item;
-    }
-
-    public void setItem (Item[] item)
-    {
-        this.item = item;
-    }
 
     public String getLink ()
     {

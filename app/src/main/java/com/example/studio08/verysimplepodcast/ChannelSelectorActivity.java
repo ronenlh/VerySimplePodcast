@@ -20,6 +20,7 @@ import org.simpleframework.xml.core.Persister;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -83,23 +84,17 @@ public class ChannelSelectorActivity extends AppCompatActivity implements Adapte
                     playButton.setImageResource(R.drawable.ic_pause_24dp);
 
 
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://feeds.feedburner.com/CloudJazz")
-                            .addConverterFactory(SimpleXmlConverterFactory.create())
-                            .build();
-
-                    ApiService service = retrofit.create(ApiService.class);
-                    Feed feed = service.getXML();
+                    ApiService client =  ServiceGenerator.createService(ApiService.class);
+                    List<Feed> podcasts = (List<Feed>) client.createUser();
+//                    Feed feed = service.getXML();
 
                     // sample stream
                     String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
                     if (mediaPlayer == null) {
                         mediaPlayer = MediaPlayer.create(ChannelSelectorActivity.this, Uri.parse(url));
                         fileDuration = mediaPlayer.getDuration();
-                        mediaPlayer.start();
-                    } else {
-                        mediaPlayer.start();
                     }
+                        mediaPlayer.start();
 
                     progressBarHandler = new Handler();
                     new Runnable() {
