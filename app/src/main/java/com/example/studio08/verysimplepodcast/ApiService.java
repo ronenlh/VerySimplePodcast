@@ -14,6 +14,6 @@ import retrofit2.http.Path;
  */
 public interface ApiService
 {
-    @GET("/{feed}/format=xml")
-    Call<List<Feed>> feed(@Path("feed") String feedName);
+    @GET("{feed}/format=xml")
+    Call<Feed> feed(@Path("feed") String feedName);
 }

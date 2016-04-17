@@ -26,6 +26,8 @@ import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
@@ -46,6 +48,28 @@ public class ChannelSelectorActivity extends AppCompatActivity implements Adapte
 //        startFontManager();
         startAdapter();
         startViews();
+        simpleXML();
+    }
+
+    private void simpleXML() {
+
+        ApiService service =  ServiceGenerator.createService(ApiService.class);
+        Call<Feed> call = service.feed("CloudJazz");
+        call.enqueue(new Callback<Feed>() {
+            @Override
+            public void onResponse(Call<Feed> call, Response<Feed> response) {
+                Feed feed = response.body();
+                if (feed != null)
+                    Log.d("feed", feed.toString());
+                else
+                    Log.d("feed", "feed is null, maybe 400 error");
+            }
+
+            @Override
+            public void onFailure(Call<Feed> call, Throwable t) {
+
+            }
+        });
     }
 
 //    private void startFontManager() {
@@ -85,20 +109,6 @@ public class ChannelSelectorActivity extends AppCompatActivity implements Adapte
                 isPlayButton = !isPlayButton;
                 if(isPlayButton) {
                     playButton.setImageResource(R.drawable.ic_pause_24dp);
-
-
-                    ApiService client =  ServiceGenerator.createService(ApiService.class);
-                    Call<List<Feed>> call = client.feed("CloudJazz");
-                    try {
-                        List<Feed> feedList = call.execute().body();
-                        for (Feed feed : feedList) {
-                            Log.d("feed", feed.getRss().getChannel().getTitle());
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
 
                     // sample stream
                     String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
