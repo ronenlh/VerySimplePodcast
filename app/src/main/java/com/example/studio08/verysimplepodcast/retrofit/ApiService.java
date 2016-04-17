@@ -1,6 +1,7 @@
 package com.example.studio08.verysimplepodcast.retrofit;
 
-import com.example.studio08.verysimplepodcast.model.Feed;
+
+
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,6 +12,6 @@ import retrofit2.http.Path;
  */
 public interface ApiService
 {
-    @GET("{feed}/format=xml")
-    Call<Feed> feed(@Path("feed") String feedName);
+    @GET("{feed}?format=xml")
+    Call<RSS> feed(@Path("feed") String feedName);
 }

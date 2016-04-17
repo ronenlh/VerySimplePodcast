@@ -19,7 +19,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.studio08.verysimplepodcast.model.Feed;
+import com.example.studio08.verysimplepodcast.retrofit.RSS;
 import com.example.studio08.verysimplepodcast.retrofit.ApiService;
 import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 
@@ -58,20 +58,24 @@ public class FeedSelectorActivity extends AppCompatActivity {
     private void simpleXML() {
 
         ApiService service =  ServiceGenerator.createService(ApiService.class);
-        Call<Feed> call = service.feed("CloudJazz");
-        call.enqueue(new Callback<Feed>() {
+        Call<RSS> call = service.feed("CloudJazz");
+        call.enqueue(new Callback<RSS>() {
             @Override
-            public void onResponse(Call<Feed> call, Response<Feed> response) {
-                Feed feed = response.body();
+            public void onResponse(Call<RSS> call, Response<RSS> response) {
+                RSS feed = response.body();
                 if (feed != null)
                     Log.d("feed", feed.toString());
                 else
-                    Log.d("feed", "feed is null, maybe 400 error");
+                    try {
+                        Log.d("feed", response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
             }
 
             @Override
-            public void onFailure(Call<Feed> call, Throwable t) {
-
+            public void onFailure(Call<RSS> call, Throwable t) {
+                Log.d("failure", t.toString());
             }
         });
     }

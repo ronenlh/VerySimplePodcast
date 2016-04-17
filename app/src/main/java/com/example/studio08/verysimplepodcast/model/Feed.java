@@ -14,20 +14,15 @@ import org.simpleframework.xml.Root;
  * @Namespace(reference="http://search.yahoo.com/mrss/", prefix="media")
  * @Namespace(reference="http://www.itunes.com/dtds/podcast-1.0.dtd", prefix="itunes")
  */
-@Root
+@Root(strict=false)
 public class Feed
 {
-    @Element
+    @Element(name="rss")
     private Rss rss;
 
     public Rss getRss ()
     {
         return rss;
-    }
-
-    public void setRss (Rss rss)
-    {
-        this.rss = rss;
     }
 
     @Override
