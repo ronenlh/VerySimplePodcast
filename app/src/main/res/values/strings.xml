@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">VerySimplePodcast</string>
+
+    <!-- Menu Strings -->
+    <string name="ui_menu_search">search</string>
+    <string name="ui_menu_send">send</string>
+    <string name="ui_menu_add">add</string>
+    <string name="ui_menu_quit">quit</string>
+    <string name="ui_menu_feedback">feedback</string>
+    <string name="ui_menu_about">about</string>
+    <string name="ui_menu_share">share</string>
 </resources>
