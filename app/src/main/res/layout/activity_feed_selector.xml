@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.studio08.verysimplepodcast.FeedSelectorActivity"
+        tools:context=".ChannelSelectorActivity"
         android:orientation="vertical">
 
         <LinearLayout
@@ -55,8 +55,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/backward_imageView"
-                    android:textSize="30sp"
-                    android:textColor="#000000"
                     android:src="@drawable/ic_rotate_left_24dp"
                     android:layout_alignParentTop="true"
                     android:layout_toLeftOf="@+id/play_imageView"
@@ -65,8 +63,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/play_imageView"
-                    android:textSize="30sp"
-                    android:textColor="#000000"
                     android:src="@drawable/ic_play_arrow_24dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
@@ -74,8 +70,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/forward_imageView"
-                    android:textSize="30sp"
-                    android:textColor="#000000"
                     android:src="@drawable/ic_rotate_right_24dp"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/play_imageView"

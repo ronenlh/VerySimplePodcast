@@ -1,12 +1,9 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,14 +11,21 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
+import com.example.studio08.verysimplepodcast.model.Feed;
+
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FeedSelectorActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
+
+public class ChannelSelectorActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<PodcastFeed> podcastFeedList;
     private ImageView plusButton, playButton;
@@ -29,7 +33,7 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
     private boolean isPlayButton = false;
     private MediaPlayer mediaPlayer = null;
     private int fileDuration;
-    private Handler progressBarHandler = new Handler();
+    private Handler progressBarHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,7 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FeedSelectorActivity.this, AddPodcastActivity.class));
+                startActivity(new Intent(ChannelSelectorActivity.this, AddPodcastActivity.class));
             }
         });
 
@@ -77,16 +81,27 @@ public class FeedSelectorActivity extends AppCompatActivity implements AdapterVi
                 isPlayButton = !isPlayButton;
                 if(isPlayButton) {
                     playButton.setImageResource(R.drawable.ic_pause_24dp);
+
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://feeds.feedburner.com/CloudJazz")
+                            .addConverterFactory(SimpleXmlConverterFactory.create())
+                            .build();
+
+                    ApiService service = retrofit.create(ApiService.class);
+                    Feed feed = service.getXML();
+
                     // sample stream
                     String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
                     if (mediaPlayer == null) {
-                        mediaPlayer = MediaPlayer.create(FeedSelectorActivity.this, Uri.parse(url));
+                        mediaPlayer = MediaPlayer.create(ChannelSelectorActivity.this, Uri.parse(url));
                         fileDuration = mediaPlayer.getDuration();
                         mediaPlayer.start();
                     } else {
                         mediaPlayer.start();
                     }
 
+                    progressBarHandler = new Handler();
                     new Runnable() {
                         // he's responsible: http://stackoverflow.com/questions/17168215/seekbar-and-media-player-in-android
                         @Override

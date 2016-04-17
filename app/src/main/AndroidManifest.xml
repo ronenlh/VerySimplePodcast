@@ -18,7 +18,7 @@
         <activity android:name=".PodcastFeedActivity" />
         <activity android:name=".PlayerActivity" />
         <activity android:name=".AddPodcastActivity" />
-        <activity android:name=".FeedSelectorActivity"></activity>
+        <activity android:name=".ChannelSelectorActivity"></activity>
     </application>
 
 </manifest>
