@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -18,11 +19,13 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
@@ -85,8 +88,17 @@ public class ChannelSelectorActivity extends AppCompatActivity implements Adapte
 
 
                     ApiService client =  ServiceGenerator.createService(ApiService.class);
-                    List<Feed> podcasts = (List<Feed>) client.createUser();
-//                    Feed feed = service.getXML();
+                    Call<List<Feed>> call = client.feed("CloudJazz");
+                    try {
+                        List<Feed> feedList = call.execute().body();
+                        for (Feed feed : feedList) {
+                            Log.d("feed", feed.getRss().getChannel().getTitle());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
 
                     // sample stream
                     String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";

@@ -9,7 +9,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
  */
 public class ServiceGenerator {
 
-    public static final String API_BASE_URL = "http://feeds.feedburner.com/CloudJazz";
+    public static final String API_BASE_URL = "http://feeds.feedburner.com";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
