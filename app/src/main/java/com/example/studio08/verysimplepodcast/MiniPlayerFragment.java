@@ -57,10 +57,8 @@ public class MiniPlayerFragment extends Fragment {
                     if (mediaPlayer == null) {
                         mediaPlayer = MediaPlayer.create(getContext(), Uri.parse(url));
                         fileDuration = mediaPlayer.getDuration();
-                        mediaPlayer.start();
-                    } else {
-                        mediaPlayer.start();
                     }
+                        mediaPlayer.start();
 
                     new Runnable() {
                         // he's responsible: http://stackoverflow.com/questions/17168215/seekbar-and-media-player-in-android
