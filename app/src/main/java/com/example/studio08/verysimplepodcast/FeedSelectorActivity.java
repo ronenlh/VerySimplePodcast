@@ -1,6 +1,8 @@
 package com.example.studio08.verysimplepodcast;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -19,9 +21,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
+import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
+import com.example.studio08.verysimplepodcast.retrofit.FeedChannel;
 import com.example.studio08.verysimplepodcast.retrofit.RSS;
 import com.example.studio08.verysimplepodcast.retrofit.ApiService;
 import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +42,11 @@ import retrofit2.Response;
 public class FeedSelectorActivity extends AppCompatActivity {
 
     private ImageView plusButton;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,10 @@ public class FeedSelectorActivity extends AppCompatActivity {
 
         startBar();
         simpleXML();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -57,15 +74,25 @@ public class FeedSelectorActivity extends AppCompatActivity {
 
     private void simpleXML() {
 
-        ApiService service =  ServiceGenerator.createService(ApiService.class);
+        // database
+        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(this);
+        final SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<RSS> call = service.feed("CloudJazz");
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
                 RSS feed = response.body();
-                if (feed != null)
+                if (feed != null) {
                     Log.d("feed", feed.toString());
-                else
+                    for (FeedChannel.Item item : feed.getChannel().itemList) {
+                        String title = item.title;
+                        String link = item.link;
+                        String description = item.description;
+                        databaseHelper(db, title, link, description);
+                    }
+                } else
                     try {
                         Log.d("feed", response.errorBody().string());
                     } catch (IOException e) {
@@ -80,4 +107,61 @@ public class FeedSelectorActivity extends AppCompatActivity {
         });
     }
 
+    private long databaseHelper(SQLiteDatabase db, String title, String link, String description) {
+
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, title);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_LINK, link);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION, description);
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId;
+        newRowId = db.insert(
+                FeedReaderContract.FeedEntry.TABLE_NAME,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_NULLABLE,
+                values);
+
+        return newRowId;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "FeedSelector Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.studio08.verysimplepodcast/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "FeedSelector Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.studio08.verysimplepodcast/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
