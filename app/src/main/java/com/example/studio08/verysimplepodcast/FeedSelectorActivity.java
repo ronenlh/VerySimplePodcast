@@ -2,6 +2,7 @@ package com.example.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -92,6 +93,10 @@ public class FeedSelectorActivity extends AppCompatActivity {
                         String description = item.description;
                         databaseHelper(db, title, link, description);
                     }
+                    Cursor cursor = cursor(db);
+                    ListView listView = (ListView) findViewById(R.id.channel_list_view);
+                    ChannelCursorAdapter adapter = new ChannelCursorAdapter(FeedSelectorActivity.this, cursor, true);
+                    listView.setAdapter(adapter);
                 } else
                     try {
                         Log.d("feed", response.errorBody().string());
@@ -116,13 +121,40 @@ public class FeedSelectorActivity extends AppCompatActivity {
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION, description);
 
         // Insert the new row, returning the primary key value of the new row
-        long newRowId;
-        newRowId = db.insert(
+        long newRowId = db.insert(
                 FeedReaderContract.FeedEntry.TABLE_NAME,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_NULLABLE,
                 values);
-
+        Log.d("databaseHelper()", ""+newRowId+" "+title);
         return newRowId;
+    }
+
+    private Cursor cursor(SQLiteDatabase db) {
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                FeedReaderContract.FeedEntry._ID,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_LINK,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION
+        };
+
+        // How you want the results sorted in the resulting Cursor
+//        String sortOrder =
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_UPDATED + " DESC";
+
+        Cursor cursor = db.query(
+                FeedReaderContract.FeedEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                 // The sort order
+        );
+
+        return cursor;
     }
 
     @Override
