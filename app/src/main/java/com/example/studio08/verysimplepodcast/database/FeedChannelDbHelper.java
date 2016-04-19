@@ -5,30 +5,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by studio08 on 4/18/2016.
+ * Created by studio08 on 4/19/2016.
  */
-public class FeedReaderDbHelper extends SQLiteOpenHelper {
+public class FeedChannelDbHelper extends SQLiteOpenHelper {
 
     //  implement methods that create and maintain the database and tables
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + FeedReaderContract.FeedEntry.TABLE_NAME + " (" +
-                    FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
-                    FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
-                    FeedReaderContract.FeedEntry.COLUMN_NAME_LINK + TEXT_TYPE + COMMA_SEP +
-                    FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE +
+            "CREATE TABLE " + FeedReaderContract.FeedChannel.TABLE_CHANNEL_NAME + " (" +
+                    FeedReaderContract.FeedChannel._ID + " INTEGER PRIMARY KEY," +
+                    FeedReaderContract.FeedChannel.COLUMN_NAME_CHANNEL_TITLE + TEXT_TYPE +
                     // Any other options for the CREATE command, remember the COMMA_SEP
                     " )";
 
     private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + FeedReaderContract.FeedChannel.TABLE_CHANNEL_NAME;
 
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "FeedReader.db";
 
-    public FeedReaderDbHelper(Context context) {
+    public FeedChannelDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {

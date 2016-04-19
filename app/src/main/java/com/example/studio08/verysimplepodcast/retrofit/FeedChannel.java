@@ -25,11 +25,18 @@ public class FeedChannel {
     @ElementList(name = "item", required = true, inline = true)
     public List<Item> itemList;
 
+    public List<Item> getItemList() {
+        return itemList;
+    }
 
     @Element
     String title;
     @Element
     String language;
+
+    public String getTitle() {
+        return title;
+    }
 
     @Element(name = "ttl", required = false)
     int ttl;

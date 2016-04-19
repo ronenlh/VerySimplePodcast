@@ -11,13 +11,13 @@ public final class FeedReaderContract {
     public FeedReaderContract() {}
 
     /* Inner class that defines the table contents */
-    public static abstract class FeedEntry implements BaseColumns {
-        public static final String TABLE_NAME = "entry";
+    public static abstract class FeedItem implements BaseColumns {
+        public static final String TABLE_FEED_NAME = "item";
 //        public static final String COLUMN_NAME_ENTRY_ID = "entryid";
-        public static final String COLUMN_NAME_TITLE = "title";
-        public static final String COLUMN_NAME_LINK = "link";
-        public static final String COLUMN_NAME_DESCRIPTION = "description";
-        public static final String COLUMN_NAME_NULLABLE = "null";
+        public static final String COLUMN_NAME_FEED_TITLE = "title";
+        public static final String COLUMN_NAME_FEED_LINK = "link";
+        public static final String COLUMN_NAME_FEED_DESCRIPTION = "description";
+        public static final String COLUMN_NAME_FEED_NULLABLE = "null";
 
         /* author='null',
         category='null',
@@ -28,6 +28,14 @@ public final class FeedReaderContract {
         source='null'
         plus many more that are not in the model class and are ignored by simpleXML
         */
+    }
+
+    // another inner class to define the channel database
+    public static abstract class FeedChannel implements BaseColumns {
+        public static final String TABLE_CHANNEL_NAME = "channel";
+        public static final String COLUMN_NAME_CHANNEL_TITLE = "title";
+        public static final String COLUMN_NAME_CHANNEL_NULLABLE = "null";
+
     }
 
 

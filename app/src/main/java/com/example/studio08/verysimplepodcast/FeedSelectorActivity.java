@@ -12,13 +12,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.studio08.verysimplepodcast.database.FeedChannelDbHelper;
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
-import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
+import com.example.studio08.verysimplepodcast.database.FeedItemsDbHelper;
 import com.example.studio08.verysimplepodcast.retrofit.FeedChannel;
 import com.example.studio08.verysimplepodcast.retrofit.RSS;
 import com.example.studio08.verysimplepodcast.retrofit.ApiService;
 import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -81,8 +81,10 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
     private void simpleXML() {
 
         // database
-        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(this);
-        final SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        FeedItemsDbHelper itemsDbHelper = new FeedItemsDbHelper(this);
+        final SQLiteDatabase itemsDb = itemsDbHelper.getWritableDatabase();
+        FeedChannelDbHelper channelDbHelper = new FeedChannelDbHelper(this);
+        final SQLiteDatabase channelDb = channelDbHelper.getWritableDatabase();
 
         ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<RSS> call = service.feed("CloudJazz");
@@ -90,20 +92,23 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
                 RSS feed = response.body();
+
                 if (feed != null) {
-                    Log.d("feed", feed.toString());
-                    for (FeedChannel.Item item : feed.getChannel().itemList) {
+                    Log.d("feed", "feed isn't null");
+                    channelDbInserter(channelDb, feed.getChannel().getTitle());
+
+                    for (FeedChannel.Item item : feed.getChannel().getItemList()) {
                         String title = item.title;
                         String link = item.link;
                         String description = item.description;
-                        databaseHelper(db, title, link, description);
+                        itemsDbInserter(itemsDb, title, link, description);
                     }
-                    Cursor cursor = cursor(db);
+                    Cursor cursor = cursor(channelDb);
                     ChannelListFragment channelListFragment = new ChannelListFragment();
 
                     // stuff needed to initialize ChannelCursorAdapter
-                    String[] from = {FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
-                            FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION};
+                    String[] from = {FeedReaderContract.FeedItem.COLUMN_NAME_FEED_TITLE,
+                            FeedReaderContract.FeedItem.COLUMN_NAME_FEED_DESCRIPTION};
                     int[] to = {R.id.episode_title,
                             R.id.episode_description};
                     ChannelCursorAdapter adapter = new ChannelCursorAdapter(FeedSelectorActivity.this,
@@ -128,19 +133,29 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
         });
     }
 
-    private long databaseHelper(SQLiteDatabase db, String title, String link, String description) {
+    private long channelDbInserter(SQLiteDatabase db, String title) {
+        ContentValues values = new ContentValues();
+        values.put(FeedReaderContract.FeedChannel.COLUMN_NAME_CHANNEL_TITLE, title);
+
+        return db.insert(
+                FeedReaderContract.FeedChannel.TABLE_CHANNEL_NAME,
+                FeedReaderContract.FeedChannel.COLUMN_NAME_CHANNEL_NULLABLE,
+                values);
+    }
+
+    private long itemsDbInserter(SQLiteDatabase db, String title, String link, String description) {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, title);
-        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_LINK, link);
-        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION, description);
+        values.put(FeedReaderContract.FeedItem.COLUMN_NAME_FEED_TITLE, title);
+        values.put(FeedReaderContract.FeedItem.COLUMN_NAME_FEED_LINK, link);
+        values.put(FeedReaderContract.FeedItem.COLUMN_NAME_FEED_DESCRIPTION, description);
 
         // Insert the new row, returning the primary key value of the new row
-//        Log.d("databaseHelper()", ""+newRowId+" "+title);
+//        Log.d("itemsDbInserter()", ""+newRowId+" "+title);
         return db.insert(
-                FeedReaderContract.FeedEntry.TABLE_NAME,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_NULLABLE,
+                FeedReaderContract.FeedItem.TABLE_FEED_NAME,
+                FeedReaderContract.FeedItem.COLUMN_NAME_FEED_NULLABLE,
                 values);
     }
 
@@ -149,10 +164,10 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
-                FeedReaderContract.FeedEntry._ID,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_LINK,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION
+                FeedReaderContract.FeedItem._ID,
+                FeedReaderContract.FeedItem.COLUMN_NAME_FEED_TITLE,
+                FeedReaderContract.FeedItem.COLUMN_NAME_FEED_LINK,
+                FeedReaderContract.FeedItem.COLUMN_NAME_FEED_DESCRIPTION
         };
 
         // How you want the results sorted in the resulting Cursor
@@ -160,13 +175,13 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
 //                FeedReaderContract.FeedEntry.COLUMN_NAME_UPDATED + " DESC";
 
         return db.query(
-                FeedReaderContract.FeedEntry.TABLE_NAME,  // The table to query
-                projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
+                FeedReaderContract.FeedItem.TABLE_FEED_NAME,    // The table to query
+                projection,                                 // The columns to return
+                null,                                       // The columns for the WHERE clause
+                null,                                       // The values for the WHERE clause
+                null,                                       // don't group the rows
+                null,                                       // don't filter by row groups
+                null                                        // The sort order
         );
     }
 

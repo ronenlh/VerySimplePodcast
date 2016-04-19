@@ -21,15 +21,4 @@ public class ChannelCursorAdapter extends SimpleCursorAdapter {
         return LayoutInflater.from(context).inflate(R.layout.channel_row, parent, false);
     }
 
-    @Override
-    public void bindView(View view, Context context, Cursor cursor) {
-//        TextView episodeTitle = (TextView) view.findViewById();
-//        TextView episodeDescription = (TextView) view.findViewById();
-//
-//        String title = cursor.getString(cursor.getColumnIndexOrThrow());
-//        String description = cursor.getString(cursor.getColumnIndexOrThrow());
-//
-//        episodeTitle.setText(title);
-//        episodeDescription.setText(description);
-    }
 }
