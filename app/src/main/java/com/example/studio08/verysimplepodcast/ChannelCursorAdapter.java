@@ -6,10 +6,6 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
-import android.widget.TextView;
-
-import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 
 /**
  * Created by studio08 on 4/18/2016.

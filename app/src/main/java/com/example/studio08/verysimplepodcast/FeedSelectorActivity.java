@@ -4,24 +4,13 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.PowerManager;
-import android.support.v4.app.ListFragment;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
@@ -34,16 +23,13 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedSelectorActivity extends AppCompatActivity {
+public class FeedSelectorActivity extends AppCompatActivity implements FeedSelectorFragment.onChannelSelectedListener {
 
-    private ImageView plusButton;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -57,21 +43,39 @@ public class FeedSelectorActivity extends AppCompatActivity {
 
         startBar();
         simpleXML();
-
+        if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
+            FeedSelectorFragment feedSelectorFragment = new FeedSelectorFragment();
+            feedSelectorFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().
+                    beginTransaction().
+                    add(R.id.feed_selector_container, feedSelectorFragment).
+                    commit();
+        }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    public void onChannelSelected(int position){
+        ChannelListFragment channelListFragment = new ChannelListFragment();
+        getSupportFragmentManager().
+                beginTransaction().
+                replace(R.id.feed_selector_container, channelListFragment).
+                addToBackStack(null).
+                commit();
+    }
+
 
     private void startBar() {
-        plusButton = (ImageView) findViewById(R.id.plus_imageView);
-        plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FeedSelectorActivity.this, AddPodcastActivity.class));
-            }
-        });
+        ImageView plusButton = (ImageView) findViewById(R.id.plus_imageView);
+        if (plusButton != null) {
+            plusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(FeedSelectorActivity.this, AddPodcastActivity.class));
+                }
+            });
+        }
     }
 
     private void simpleXML() {
@@ -133,12 +137,11 @@ public class FeedSelectorActivity extends AppCompatActivity {
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION, description);
 
         // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(
+//        Log.d("databaseHelper()", ""+newRowId+" "+title);
+        return db.insert(
                 FeedReaderContract.FeedEntry.TABLE_NAME,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_NULLABLE,
                 values);
-        Log.d("databaseHelper()", ""+newRowId+" "+title);
-        return newRowId;
     }
 
     private Cursor cursor(SQLiteDatabase db) {
@@ -156,7 +159,7 @@ public class FeedSelectorActivity extends AppCompatActivity {
 //        String sortOrder =
 //                FeedReaderContract.FeedEntry.COLUMN_NAME_UPDATED + " DESC";
 
-        Cursor cursor = db.query(
+        return db.query(
                 FeedReaderContract.FeedEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
                 null,                                // The columns for the WHERE clause
@@ -165,8 +168,6 @@ public class FeedSelectorActivity extends AppCompatActivity {
                 null,                                     // don't filter by row groups
                 null                                 // The sort order
         );
-
-        return cursor;
     }
 
     @Override
