@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,9 +95,20 @@ public class FeedSelectorActivity extends AppCompatActivity {
                         databaseHelper(db, title, link, description);
                     }
                     Cursor cursor = cursor(db);
-                    ListView listView = (ListView) findViewById(R.id.channel_list_view);
-                    ChannelCursorAdapter adapter = new ChannelCursorAdapter(FeedSelectorActivity.this, cursor, true);
-                    listView.setAdapter(adapter);
+                    ChannelListFragment channelListFragment = new ChannelListFragment();
+
+                    // stuff needed to initialize ChannelCursorAdapter
+                    String[] from = {FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION};
+                    int[] to = {R.id.episode_title,
+                            R.id.episode_description};
+                    ChannelCursorAdapter adapter = new ChannelCursorAdapter(FeedSelectorActivity.this,
+                            R.layout.channel_row,
+                            cursor,
+                            from,
+                            to,
+                            CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+                    channelListFragment.setListAdapter(adapter);
                 } else
                     try {
                         Log.d("feed", response.errorBody().string());
