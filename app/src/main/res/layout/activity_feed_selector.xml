@@ -26,20 +26,20 @@
                 android:src="@drawable/ic_add_24dp" />
         </LinearLayout>
 
-    <!-- <fragment
+ <fragment
         android:name="com.example.studio08.verysimplepodcast.FeedSelectorFragment"
-        android:id="@+id/feed_selector_list"
+     android:id="@+id/feed_selector_container"
        android:layout_width="match_parent"
        android:layout_height="0dp"
         android:layout_weight="1"
-        /> -->
-    <FrameLayout
+        />
+    <!--    <FrameLayout
         android:name="com.example.studio08.verysimplepodcast.ChannelListFragment"
         android:id="@+id/feed_selector_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        />
+        /> -->
 
     <fragment
         android:name="com.example.studio08.verysimplepodcast.MiniPlayerFragment"

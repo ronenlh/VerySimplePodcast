@@ -29,12 +29,14 @@ public class FeedSelectorFragment extends ListFragment {
 
     @Override
     public void onAttach(Context context) {
+        // To allow a Fragment to communicate up to its Activity, you can define an interface in the Fragment class and implement it within the Activity.
+        // The Fragment captures the interface implementation during its onAttach() lifecycle method and can then call the Interface methods in order to communicate with the Activity.
         super.onAttach(context);
         try {
             mCallback = (onChannelSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " must implement onChannelSelectedListener");
         }
     }
 
@@ -64,8 +66,7 @@ public class FeedSelectorFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
         mCallback.onChannelSelected(position);
-        super.onListItemClick(l, v, position, id);
+//        super.onListItemClick(l, v, position, id);
     }
 }

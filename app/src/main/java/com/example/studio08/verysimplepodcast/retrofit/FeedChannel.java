@@ -89,9 +89,9 @@ public class FeedChannel {
 
         @Override
         public String toString() {
-            return "Item{" +
+            return "\n\t Item{" +
                     "title='" + title + '\'' +
-                    ", link='" + link + '\'' +
+                    ",  link='" + link + '\'' +
                     ", description='" + description + '\'' +
                     ", author='" + author + '\'' +
                     ", category='" + category + '\'' +
@@ -116,7 +116,7 @@ public class FeedChannel {
         @Override
         public String toString() {
             return "Enclosure{" +
-                    " url='" + url + '\'' +
+                    "url='" + url + '\'' +
                     ", type='" + type + '\'' +
                     ", length='" + length + '\'' +
                     "}";

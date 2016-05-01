@@ -6,11 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
@@ -28,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedSelectorActivity extends AppCompatActivity implements FeedSelectorFragment.onChannelSelectedListener {
+public class FeedSelectorActivity extends AppCompatActivity implements FeedSelectorFragment.onChannelSelectedListener, ChannelListFragment.onEpisodeSelectedListener {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -56,15 +58,6 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void onChannelSelected(int position){
-        ChannelListFragment channelListFragment = new ChannelListFragment();
-        getSupportFragmentManager().
-                beginTransaction().
-                replace(R.id.feed_selector_container, channelListFragment).
-                addToBackStack(null).
-                commit();
-    }
-
 
     private void startBar() {
         ImageView plusButton = (ImageView) findViewById(R.id.plus_imageView);
@@ -89,9 +82,9 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
-                RSS feed = response.body();
+                RSS feed = response.body(); // <-- this is the feed!
                 if (feed != null) {
-                    Log.d("feed", "feed is not null: \t" + feed.toString());
+                    Log.d("feed", "feed is not null: \n" + feed.toString());
                     // first:
                     for (FeedChannel.Item item : feed.getChannel().itemList) {
                         String title = item.title;
@@ -105,6 +98,9 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
                     ChannelListFragment channelListFragment = new ChannelListFragment();
 
                     // stuff needed to initialize ChannelCursorAdapter
+                    // A ListAdapter constructor takes a parameter that specifies a layout resource for each row.
+                    // It also has two additional parameters that let you specify which data field to associate with which object in the row layout resource.
+                    // These two (from, to) parameters are typically parallel arrays.
                     String[] from = {FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
                             FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION};
                     int[] to = {R.id.episode_title,
@@ -118,7 +114,7 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
                     channelListFragment.setListAdapter(adapter);
                 } else
                     try {
-                        Log.d("feed", response.errorBody().string());
+                        Log.e("feed", response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -213,5 +209,20 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public void onChannelSelected(int position){
+        ChannelListFragment channelListFragment = new ChannelListFragment();
+        getSupportFragmentManager().
+                beginTransaction().
+                replace(R.id.feed_selector_container, channelListFragment).
+                addToBackStack(null).
+                commit();
+    }
+
+    @Override
+    public void onEpisodeSelected(int position) {
+        Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
     }
 }

@@ -24,8 +24,8 @@ public class RSS {
     @Override
     public String toString() {
         return "RSS{" +
-                "version='" + version + '\'' +
-                ", channel=" + channel +
+                "\n\t version='" + version + '\'' +
+                ", \n\t channel=" + channel +
                 '}';
     }
 }
