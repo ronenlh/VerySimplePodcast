@@ -85,13 +85,13 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
         final SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ApiService service = ServiceGenerator.createService(ApiService.class);
-        Call<RSS> call = service.feed("CloudJazz");
+        Call<RSS> call = service.feed("serialpodcast");
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
                 RSS feed = response.body();
                 if (feed != null) {
-                    Log.d("feed", feed.toString());
+                    Log.d("feed", "feed is not null:" + feed.toString());
                     for (FeedChannel.Item item : feed.getChannel().itemList) {
                         String title = item.title;
                         String link = item.link;
