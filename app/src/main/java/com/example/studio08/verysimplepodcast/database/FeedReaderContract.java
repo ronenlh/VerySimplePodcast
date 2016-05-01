@@ -17,6 +17,7 @@ public final class FeedReaderContract {
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_LINK = "link";
         public static final String COLUMN_NAME_DESCRIPTION = "description";
+        public static final String COLUMN_NAME_URL = "url";
         public static final String COLUMN_NAME_NULLABLE = "null";
 
         /* author='null',

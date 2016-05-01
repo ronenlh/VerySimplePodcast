@@ -116,9 +116,9 @@ public class FeedChannel {
         @Override
         public String toString() {
             return "Enclosure{" +
-                    " url=" + url +
-                    " type=" + type +
-                    " length=" + length +
+                    " url='" + url + '\'' +
+                    ", type='" + type + '\'' +
+                    ", length='" + length + '\'' +
                     "}";
         }
     }

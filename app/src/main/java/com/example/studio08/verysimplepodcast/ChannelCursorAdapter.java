@@ -6,6 +6,9 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 
 /**
  * Created by studio08 on 4/18/2016.
@@ -23,13 +26,13 @@ public class ChannelCursorAdapter extends SimpleCursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-//        TextView episodeTitle = (TextView) view.findViewById();
-//        TextView episodeDescription = (TextView) view.findViewById();
-//
-//        String title = cursor.getString(cursor.getColumnIndexOrThrow());
-//        String description = cursor.getString(cursor.getColumnIndexOrThrow());
-//
-//        episodeTitle.setText(title);
-//        episodeDescription.setText(description);
+        TextView episodeTitle = (TextView) view.findViewById(R.id.episode_title);
+        TextView episodeDescription = (TextView) view.findViewById(R.id.episode_description);
+
+        String title = cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE));
+        String description = cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION));
+
+        episodeTitle.setText(title);
+        episodeDescription.setText(description);
     }
 }

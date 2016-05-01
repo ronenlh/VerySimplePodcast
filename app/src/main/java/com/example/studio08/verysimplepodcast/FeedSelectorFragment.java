@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,12 +48,13 @@ public class FeedSelectorFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         // sets sample array
-        PodcastFeed[] podcastFeedTestArray = {new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed()};
-        ArrayList<PodcastFeed> podcastFeedList = new ArrayList<>(Arrays.asList(podcastFeedTestArray));
+//        PodcastFeed[] podcastFeedTestArray = {new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed()};
+//        ArrayList<PodcastFeed> podcastFeedList = new ArrayList<>(Arrays.asList(podcastFeedTestArray));
+//
+//        PodcastFeedAdapter podcastFeedAdapter = new PodcastFeedAdapter(getContext(), podcastFeedList);
+//        setListAdapter(podcastFeedAdapter);
+////        getListView().setOnItemClickListener(this);
 
-        PodcastFeedAdapter podcastFeedAdapter = new PodcastFeedAdapter(getContext(), podcastFeedList);
-        setListAdapter(podcastFeedAdapter);
-//        getListView().setOnItemClickListener(this);
     }
 
     @Override
@@ -62,7 +64,8 @@ public class FeedSelectorFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+        Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
         mCallback.onChannelSelected(position);
+        super.onListItemClick(l, v, position, id);
     }
 }

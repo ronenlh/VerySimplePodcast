@@ -91,13 +91,16 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
             public void onResponse(Call<RSS> call, Response<RSS> response) {
                 RSS feed = response.body();
                 if (feed != null) {
-                    Log.d("feed", "feed is not null:" + feed.toString());
+                    Log.d("feed", "feed is not null: \t" + feed.toString());
+                    // first:
                     for (FeedChannel.Item item : feed.getChannel().itemList) {
                         String title = item.title;
                         String link = item.link;
                         String description = item.description;
-                        databaseHelper(db, title, link, description);
+                        String url = item.enclosure.url;
+                        databaseHelper(db, title, link, description, url);
                     }
+                    // after that:
                     Cursor cursor = cursor(db);
                     ChannelListFragment channelListFragment = new ChannelListFragment();
 
@@ -128,13 +131,14 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
         });
     }
 
-    private long databaseHelper(SQLiteDatabase db, String title, String link, String description) {
+    private long databaseHelper(SQLiteDatabase db, String title, String link, String description, String url) {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, title);
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_LINK, link);
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION, description);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_URL, url);
 
         // Insert the new row, returning the primary key value of the new row
 //        Log.d("databaseHelper()", ""+newRowId+" "+title);
@@ -152,7 +156,8 @@ public class FeedSelectorActivity extends AppCompatActivity implements FeedSelec
                 FeedReaderContract.FeedEntry._ID,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_LINK,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION
+                FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_URL
         };
 
         // How you want the results sorted in the resulting Cursor
