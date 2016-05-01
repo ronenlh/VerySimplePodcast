@@ -78,8 +78,8 @@ public class FeedChannel {
         public String category;
         @Element(name = "comments", required = false)
         public String comments;
-        @Element(name = "enclosure", required = false)
-        public String enclosure;//	Describes a media object that is attached to the item. More.	<enclosure url="http://live.curry.com/mp3/celebritySCms.mp3" length="1069871" type="audio/mpeg"/>
+        @Element(name = "enclosure", required = true)
+        public Enclosure enclosure;//	Describes a media object that is attached to the item. More.	<enclosure url="http://live.curry.com/mp3/celebritySCms.mp3" length="1069871" type="audio/mpeg"/>
         @Element(name = "guid", required = false)
         public String guid;//A string that uniquely identifies the item. More.	<guid isPermaLink="true">http://inessential.com/2002/09/01.php#a2</guid>
         @Element(name = "pubDate", required = false)
@@ -103,4 +103,24 @@ public class FeedChannel {
                     '}';
         }
     }
+    public static class Enclosure {
+        @Attribute(required = true)
+        public String url;
+
+        @Attribute(required = false)
+        public String type;
+
+        @Attribute(required = false)
+        public long length;
+
+        @Override
+        public String toString() {
+            return "Enclosure{" +
+                    " url=" + url +
+                    " type=" + type +
+                    " length=" + length +
+                    "}";
+        }
+    }
+
 }
