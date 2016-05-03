@@ -28,7 +28,7 @@ public class AddPodcastActivity extends AppCompatActivity {
             Toast.makeText(this, "There must be a typo in the URL...", Toast.LENGTH_SHORT).show();
         }
         String feedStringURL = feedURL.toString();
-        Intent intent = new Intent(this, FeedSelectorActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("feedURL", feedStringURL);
         startActivity(intent);
     }

@@ -1,20 +1,32 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
+import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
+import com.example.studio08.verysimplepodcast.retrofit.ApiService;
+import com.example.studio08.verysimplepodcast.retrofit.FeedChannel;
+import com.example.studio08.verysimplepodcast.retrofit.RSS;
+import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -22,10 +34,10 @@ import java.util.Arrays;
  */
 public class FeedSelectorFragment extends ListFragment {
 
-    onChannelSelectedListener mCallback;
+    onFeedSelectedListener mCallback;
 
-    interface onChannelSelectedListener {
-        void onChannelSelected(int position);
+    interface onFeedSelectedListener {
+        void onFeedSelected(int position);
     }
 
     @Override
@@ -34,10 +46,10 @@ public class FeedSelectorFragment extends ListFragment {
         // The Fragment captures the interface implementation during its onAttach() lifecycle method and can then call the Interface methods in order to communicate with the Activity.
         super.onAttach(context);
         try {
-            mCallback = (onChannelSelectedListener) context;
+            mCallback = (onFeedSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement onChannelSelectedListener");
+                    + " must implement onEpisodeSelectedListener");
         }
     }
 
@@ -70,9 +82,10 @@ public class FeedSelectorFragment extends ListFragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        mCallback.onChannelSelected(position);
+        mCallback.onFeedSelected(position);
 //        super.onListItemClick(l, v, position, id);
     }
 }
