@@ -7,10 +7,13 @@ import android.widget.TextView;
  * Created by studio08 on 4/10/2016.
  */
 public class PodcastFeed {
-    private String title = "test";
-    private String description = "test description";
+    private String title;
+    private String description = "sample description";
     private int thumbnailId = R.drawable.thumbnail99pi;
 
+    public PodcastFeed(String title) {
+        this.title = title;
+    }
 
     public String getTitle() {
         return title;
@@ -22,5 +25,10 @@ public class PodcastFeed {
 
     public int getThumbnailId() {
         return thumbnailId;
+    }
+
+    @Override
+    public String toString() {
+        return getTitle();
     }
 }

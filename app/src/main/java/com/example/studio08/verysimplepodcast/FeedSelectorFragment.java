@@ -7,6 +7,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -50,11 +51,16 @@ public class FeedSelectorFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         // sets sample array
-//        PodcastFeed[] podcastFeedTestArray = {new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed(), new PodcastFeed()};
-//        ArrayList<PodcastFeed> podcastFeedList = new ArrayList<>(Arrays.asList(podcastFeedTestArray));
-//
-//        PodcastFeedAdapter podcastFeedAdapter = new PodcastFeedAdapter(getContext(), podcastFeedList);
-//        setListAdapter(podcastFeedAdapter);
+        ArrayList<PodcastFeed> podcastFeedList = new ArrayList<>();
+        for (int i = 1; i < 20; i++) {
+            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
+        }
+
+//        PodcastFeedAdapter adapter = new PodcastFeedAdapter(getContext(), podcastFeedList);
+
+        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
+        setListAdapter(adapter);
+
 ////        getListView().setOnItemClickListener(this);
 
     }
