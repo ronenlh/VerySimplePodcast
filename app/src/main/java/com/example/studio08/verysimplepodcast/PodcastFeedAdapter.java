@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by studio08 on 4/10/2016.
  */
-public class PodcastFeedAdapter implements ListAdapter {
+public class PodcastFeedAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<PodcastFeed> podcastFeeds;
@@ -23,16 +23,6 @@ public class PodcastFeedAdapter implements ListAdapter {
     public PodcastFeedAdapter(Context context, ArrayList<PodcastFeed> podcastFeeds) {
         this.context = context;
         this.podcastFeeds = podcastFeeds;
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
     }
 
     @Override
@@ -48,11 +38,6 @@ public class PodcastFeedAdapter implements ListAdapter {
     @Override
     public long getItemId(int position) {
         return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
     }
 
     @Override
@@ -77,31 +62,6 @@ public class PodcastFeedAdapter implements ListAdapter {
         holder.thumbnail.setImageResource(getItem(position).getThumbnailId());
 
         return row;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 0;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 1;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return podcastFeeds.isEmpty();
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return false;
     }
 
     class Holder {

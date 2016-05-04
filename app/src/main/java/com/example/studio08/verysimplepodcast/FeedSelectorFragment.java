@@ -68,12 +68,10 @@ public class FeedSelectorFragment extends ListFragment {
             podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
         }
 
-//        PodcastFeedAdapter adapter = new PodcastFeedAdapter(getContext(), podcastFeedList);
+        PodcastFeedAdapter adapter = new PodcastFeedAdapter(getContext(), podcastFeedList);
 
-        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
+//        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
         setListAdapter(adapter);
-
-////        getListView().setOnItemClickListener(this);
 
     }
 
@@ -86,6 +84,6 @@ public class FeedSelectorFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         mCallback.onFeedSelected(position);
-//        super.onListItemClick(l, v, position, id);
+        super.onListItemClick(l, v, position, id);
     }
 }
