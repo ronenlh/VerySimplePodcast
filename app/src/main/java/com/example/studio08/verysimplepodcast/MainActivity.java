@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startBar();
+//        startBar();
         if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
             FeedSelectorFragment feedSelectorFragment = new FeedSelectorFragment();
             feedSelectorFragment.setArguments(getIntent().getExtras());
@@ -44,17 +45,18 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
 
-    private void startBar() {
-        ImageView plusButton = (ImageView) findViewById(R.id.plus_imageView);
-        if (plusButton != null) {
-            plusButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, AddPodcastActivity.class));
-                }
-            });
-        }
-    }
+//    private void startBar() {
+//        ImageView plusButton = (ImageView) findViewById(R.id.plus_imageView);
+//        if (plusButton != null) {
+//            plusButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    startActivity(new Intent(MainActivity.this, AddPodcastActivity.class));
+//                }
+//            });
+//        }
+//    }
+
 
 
 
@@ -100,9 +102,14 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
     @Override
-    public void onFeedSelected(int position){
+    public void onFeedSelected(int position, String feedUrl){
         Toast.makeText(this, "Channel Selected", Toast.LENGTH_SHORT).show();
         EpisodeSelectorFragment episodeSelectorFragment = new EpisodeSelectorFragment();
+        // getting and adding the feedUrl to the Fragment
+        Bundle args = new Bundle();
+        args.putString("feedUrl", feedUrl);
+        episodeSelectorFragment.setArguments(args);
+        // now switching Fragments
         getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.feed_selector_container, episodeSelectorFragment).
@@ -118,14 +125,15 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     @Override
     public void onLongEpisodeClick(int position, String url) {
-        WebViewFragment webViewFragment = new WebViewFragment();
-        Bundle args = new Bundle();
-        args.putString("url", url);
-        webViewFragment.setArguments(args);
-        getSupportFragmentManager().
-                beginTransaction().
-                replace(R.id.feed_selector_container, webViewFragment).
-                addToBackStack(null).
-                commit();
+        Log.d("onLongEpisodeClick", "long click");
+//        WebViewFragment webViewFragment = new WebViewFragment();
+//        Bundle args = new Bundle();
+//        args.putString("url", url);
+//        webViewFragment.setArguments(args);
+//        getSupportFragmentManager().
+//                beginTransaction().
+//                replace(R.id.feed_selector_container, webViewFragment).
+//                addToBackStack(null).
+//                commit();
     }
 }

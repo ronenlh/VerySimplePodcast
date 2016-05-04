@@ -20,7 +20,7 @@ public class FeedSelectorFragment extends ListFragment {
     onFeedSelectedListener mCallback;
 
     interface onFeedSelectedListener {
-        void onFeedSelected(int position);
+        void onFeedSelected(int position, String feedUrl);
     }
 
     @Override
@@ -47,9 +47,10 @@ public class FeedSelectorFragment extends ListFragment {
 
         // sets sample array
         ArrayList<PodcastFeed> podcastFeedList = new ArrayList<>();
-        for (int i = 1; i < 20; i++) {
-            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
-        }
+//        for (int i = 1; i < 20; i++) {
+//            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
+//        }
+        podcastFeedList.add(new PodcastFeed("Serial"));
 
         PodcastFeedBaseAdapter adapter = new PodcastFeedBaseAdapter(getContext(), podcastFeedList);
 
@@ -66,7 +67,10 @@ public class FeedSelectorFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        mCallback.onFeedSelected(position);
+        // testing feedUrl, should come from list
+        String[] feedUrl = {"http://feeds.serialpodcast.org/serialpodcast",
+            "https://feeds.feedburner.com/99pi"};
+        mCallback.onFeedSelected(position, feedUrl[0]);
         super.onListItemClick(l, v, position, id);
     }
 }

@@ -12,11 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
-import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
+import com.example.studio08.verysimplepodcast.database.DatabaseHelper;
 import com.example.studio08.verysimplepodcast.retrofit.ApiService;
 import com.example.studio08.verysimplepodcast.retrofit.FeedChannel;
 import com.example.studio08.verysimplepodcast.retrofit.RSS;
@@ -62,20 +62,21 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        RetrofitCaller();
+        String feedUrl = getArguments().getString("feedUrl");
+        RetrofitCaller(feedUrl);
         
         getListView().setOnItemLongClickListener(this);
 
     }
 
-    private void RetrofitCaller() {
+    private void RetrofitCaller(String feedUrl) {
 
         // database
-        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(getActivity());
+        DatabaseHelper mDbHelper = new DatabaseHelper(getActivity());
         final SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ApiService service = ServiceGenerator.createService(ApiService.class);
-        Call<RSS> call = service.feed("serialpodcast");
+        Call<RSS> call = service.feed(feedUrl);
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
@@ -97,10 +98,10 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
                     // It also has two additional parameters that let you specify which data field to associate with which object in the row layout resource.
                     // These two (from, to) parameters are typically parallel arrays.
 
-                    EpisodeCursorAdapter adapter = EpisodeCursorAdapter.EpisodeCursorAdapterFactory(getActivity(), cursor);
+//                    EpisodeCursorAdapter adapter = EpisodeCursorAdapter.EpisodeCursorAdapterFactory(getActivity(), cursor);
 
+                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
 
-//                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
                     setListAdapter(adapter);
                 } else
                     try {

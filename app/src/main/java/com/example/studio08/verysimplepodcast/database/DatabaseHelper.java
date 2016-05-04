@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by studio08 on 4/18/2016.
  */
-public class FeedReaderDbHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     //  implement methods that create and maintain the database and tables
     private static final String TEXT_TYPE = " TEXT";
@@ -29,7 +29,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "FeedReader.db";
 
-    public FeedReaderDbHelper(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {

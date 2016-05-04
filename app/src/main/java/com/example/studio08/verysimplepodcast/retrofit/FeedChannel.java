@@ -75,7 +75,7 @@ public class FeedChannel {
         @Element(name = "author", required = false)
         public String author;
         @Element(name = "category", required = false)
-        public String category;
+        public String category;  // should check this: https://stackoverflow.com/questions/31999265/parsing-xml-feed-die-with-element-is-already-used
         @Element(name = "comments", required = false)
         public String comments;
         @Element(name = "enclosure", required = true)
