@@ -88,24 +88,16 @@ public class EpisodeSelectorFragment extends ListFragment {
                         databaseHelper(db, title, link, description, url);
                     }
                     // after that:
-//                    Cursor cursor = cursor(db);
-//                    // stuff needed to initialize ChannelCursorAdapter
-//                    // A ListAdapter constructor takes a parameter that specifies a layout resource for each row.
-//                    // It also has two additional parameters that let you specify which data field to associate with which object in the row layout resource.
-//                    // These two (from, to) parameters are typically parallel arrays.
-//                    String[] from = {FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
-//                            FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION};
-//                    int[] to = {R.id.episode_title,
-//                            R.id.episode_description};
-//                    ChannelCursorAdapter adapter = new ChannelCursorAdapter(getActivity(),
-//                            android.R.layout.simple_list_item_1,
-//                            cursor,
-//                            from,
-//                            to,
-//                            CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+                    Cursor cursor = cursor(db);
+                    // stuff needed to initialize PodcastFeedCursorAdapter
+                    // A ListAdapter constructor takes a parameter that specifies a layout resource for each row.
+                    // It also has two additional parameters that let you specify which data field to associate with which object in the row layout resource.
+                    // These two (from, to) parameters are typically parallel arrays.
+
+                    PodcastFeedCursorAdapter adapter = PodcastFeedCursorAdapter.PodcastFeedCursorAdapterFactory(getActivity(), cursor);
 
 
-                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
+//                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
                     setListAdapter(adapter);
                 } else
                     try {
@@ -134,10 +126,11 @@ public class EpisodeSelectorFragment extends ListFragment {
 
         // Insert the new row, returning the primary key value of the new row
 //        Log.d("databaseHelper()", ""+newRowId+" "+title);
-        return db.insert(
+        //insertWithConflict instead of insert.
+        return db.insertWithOnConflict(
                 FeedReaderContract.FeedEntry.TABLE_NAME,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_NULLABLE,
-                values);
+                values,SQLiteDatabase.CONFLICT_IGNORE);
     }
 
     private Cursor cursor(SQLiteDatabase db) {
@@ -153,8 +146,7 @@ public class EpisodeSelectorFragment extends ListFragment {
         };
 
         // How you want the results sorted in the resulting Cursor
-//        String sortOrder =
-//                FeedReaderContract.FeedEntry.COLUMN_NAME_UPDATED + " DESC";
+        String sortOrder = null; //FeedReaderContract.FeedEntry.TABLE_NAME + " DESC";
 
         return db.query(
                 FeedReaderContract.FeedEntry.TABLE_NAME,  // The table to query
@@ -163,7 +155,7 @@ public class EpisodeSelectorFragment extends ListFragment {
                 null,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
-                null                                 // The sort order
+                sortOrder                                 // The sort order
         );
     }
 

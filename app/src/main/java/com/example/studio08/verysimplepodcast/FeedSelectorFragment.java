@@ -1,32 +1,15 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
-import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
-import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
-import com.example.studio08.verysimplepodcast.retrofit.ApiService;
-import com.example.studio08.verysimplepodcast.retrofit.FeedChannel;
-import com.example.studio08.verysimplepodcast.retrofit.RSS;
-import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
-
-import java.io.IOException;
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -68,7 +51,7 @@ public class FeedSelectorFragment extends ListFragment {
             podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
         }
 
-        PodcastFeedAdapter adapter = new PodcastFeedAdapter(getContext(), podcastFeedList);
+        PodcastFeedBaseAdapter adapter = new PodcastFeedBaseAdapter(getContext(), podcastFeedList);
 
 //        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
         setListAdapter(adapter);

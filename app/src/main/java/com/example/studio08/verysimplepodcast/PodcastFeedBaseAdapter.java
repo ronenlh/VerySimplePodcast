@@ -15,12 +15,12 @@ import java.util.ArrayList;
 /**
  * Created by studio08 on 4/10/2016.
  */
-public class PodcastFeedAdapter extends BaseAdapter {
+public class PodcastFeedBaseAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<PodcastFeed> podcastFeeds;
 
-    public PodcastFeedAdapter(Context context, ArrayList<PodcastFeed> podcastFeeds) {
+    public PodcastFeedBaseAdapter(Context context, ArrayList<PodcastFeed> podcastFeeds) {
         this.context = context;
         this.podcastFeeds = podcastFeeds;
     }
