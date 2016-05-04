@@ -7,13 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
-import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.example.studio08.verysimplepodcast.database.FeedReaderDbHelper;
@@ -31,12 +31,13 @@ import retrofit2.Response;
 /**
  * Created by Ronen on 3/5/16.
  */
-public class EpisodeSelectorFragment extends ListFragment {
+public class EpisodeSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
     onEpisodeSelectedListener mCallback;
-
+    
     interface onEpisodeSelectedListener {
         void onEpisodeSelected(int position);
+        void onLongEpisodeClick(int position, String url);
     }
 
     @Override
@@ -62,6 +63,8 @@ public class EpisodeSelectorFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         RetrofitCaller();
+        
+        getListView().setOnItemLongClickListener(this);
 
     }
 
@@ -94,7 +97,7 @@ public class EpisodeSelectorFragment extends ListFragment {
                     // It also has two additional parameters that let you specify which data field to associate with which object in the row layout resource.
                     // These two (from, to) parameters are typically parallel arrays.
 
-                    PodcastFeedCursorAdapter adapter = PodcastFeedCursorAdapter.PodcastFeedCursorAdapterFactory(getActivity(), cursor);
+                    EpisodeCursorAdapter adapter = EpisodeCursorAdapter.EpisodeCursorAdapterFactory(getActivity(), cursor);
 
 
 //                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
@@ -122,15 +125,17 @@ public class EpisodeSelectorFragment extends ListFragment {
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, title);
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_LINK, link);
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION, description);
-        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_URL, url);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_MEDIA_URL, url);
 
         // Insert the new row, returning the primary key value of the new row
 //        Log.d("databaseHelper()", ""+newRowId+" "+title);
         //insertWithConflict instead of insert.
-        return db.insertWithOnConflict(
+        long primaryKey = db.insertWithOnConflict(
                 FeedReaderContract.FeedEntry.TABLE_NAME,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_NULLABLE,
                 values,SQLiteDatabase.CONFLICT_IGNORE);
+
+        return primaryKey;
     }
 
     private Cursor cursor(SQLiteDatabase db) {
@@ -142,7 +147,7 @@ public class EpisodeSelectorFragment extends ListFragment {
                 FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_LINK,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_DESCRIPTION,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_URL
+                FeedReaderContract.FeedEntry.COLUMN_NAME_MEDIA_URL
         };
 
         // How you want the results sorted in the resulting Cursor
@@ -170,5 +175,13 @@ public class EpisodeSelectorFragment extends ListFragment {
         mCallback.onEpisodeSelected(position);
 //        super.onListItemClick(l, v, position, id);
     }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        String url = "http://google.com"; // get the correct url from the cursor
+        mCallback.onLongEpisodeClick(position, url);
+        return true;
+    }
+
 
 }

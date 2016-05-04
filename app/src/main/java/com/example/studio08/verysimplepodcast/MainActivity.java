@@ -113,5 +113,19 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     @Override
     public void onEpisodeSelected(int position) {
         Toast.makeText(this, "Episode Selected", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onLongEpisodeClick(int position, String url) {
+        WebViewFragment webViewFragment = new WebViewFragment();
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        webViewFragment.setArguments(args);
+        getSupportFragmentManager().
+                beginTransaction().
+                replace(R.id.feed_selector_container, webViewFragment).
+                addToBackStack(null).
+                commit();
     }
 }
