@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class FeedSelectorFragment extends ListFragment {
 
+    ArrayList<PodcastFeed> podcastFeedList;
     onFeedSelectedListener mCallback;
 
     interface onFeedSelectedListener {
@@ -46,11 +47,12 @@ public class FeedSelectorFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         // sets sample array
-        ArrayList<PodcastFeed> podcastFeedList = new ArrayList<>();
+        podcastFeedList = new ArrayList<>();
 //        for (int i = 1; i < 20; i++) {
 //            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
 //        }
-        podcastFeedList.add(new PodcastFeed("Serial"));
+        podcastFeedList.add(new PodcastFeed("Serial", "http://feeds.serialpodcast.org/serialpodcast"));
+        podcastFeedList.add(new PodcastFeed("99% Invisible", "https://feeds.feedburner.com/99pi"));
 
         PodcastFeedBaseAdapter adapter = new PodcastFeedBaseAdapter(getContext(), podcastFeedList);
 
@@ -67,10 +69,8 @@ public class FeedSelectorFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        // testing feedUrl, should come from list
-        String[] feedUrl = {"http://feeds.serialpodcast.org/serialpodcast",
-            "https://feeds.feedburner.com/99pi"};
-        mCallback.onFeedSelected(position, feedUrl[0]);
+
+        mCallback.onFeedSelected(position, podcastFeedList.get(position).getFeedUrl());
         super.onListItemClick(l, v, position, id);
     }
 }
