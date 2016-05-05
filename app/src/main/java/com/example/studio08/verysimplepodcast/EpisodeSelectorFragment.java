@@ -23,6 +23,7 @@ import com.example.studio08.verysimplepodcast.retrofit.RSS;
 import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -100,7 +101,9 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
 
 //                    EpisodeCursorAdapter adapter = EpisodeCursorAdapter.EpisodeCursorAdapterFactory(getActivity(), cursor);
 
-                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
+//                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
+
+                    EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
 
                     setListAdapter(adapter);
                 } else

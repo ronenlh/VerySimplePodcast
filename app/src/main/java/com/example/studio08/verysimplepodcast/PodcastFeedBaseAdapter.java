@@ -48,20 +48,19 @@ public class PodcastFeedBaseAdapter extends BaseAdapter {
 
         if (convertView == null) {
             holder = new Holder();
-            row = layoutInflater.inflate(R.layout.main_row, null);
-            holder.title = (TextView) row.findViewById(R.id.title_textView);
-            holder.description = (TextView) row.findViewById(R.id.description_textView);
-            holder.thumbnail = (ImageView) row.findViewById(R.id.thumbnail_imageView);
-            row.setTag(holder);
+            convertView = layoutInflater.inflate(R.layout.main_row, null);
+            holder.title = (TextView) convertView.findViewById(R.id.title_textView);
+            holder.description = (TextView) convertView.findViewById(R.id.description_textView);
+            holder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail_imageView);
+            convertView.setTag(holder);
         } else {
-            row = convertView;
             holder = (Holder) row.getTag();
         }
         holder.title.setText(getItem(position).getTitle());
         holder.description.setText(getItem(position).getDescription());
         holder.thumbnail.setImageResource(getItem(position).getThumbnailId());
 
-        return row;
+        return convertView;
     }
 
     class Holder {
