@@ -54,7 +54,7 @@ public class PodcastFeedBaseAdapter extends BaseAdapter {
             holder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail_imageView);
             convertView.setTag(holder);
         } else {
-            holder = (Holder) row.getTag();
+            holder = (Holder) convertView.getTag();
         }
         holder.title.setText(getItem(position).getTitle());
         holder.description.setText(getItem(position).getDescription());
