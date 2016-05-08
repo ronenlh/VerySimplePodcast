@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
@@ -64,13 +63,13 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         super.onActivityCreated(savedInstanceState);
 
         String feedUrl = getArguments().getString("feedUrl");
-        RetrofitCaller(feedUrl);
+        retrofitCaller(feedUrl);
         
         getListView().setOnItemLongClickListener(this);
 
     }
 
-    private void RetrofitCaller(String feedUrl) {
+    private void retrofitCaller(String feedUrl) {
 
         // database
         DatabaseHelper mDbHelper = new DatabaseHelper(getActivity());
@@ -100,12 +99,10 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
                     // These two (from, to) parameters are typically parallel arrays.
 
 //                    EpisodeCursorAdapter adapter = EpisodeCursorAdapter.EpisodeCursorAdapterFactory(getActivity(), cursor);
-
 //                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
-
                     EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
-
                     setListAdapter(adapter);
+
                 } else
                     try {
                         Log.e("feed", response.errorBody().string());

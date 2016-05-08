@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class FeedSelectorFragment extends ListFragment {
 
-    ArrayList<PodcastFeed> podcastFeedList;
+    ArrayList<Feed> podcastFeedList;
     onFeedSelectedListener mCallback;
 
     interface onFeedSelectedListener {
@@ -51,10 +51,10 @@ public class FeedSelectorFragment extends ListFragment {
 //        for (int i = 1; i < 20; i++) {
 //            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
 //        }
-        podcastFeedList.add(new PodcastFeed("Serial", "http://feeds.serialpodcast.org/serialpodcast"));
-        podcastFeedList.add(new PodcastFeed("99% Invisible", "https://feeds.feedburner.com/99pi"));
+        podcastFeedList.add(new Feed("Serial", "http://feeds.serialpodcast.org/serialpodcast"));
+        podcastFeedList.add(new Feed("99% Invisible", "https://feeds.feedburner.com/99pi"));
 
-        PodcastFeedBaseAdapter adapter = new PodcastFeedBaseAdapter(getContext(), podcastFeedList);
+        FeedBaseAdapter adapter = new FeedBaseAdapter(getContext(), podcastFeedList);
 
 //        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
         setListAdapter(adapter);

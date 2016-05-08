@@ -1,13 +1,11 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,12 +13,12 @@ import java.util.ArrayList;
 /**
  * Created by studio08 on 4/10/2016.
  */
-public class PodcastFeedBaseAdapter extends BaseAdapter {
+public class FeedBaseAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<PodcastFeed> podcastFeeds;
+    ArrayList<Feed> podcastFeeds;
 
-    public PodcastFeedBaseAdapter(Context context, ArrayList<PodcastFeed> podcastFeeds) {
+    public FeedBaseAdapter(Context context, ArrayList<Feed> podcastFeeds) {
         this.context = context;
         this.podcastFeeds = podcastFeeds;
     }
@@ -31,7 +29,7 @@ public class PodcastFeedBaseAdapter extends BaseAdapter {
     }
 
     @Override
-    public PodcastFeed getItem(int position) {
+    public Feed getItem(int position) {
         return podcastFeeds.get(position);
     }
 

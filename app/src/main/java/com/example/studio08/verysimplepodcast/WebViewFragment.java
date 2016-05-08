@@ -20,7 +20,7 @@ public class WebViewFragment extends Fragment {
         String url = getArguments().getString("url");
         WebView webview = new WebView(getContext());
         webview.loadUrl(url);
-        
+
         // found in stackOverflow, override this method so the url doesn't open in default browser
 //        webview.setWebViewClient(new WebViewClient() {
 //            @Override
