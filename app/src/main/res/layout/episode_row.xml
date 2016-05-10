@@ -2,19 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:maxLines="1"
         android:id="@+id/episode_title"
         tools:text="Episode Title"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/episode_description"
-        tools:text="Episode Description"/>
+        android:maxLines="2"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas vestibulum diam, quis eleifend sapien gravida varius. Etiam convallis massa vitae erat volutpat, at volutpat orci venenatis. Ut vel nisl facilisis, commodo tellus pellentesque, pellentesque lorem. Pellentesque sed consequat orci. Vestibulum pretium bibendum augue, quis luctus nibh interdum at. In est neque, dignissim vel pharetra dignissim, tristique a massa. Donec volutpat molestie nunc, non ultricies tellus lobortis sed. Vestibulum et sapien urna. Sed tincidunt libero nunc, nec sollicitudin augue pretium at. Suspendisse dictum ultricies magna ut bibendum. Curabitur condimentum neque in erat lobortis, vitae convallis risus tristique."/>
 </LinearLayout>
