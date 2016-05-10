@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     @Override
     public void onFeedSelected(int position, String feedUrl){
-        Toast.makeText(this, "Channel Selected", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.feed_selected, Toast.LENGTH_SHORT).show();
         EpisodeSelectorFragment episodeSelectorFragment = new EpisodeSelectorFragment();
         // getting and adding the feedUrl to the Fragment
         Bundle args = new Bundle();
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     @Override
     public void onEpisodeSelected(int position) {
-        Toast.makeText(this, "Episode Selected", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.episode_selected, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
     public void addFeed(View view) {
-        Toast.makeText(this, "Add Feed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.add_feed, Toast.LENGTH_SHORT).show();
         AddFeedFragment addFeedFragment = new AddFeedFragment();
         getSupportFragmentManager().
                 beginTransaction().

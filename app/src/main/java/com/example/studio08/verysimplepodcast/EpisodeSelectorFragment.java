@@ -83,7 +83,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
             public void onResponse(Call<RSS> call, Response<RSS> response) {
                 RSS feed = response.body(); // <-- this is the feed!
                 if (feed != null) {
-                    Log.d("feed", "feed is not null: \n" + feed.toString());
+//                    Log.d("feed", "feed is not null: \n" + feed.toString());
                     EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
                     setListAdapter(adapter);
                     // first:
@@ -103,7 +103,6 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
 
 //                    EpisodeCursorAdapter adapter = EpisodeCursorAdapter.EpisodeCursorAdapterFactory(getActivity(), cursor);
 //                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
-
 
                 } else
                     try {
