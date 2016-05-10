@@ -1,5 +1,6 @@
 package com.example.studio08.verysimplepodcast;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -83,14 +84,16 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
                 RSS feed = response.body(); // <-- this is the feed!
                 if (feed != null) {
                     Log.d("feed", "feed is not null: \n" + feed.toString());
+                    EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
+                    setListAdapter(adapter);
                     // first:
-                    for (FeedChannel.Item item : feed.getChannel().itemList) {
-                        String title = item.title;
-                        String link = item.link;
-                        String description = item.description;
-                        String url = item.enclosure.url;
-                        databaseHelper(db, title, link, description, url);
-                    }
+//                    for (FeedChannel.Item item : feed.getChannel().itemList) {
+//                        String title = item.title;
+//                        String link = item.link;
+//                        String description = item.description;
+//                        String url = item.enclosure.url;
+//                        databaseHelper(db, title, link, description, url);
+//                    }
                     // after that:
                     Cursor cursor = cursor(db);
                     // stuff needed to initialize PodcastFeedCursorAdapter
@@ -100,8 +103,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
 
 //                    EpisodeCursorAdapter adapter = EpisodeCursorAdapter.EpisodeCursorAdapterFactory(getActivity(), cursor);
 //                    ArrayAdapter<FeedChannel.Item> adapter = new ArrayAdapter<FeedChannel.Item>(getContext(),android.R.layout.simple_list_item_1, feed.getChannel().itemList );
-                    EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
-                    setListAdapter(adapter);
+
 
                 } else
                     try {
