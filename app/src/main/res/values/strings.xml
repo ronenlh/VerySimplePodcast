@@ -6,4 +6,7 @@
     <string name="episode_selected">Episode Selected</string>
     <string name="add_feed">Add Feed</string>
     <string name="feed_selected">Feed Selected</string>
+    <string name="dialog_play">play</string>
+    <string name="dialog_close">close</string>
+    <string name="episode_info">Episode Info</string>
 </resources>

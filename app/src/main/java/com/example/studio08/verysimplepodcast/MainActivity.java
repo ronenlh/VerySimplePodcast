@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         args.putString("feedUrl", feedUrl);
         episodeSelectorFragment.setArguments(args);
         // now switching Fragments
-        getSupportFragmentManager().
+        getFragmentManager().
                 beginTransaction().
                 replace(R.id.feed_selector_container, episodeSelectorFragment).
                 addToBackStack(null).
@@ -126,21 +126,13 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     @Override
     public void onLongEpisodeClick(int position, String url) {
         Log.d("onLongEpisodeClick", "long click");
-//        WebViewFragment webViewFragment = new WebViewFragment();
-//        Bundle args = new Bundle();
-//        args.putString("url", url);
-//        webViewFragment.setArguments(args);
-//        getSupportFragmentManager().
-//                beginTransaction().
-//                replace(R.id.feed_selector_container, webViewFragment).
-//                addToBackStack(null).
-//                commit();
+
     }
 
     public void addFeed(View view) {
         Toast.makeText(this, R.string.add_feed, Toast.LENGTH_SHORT).show();
         AddFeedFragment addFeedFragment = new AddFeedFragment();
-        getSupportFragmentManager().
+        getFragmentManager().
                 beginTransaction().
                 replace(R.id.feed_selector_container, addFeedFragment).
                 addToBackStack(null).
