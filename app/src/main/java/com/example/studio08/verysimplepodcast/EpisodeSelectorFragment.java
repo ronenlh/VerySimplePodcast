@@ -35,6 +35,7 @@ import retrofit2.Response;
  */
 public class EpisodeSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
+    RSS feed;
     onEpisodeSelectedListener mCallback;
     
     interface onEpisodeSelectedListener {
@@ -82,7 +83,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
-                RSS feed = response.body(); // <-- this is the feed!
+                feed = response.body(); // <-- this is the feed!
                 if (feed != null) {
 //                    Log.d("feed", "feed is not null: \n" + feed.toString());
                     EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
@@ -176,7 +177,16 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         mCallback.onEpisodeSelected(position);
+        FeedChannel.Item item = feed.getChannel().getItemList().get(position);
+
         DialogFragment dialogFragment = new EpisodeDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("title", item.getTitle());
+        args.putString("author", item.getDescription());
+        args.putString("description",item.getDescription());
+        args.putString("feedUrl",item.getLink());
+        args.putString("pubDate",item.getPubDate());
+        dialogFragment.setArguments(args);
         dialogFragment.show(getFragmentManager(), "Episode "+position);
 //        super.onListItemClick(l, v, position, id);
     }

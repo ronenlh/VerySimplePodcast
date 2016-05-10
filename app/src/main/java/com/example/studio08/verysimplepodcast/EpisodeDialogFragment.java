@@ -10,12 +10,29 @@ import android.support.v7.app.AlertDialog;
  * Created by studio08 on 5/10/2016.
  */
 public class EpisodeDialogFragment extends DialogFragment {
+
+    String title;
+    String description;
+    String feedUrl;
+    String author;
+    String pubDate;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        title = getArguments().getString("title");
+        description = getArguments().getString("description");
+        feedUrl = getArguments().getString("feedUrl");
+        author = getArguments().getString("author");
+        pubDate = getArguments().getString("pubDate");
+
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage(R.string.episode_info)
+        builder.setTitle(""+title)
+                .setMessage(""+description)
+//                .setMessage(""+author)
+//                .setMessage(""+pubDate)
                 .setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 

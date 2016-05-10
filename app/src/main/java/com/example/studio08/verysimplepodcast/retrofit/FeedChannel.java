@@ -25,6 +25,9 @@ public class FeedChannel {
     @ElementList(name = "item", required = true, inline = true)
     public List<Item> itemList;
 
+    public List<Item> getItemList() {
+        return itemList;
+    }
 
     @Element
     String title;
@@ -90,6 +93,49 @@ public class FeedChannel {
         public String pubDate;//	Indicates when the item was published. More.	Sun, 19 May 2002 15:21:36 GMT
         @Element(name = "source", required = false)
         public String source;//	The RSS channel that the item came from. More.
+
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public String getDescription() {
+            // remove html tags from description
+            String sanitizedDescription = description.replaceAll("<[^>]*>", "");
+            return sanitizedDescription;
+        }
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public String getComments() {
+            return comments;
+        }
+
+        public Enclosure getEnclosure() {
+            return enclosure;
+        }
+
+        public String getGuid() {
+            return guid;
+        }
+
+        public String getPubDate() {
+            return pubDate;
+        }
+
+        public String getSource() {
+            return source;
+        }
 
         @Override
         public String toString() {

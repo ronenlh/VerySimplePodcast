@@ -55,11 +55,8 @@ public class EpisodeBaseAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        // remove html tags from description
-        String sanitizedDescription = getItem(position).description.replaceAll("<[^>]*>", "");
-
-        holder.title.setText(getItem(position).title);
-        holder.description.setText(sanitizedDescription);
+        holder.title.setText(getItem(position).getTitle());
+        holder.description.setText(getItem(position).getDescription());
 
         return convertView;
     }
