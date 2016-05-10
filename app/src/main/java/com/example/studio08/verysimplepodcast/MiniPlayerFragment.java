@@ -41,6 +41,29 @@ public class MiniPlayerFragment extends Fragment {
         return miniplayer;
     }
 
+    public void startPlayer(String feedUrl) {
+        if (mediaPlayer != null)
+            mediaPlayer.release();
+        mediaPlayer = MediaPlayer.create(getContext(), Uri.parse(feedUrl));
+        changePlayButtonState();
+        fileDuration = mediaPlayer.getDuration();
+
+    }
+
+    public void changePlayButtonState(){
+        isPlayButton = !isPlayButton;
+        if(isPlayButton) {
+            if (mediaPlayer != null) {
+                playButton.setImageResource(R.drawable.ic_pause_24dp);
+                mediaPlayer.start();
+            }
+        } else {
+            if (mediaPlayer != null) {
+                playButton.setImageResource(R.drawable.ic_play_arrow_24dp);
+                mediaPlayer.pause();
+            }
+        }
+    }
 
     private void startViews() {
 
@@ -49,58 +72,7 @@ public class MiniPlayerFragment extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isPlayButton = !isPlayButton;
-                if(isPlayButton) {
-                    playButton.setImageResource(R.drawable.ic_pause_24dp);
-                    // sample stream
-                    String url = "http://feeds.wnyc.org/~r/radiolab/~5/KYQG_JtkTYM/radiolab_podcast16cellmates.mp3";
-                    if (mediaPlayer == null) {
-                        mediaPlayer = MediaPlayer.create(getContext(), Uri.parse(url));
-                        fileDuration = mediaPlayer.getDuration();
-                    }
-                        mediaPlayer.start();
-
-                    new Runnable() {
-                        // he's responsible: http://stackoverflow.com/questions/17168215/seekbar-and-media-player-in-android
-                        @Override
-                        public void run() {
-                            if(mediaPlayer != null){
-                                int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
-                                progressBar.setProgress(currentPosition);
-                            }
-                            progressBarHandler.postDelayed(this, 1000);
-                        }
-                    };
-                } else {
-                    playButton.setImageResource(R.drawable.ic_play_arrow_24dp);
-                    mediaPlayer.pause();
-                }
-            }
-        });
-
-        // SeekBar
-
-        progressBar = (SeekBar) miniplayer.findViewById(R.id.progressBar);
-        progressBar.setMax(fileDuration);
-        progressBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChanged = 0;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progressChanged = progress;
-                if(mediaPlayer != null && fromUser){
-                    mediaPlayer.seekTo(progress * 1000);
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+                changePlayButtonState();
             }
         });
     }

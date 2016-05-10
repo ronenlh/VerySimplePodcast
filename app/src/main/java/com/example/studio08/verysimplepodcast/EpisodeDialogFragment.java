@@ -2,6 +2,7 @@ package com.example.studio08.verysimplepodcast;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +20,25 @@ public class EpisodeDialogFragment extends DialogFragment {
     String feedUrl;
     String author;
     String pubDate;
+
+    onPlaySelectedListener mCallback;
+
+    interface onPlaySelectedListener {
+        void onPlaySelected(String feedUrl);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        // To allow a Fragment to communicate up to its Activity, you can define an interface in the Fragment class and implement it within the Activity.
+        // The Fragment captures the interface implementation during its onAttach() lifecycle method and can then call the Interface methods in order to communicate with the Activity.
+        super.onAttach(context);
+        try {
+            mCallback = (onPlaySelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement onPlaySelectedListener");
+        }
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -46,7 +66,7 @@ public class EpisodeDialogFragment extends DialogFragment {
 
         builder.setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        mCallback.onPlaySelected(feedUrl);
                     }
                 })
                 .setNegativeButton(R.string.dialog_close, new DialogInterface.OnClickListener() {

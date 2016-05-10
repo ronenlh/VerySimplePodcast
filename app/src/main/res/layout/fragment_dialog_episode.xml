@@ -18,32 +18,25 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/dialog_title" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">    <TextView
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:text="dialog_author"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:id="@+id/dialog_author"
+    android:layout_weight="1"
+    android:capitalize="characters" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="dialog_author"
+        tools:text="dialog_date"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/dialog_author"
-        android:layout_weight="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="dialog_date"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/dialog_date"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        android:id="@+id/dialog_date"
+        android:layout_weight="1"/>
 
 
-
-
-
-
-
-        <TextView
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="dialog_description"

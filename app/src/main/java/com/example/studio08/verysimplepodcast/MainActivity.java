@@ -17,7 +17,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class MainActivity extends AppCompatActivity implements FeedSelectorFragment.onFeedSelectedListener, EpisodeSelectorFragment.onEpisodeSelectedListener {
+public class MainActivity extends AppCompatActivity implements FeedSelectorFragment.onFeedSelectedListener, EpisodeSelectorFragment.onEpisodeSelectedListener, EpisodeDialogFragment.onPlaySelectedListener {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -137,5 +137,11 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                 replace(R.id.feed_selector_container, addFeedFragment).
                 addToBackStack(null).
                 commit();
+    }
+
+    @Override
+    public void onPlaySelected(String feedUrl) {
+        MiniPlayerFragment miniPlayerFragment = new MiniPlayerFragment();
+        miniPlayerFragment.startPlayer(feedUrl);
     }
 }
