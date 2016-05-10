@@ -9,16 +9,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/feed_selector_container"
-        >
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.example.studio08.verysimplepodcast.MiniPlayerFragment"
-            android:id="@+id/miniplayer_fragment"
-            android:layout_gravity="center_horizontal|bottom" />
+        android:id="@+id/feed_selector_container">
     </FrameLayout>
+    
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.studio08.verysimplepodcast.MiniPlayerFragment"
+        android:id="@+id/miniplayer_fragment"
+        android:layout_gravity="center_horizontal|bottom" />
 
     <android.support.design.widget.FloatingActionButton
         android:onClick="addFeed"
