@@ -136,4 +136,14 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 //                addToBackStack(null).
 //                commit();
     }
+
+    public void addFeed(View view) {
+        Toast.makeText(this, "Add Feed", Toast.LENGTH_SHORT).show();
+        AddFeedFragment addFeedFragment = new AddFeedFragment();
+        getSupportFragmentManager().
+                beginTransaction().
+                replace(R.id.feed_selector_container, addFeedFragment).
+                addToBackStack(null).
+                commit();
+    }
 }

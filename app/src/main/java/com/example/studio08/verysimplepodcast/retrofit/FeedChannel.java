@@ -37,6 +37,10 @@ public class FeedChannel {
     @Element(name = "pubDate", required = false)
     String pubDate;
 
+    public String getTitle() {
+        return title;
+    }
+
     @Override
     public String toString() {
         return "Channel{" +
