@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-    
+
     @Override
     public void onStart() {
         super.onStart();
