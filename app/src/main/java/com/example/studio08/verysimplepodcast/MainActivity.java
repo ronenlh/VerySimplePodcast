@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        startBar();
         if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
             FeedSelectorFragment feedSelectorFragment = new FeedSelectorFragment();
             feedSelectorFragment.setArguments(getIntent().getExtras());
@@ -43,24 +42,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
-
-//    private void startBar() {
-//        ImageView plusButton = (ImageView) findViewById(R.id.plus_imageView);
-//        if (plusButton != null) {
-//            plusButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    startActivity(new Intent(MainActivity.this, AddPodcastActivity.class));
-//                }
-//            });
-//        }
-//    }
-
-
-
-
-
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -105,10 +87,12 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     public void onFeedSelected(int position, String feedUrl){
         Toast.makeText(this, R.string.feed_selected, Toast.LENGTH_SHORT).show();
         EpisodeSelectorFragment episodeSelectorFragment = new EpisodeSelectorFragment();
+
         // getting and adding the feedUrl to the Fragment
         Bundle args = new Bundle();
         args.putString("feedUrl", feedUrl);
         episodeSelectorFragment.setArguments(args);
+
         // now switching Fragments
         getFragmentManager().
                 beginTransaction().
@@ -120,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     @Override
     public void onEpisodeSelected(int position) {
         Toast.makeText(this, R.string.episode_selected, Toast.LENGTH_SHORT).show();
-
+        // action in Fragment
     }
 
     @Override
     public void onLongEpisodeClick(int position, String url) {
         Log.d("onLongEpisodeClick", "long click");
-
+        // nothing yet
     }
 
     public void addFeed(View view) {
