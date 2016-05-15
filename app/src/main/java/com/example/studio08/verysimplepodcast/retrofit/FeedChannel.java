@@ -163,6 +163,10 @@ public class FeedChannel {
         @Attribute(required = false)
         public long length;
 
+        public String getUrl() {
+            return url;
+        }
+
         @Override
         public String toString() {
             return "Enclosure{" +

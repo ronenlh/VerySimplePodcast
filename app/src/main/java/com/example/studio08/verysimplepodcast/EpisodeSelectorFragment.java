@@ -85,7 +85,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
             public void onResponse(Call<RSS> call, Response<RSS> response) {
                 feed = response.body(); // <-- this is the feed!
                 if (feed != null) {
-//                    Log.d("feed", "feed is not null: \n" + feed.toString());
+                    Log.d("feed", "feed is not null: \n" + feed.toString());
                     EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
                     setListAdapter(adapter);
                     // first:
@@ -184,7 +184,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         args.putString("title", item.getTitle());
         args.putString("author", item.getAuthor());
         args.putString("description",item.getDescription());
-        args.putString("feedUrl",item.getLink());
+        args.putString("itemUrl",item.getEnclosure().getUrl());
         args.putString("pubDate",item.getPubDate());
         dialogFragment.setArguments(args);
         dialogFragment.show(getFragmentManager(), "Episode "+position);

@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 /**
  * Created by Ronen on 16/4/16.
@@ -41,13 +43,8 @@ public class MiniPlayerFragment extends Fragment {
         return miniplayer;
     }
 
-    public void startPlayer(String feedUrl) {
-        if (mediaPlayer != null)
-            mediaPlayer.release();
-        mediaPlayer = MediaPlayer.create(getContext(), Uri.parse(feedUrl));
-        changePlayButtonState();
-        fileDuration = mediaPlayer.getDuration();
-
+    public void startPlayer(String itemUrl) {
+        Log.d("miniplayer", itemUrl);
     }
 
     public void changePlayButtonState(){

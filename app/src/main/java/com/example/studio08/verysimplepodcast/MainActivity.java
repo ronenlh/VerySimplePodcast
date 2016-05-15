@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         Toast.makeText(this, R.string.feed_selected, Toast.LENGTH_SHORT).show();
         EpisodeSelectorFragment episodeSelectorFragment = new EpisodeSelectorFragment();
 
-        // getting and adding the feedUrl to the Fragment
+        // getting and adding the feedUrl to the Fragment, this is the parameter for Retrofit.
         Bundle args = new Bundle();
         args.putString("feedUrl", feedUrl);
         episodeSelectorFragment.setArguments(args);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         getFragmentManager().
                 beginTransaction().
                 replace(R.id.feed_selector_container, episodeSelectorFragment).
-                addToBackStack(null).
+                addToBackStack("toEpisode").
                 commit();
     }
 
@@ -119,13 +119,13 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         getFragmentManager().
                 beginTransaction().
                 replace(R.id.feed_selector_container, addFeedFragment).
-                addToBackStack(null).
+                addToBackStack("toAdd").
                 commit();
     }
 
     @Override
-    public void onPlaySelected(String feedUrl) {
+    public void onPlaySelected(String itemUrl) {
         MiniPlayerFragment miniPlayerFragment = new MiniPlayerFragment();
-        miniPlayerFragment.startPlayer(feedUrl);
+        miniPlayerFragment.startPlayer(itemUrl);
     }
 }

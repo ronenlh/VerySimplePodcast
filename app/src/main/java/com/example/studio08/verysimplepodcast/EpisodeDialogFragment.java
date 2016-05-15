@@ -17,14 +17,14 @@ public class EpisodeDialogFragment extends DialogFragment {
 
     String title;
     String description;
-    String feedUrl;
+    String itemUrl;
     String author;
     String pubDate;
 
     onPlaySelectedListener mCallback;
 
     interface onPlaySelectedListener {
-        void onPlaySelected(String feedUrl);
+        void onPlaySelected(String itemUrl);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class EpisodeDialogFragment extends DialogFragment {
 
         title = getArguments().getString("title");
         description = getArguments().getString("description");
-        feedUrl = getArguments().getString("feedUrl");
+        itemUrl = getArguments().getString("itemUrl");
         author = getArguments().getString("author");
         pubDate = getArguments().getString("pubDate");
 
@@ -66,7 +66,7 @@ public class EpisodeDialogFragment extends DialogFragment {
 
         builder.setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mCallback.onPlaySelected(feedUrl);
+                        mCallback.onPlaySelected(itemUrl);
                     }
                 })
                 .setNegativeButton(R.string.dialog_close, new DialogInterface.OnClickListener() {
