@@ -88,7 +88,7 @@ public class EpisodeDialogFragment extends DialogFragment {
             ((TextView) content.findViewById(R.id.dialog_date)).setText(""+newFormatDate);
         } catch (ParseException e) {
 //            e.printStackTrace();
-            Log.w("EpisodeDialogFragment", "problem parsing the date, diplaying unparsed date.");
+            Log.w("EpisodeDialogFragment", "problem parsing the date, displaying unparsed date.");
             ((TextView) content.findViewById(R.id.dialog_date)).setText(""+pubDate);
         }
 
