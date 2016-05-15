@@ -1,16 +1,19 @@
 package com.example.studio08.verysimplepodcast;
 
+import android.app.DialogFragment;
+import android.app.ListFragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ListFragment;
+
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.studio08.verysimplepodcast.database.DatabaseHelper;
@@ -21,13 +24,22 @@ import com.example.studio08.verysimplepodcast.database.FeedsContract;
 import java.util.ArrayList;
 
 
+
 /**
  * Created by Ronen on 16/4/16.
  */
-public class FeedSelectorFragment extends ListFragment {
+public class FeedSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
-    ArrayList<Feed> podcastFeedList;
+//    ArrayList<Feed> podcastFeedList;
     onFeedSelectedListener mCallback;
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+        DialogFragment dialogFragment = FeedDialogFragment.newInstance(cursor.getString(1));
+        dialogFragment.show(getFragmentManager(), "dialog");
+        return false;
+    }
 
     interface onFeedSelectedListener {
         void onFeedSelected(int position, String feedUrl);
@@ -73,6 +85,7 @@ public class FeedSelectorFragment extends ListFragment {
 //        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
         setListAdapter(adapter);
 
+        getListView().setOnItemLongClickListener(this);
     }
 
     private Cursor cursor(SQLiteDatabase db) {
@@ -113,5 +126,9 @@ public class FeedSelectorFragment extends ListFragment {
         Log.d("onListItemClick", cursor.getString(3));
         mCallback.onFeedSelected(position, cursor.getString(3));
         super.onListItemClick(l, v, position, id);
+    }
+
+    public void deleteRow() {
+
     }
 }

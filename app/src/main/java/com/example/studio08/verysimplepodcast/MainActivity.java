@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
             FeedSelectorFragment feedSelectorFragment = new FeedSelectorFragment();
             feedSelectorFragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().
+            getFragmentManager().
                     beginTransaction().
                     add(R.id.feed_selector_container, feedSelectorFragment).
                     commit();
