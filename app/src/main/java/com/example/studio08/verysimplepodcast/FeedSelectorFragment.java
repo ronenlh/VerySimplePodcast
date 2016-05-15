@@ -80,7 +80,7 @@ public class FeedSelectorFragment extends ListFragment {
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
-                FeedsContract.FeedEntry._ID,
+                FeedsContract.FeedEntry._ID, //
                 FeedsContract.FeedEntry.COLUMN_NAME_TITLE, // 1
                 FeedsContract.FeedEntry.COLUMN_NAME_CREATOR, // 2
                 FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL // 3
