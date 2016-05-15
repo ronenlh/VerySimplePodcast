@@ -48,21 +48,21 @@ public class FeedBaseAdapter extends BaseAdapter {
             holder = new Holder();
             convertView = layoutInflater.inflate(R.layout.main_row, null);
             holder.title = (TextView) convertView.findViewById(R.id.title_textView);
-            holder.description = (TextView) convertView.findViewById(R.id.description_textView);
+            holder.creator = (TextView) convertView.findViewById(R.id.creator_textView);
             holder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail_imageView);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
         holder.title.setText(getItem(position).getTitle());
-        holder.description.setText(getItem(position).getDescription());
+        holder.creator.setText(getItem(position).getDescription());
         holder.thumbnail.setImageResource(getItem(position).getThumbnailId());
 
         return convertView;
     }
 
     class Holder {
-        TextView title, description;
+        TextView title, creator;
         ImageView thumbnail;
     }
 }

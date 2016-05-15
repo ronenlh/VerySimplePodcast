@@ -1,6 +1,8 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -8,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.example.studio08.verysimplepodcast.database.DatabaseHelper;
+import com.example.studio08.verysimplepodcast.database.DbHelper;
+import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
+import com.example.studio08.verysimplepodcast.database.FeedsContract;
 
 import java.util.ArrayList;
 
@@ -51,14 +58,43 @@ public class FeedSelectorFragment extends ListFragment {
 //        for (int i = 1; i < 20; i++) {
 //            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
 //        }
-        podcastFeedList.add(new Feed("Serial", "http://feeds.serialpodcast.org/serialpodcast"));
-        podcastFeedList.add(new Feed("99% Invisible", "https://feeds.feedburner.com/99pi"));
+//        podcastFeedList.add(new Feed("Serial", "http://feeds.serialpodcast.org/serialpodcast"));
+//        podcastFeedList.add(new Feed("99% Invisible", "https://feeds.feedburner.com/99pi"));
 
-        FeedBaseAdapter adapter = new FeedBaseAdapter(getContext(), podcastFeedList);
+//        FeedBaseAdapter adapter = new FeedBaseAdapter(getContext(), podcastFeedList);
+
+        DbHelper dbHelper = new DbHelper(getActivity());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = cursor(db);
+        FeedCursorAdapter adapter = FeedCursorAdapter.FeedCursorAdapterFactory(getContext(), cursor);
 
 //        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
         setListAdapter(adapter);
 
+    }
+
+    private Cursor cursor(SQLiteDatabase db) {
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                FeedsContract.FeedEntry._ID,
+                FeedsContract.FeedEntry.COLUMN_NAME_TITLE,
+                FeedsContract.FeedEntry.COLUMN_NAME_CREATOR,
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = null; //FeedReaderContract.FeedEntry.TABLE_NAME + " DESC";
+
+        return db.query(
+                FeedsContract.FeedEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
     }
 
     @Override

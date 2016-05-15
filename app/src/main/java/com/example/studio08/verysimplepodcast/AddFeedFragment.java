@@ -84,7 +84,7 @@ public class AddFeedFragment extends Fragment {
         values.put(FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL, thumbnail);
 
         // Insert the new row, returning the primary key value of the new row
-//        Log.d("databaseHelper()", ""+newRowId+" "+title);
+        Log.d("databaseHelper()", title);
         // insertWithConflict instead of insert.
         long primaryKey = db.insertWithOnConflict(
                 FeedsContract.FeedEntry.TABLE_NAME,
