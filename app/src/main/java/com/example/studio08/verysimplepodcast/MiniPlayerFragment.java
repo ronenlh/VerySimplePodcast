@@ -43,8 +43,8 @@ public class MiniPlayerFragment extends Fragment {
         return miniplayer;
     }
 
-    public void startPlayer(String itemUrl) {
-        Log.d("miniplayer", itemUrl);
+    public void startPlayer(String mediaUrl) {
+        Log.d("miniplayer", mediaUrl);
     }
 
     public void changePlayButtonState(){

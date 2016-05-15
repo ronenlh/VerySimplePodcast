@@ -18,13 +18,19 @@ public class EpisodeDialogFragment extends DialogFragment {
     String title;
     String description;
     String itemUrl;
+    String mediaUrl;
     String author;
     String pubDate;
 
-    onPlaySelectedListener mCallback;
+    onPlaySelectedListener playCallback;
+    onInfoSelectedListener infoCallback;
 
     interface onPlaySelectedListener {
         void onPlaySelected(String itemUrl);
+    }
+
+    interface onInfoSelectedListener {
+        void onInfoSelected(String itemUrl);
     }
 
     @Override
@@ -33,7 +39,8 @@ public class EpisodeDialogFragment extends DialogFragment {
         // The Fragment captures the interface implementation during its onAttach() lifecycle method and can then call the Interface methods in order to communicate with the Activity.
         super.onAttach(context);
         try {
-            mCallback = (onPlaySelectedListener) context;
+            playCallback = (onPlaySelectedListener) context;
+            infoCallback = (onInfoSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement onPlaySelectedListener");
@@ -65,11 +72,19 @@ public class EpisodeDialogFragment extends DialogFragment {
         ((TextView) content.findViewById(R.id.dialog_description)).setText(""+description);
 
         builder.setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        mCallback.onPlaySelected(itemUrl);
+                        playCallback.onPlaySelected(mediaUrl);
+                    }
+                })
+                .setNeutralButton(R.string.dialog_info, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        infoCallback.onInfoSelected(itemUrl);
                     }
                 })
                 .setNegativeButton(R.string.dialog_close, new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
 
                     }

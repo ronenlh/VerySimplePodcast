@@ -17,7 +17,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class MainActivity extends AppCompatActivity implements FeedSelectorFragment.onFeedSelectedListener, EpisodeSelectorFragment.onEpisodeSelectedListener, EpisodeDialogFragment.onPlaySelectedListener {
+public class MainActivity extends AppCompatActivity implements FeedSelectorFragment.onFeedSelectedListener,
+        EpisodeSelectorFragment.onEpisodeSelectedListener, EpisodeDialogFragment.onPlaySelectedListener, EpisodeDialogFragment.onInfoSelectedListener {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -124,8 +125,14 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
     @Override
-    public void onPlaySelected(String itemUrl) {
+    public void onPlaySelected(String mediaUrl) {
         MiniPlayerFragment miniPlayerFragment = new MiniPlayerFragment();
-        miniPlayerFragment.startPlayer(itemUrl);
+        miniPlayerFragment.startPlayer(mediaUrl);
+    }
+
+    @Override
+    public void onInfoSelected(String itemUrl) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemUrl));
+        startActivity(browserIntent);
     }
 }

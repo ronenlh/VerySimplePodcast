@@ -184,7 +184,8 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         args.putString("title", item.getTitle());
         args.putString("author", item.getAuthor());
         args.putString("description",item.getDescription());
-        args.putString("itemUrl",item.getEnclosure().getUrl());
+        args.putString("itemUrl",item.getLink());
+        args.putString("mediaUrl",item.getEnclosure().getUrl());
         args.putString("pubDate",item.getPubDate());
         dialogFragment.setArguments(args);
         dialogFragment.show(getFragmentManager(), "Episode "+position);

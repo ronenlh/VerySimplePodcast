@@ -9,4 +9,5 @@
     <string name="dialog_play">play</string>
     <string name="dialog_close">close</string>
     <string name="episode_info">Episode Info</string>
+    <string name="dialog_info">info</string>
 </resources>
