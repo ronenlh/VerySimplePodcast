@@ -53,7 +53,10 @@ public class FeedDialogFragment extends DialogFragment {
                 .setNeutralButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        /*public boolean deleteTitle(String name)
+                        {
+                            return db.delete(DATABASE_TABLE, KEY_NAME + "=" + name, null) > 0;
+                        }*/
                     }
                 })
                 .create();
