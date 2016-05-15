@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.studio08.verysimplepodcast.database.DbHelper;
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
@@ -22,6 +23,7 @@ import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TooManyListenersException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +71,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener {
                 } else
                     try {
                         Log.e("feed", response.errorBody().string());
+                        Toast.makeText(getActivity(), R.string.error_feed, Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -106,8 +109,8 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         EditText editText = (EditText) view.findViewById(R.id.feed_editText);
-//        retrofitCaller(editText.getText().toString());
+        retrofitCaller(editText.getText().toString());
 //        retrofitCaller("https://simplecast.com/podcasts/1684/rss");
-        retrofitCaller("http://feeds.serialpodcast.org/serialpodcast");
+//        retrofitCaller("http://feeds.serialpodcast.org/serialpodcast");
     }
 }
