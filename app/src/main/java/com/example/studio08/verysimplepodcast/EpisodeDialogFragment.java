@@ -53,6 +53,7 @@ public class EpisodeDialogFragment extends DialogFragment {
         title = getArguments().getString("title");
         description = getArguments().getString("description");
         itemUrl = getArguments().getString("itemUrl");
+        mediaUrl = getArguments().getString("mediaUrl");
         author = getArguments().getString("author");
         pubDate = getArguments().getString("pubDate");
 
