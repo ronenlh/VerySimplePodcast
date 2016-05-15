@@ -6,9 +6,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by studio08 on 5/10/2016.
@@ -69,7 +76,22 @@ public class EpisodeDialogFragment extends DialogFragment {
         builder.setView(content);
         ((TextView) content.findViewById(R.id.dialog_title)).setText(""+title);
         ((TextView) content.findViewById(R.id.dialog_author)).setText(""+author);
-        ((TextView) content.findViewById(R.id.dialog_date)).setText(""+pubDate);
+
+        // date parser and formatter
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z ", Locale.ENGLISH);
+            SimpleDateFormat newFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+            Date pubDateParsed = dateFormat.parse(pubDate);
+            String newFormatDate = newFormat.format(pubDateParsed);
+
+            ((TextView) content.findViewById(R.id.dialog_date)).setText(""+newFormatDate);
+        } catch (ParseException e) {
+//            e.printStackTrace();
+            Log.w("EpisodeDialogFragment", "problem parsing the date, diplaying unparsed date.");
+            ((TextView) content.findViewById(R.id.dialog_date)).setText(""+pubDate);
+        }
+
         ((TextView) content.findViewById(R.id.dialog_description)).setText(""+description);
 
         builder.setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {

@@ -8,6 +8,9 @@ import org.simpleframework.xml.NamespaceList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -131,6 +134,12 @@ public class FeedChannel {
 
         public String getPubDate() {
             return pubDate;
+        }
+
+        public Date getPubDateParsed() throws ParseException {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z "); // Thu, 31 Mar 2016 09:30:00 +0000
+            Date parsedDate = dateFormat.parse(getPubDate());
+            return parsedDate;
         }
 
         public String getSource() {
