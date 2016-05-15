@@ -80,7 +80,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = cursor(db);
-        FeedCursorAdapter adapter = FeedCursorAdapter.FeedCursorAdapterFactory(getContext(), cursor);
+        FeedCursorAdapter adapter = FeedCursorAdapter.FeedCursorAdapterFactory(getActivity(), cursor);
 
 //        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
         setListAdapter(adapter);
