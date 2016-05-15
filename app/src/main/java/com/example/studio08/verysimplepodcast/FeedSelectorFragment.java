@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +56,7 @@ public class FeedSelectorFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         // sets sample array
-        podcastFeedList = new ArrayList<>();
+//        podcastFeedList = new ArrayList<>();
 //        for (int i = 1; i < 20; i++) {
 //            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
 //        }
@@ -79,8 +81,9 @@ public class FeedSelectorFragment extends ListFragment {
         // you will actually use after this query.
         String[] projection = {
                 FeedsContract.FeedEntry._ID,
-                FeedsContract.FeedEntry.COLUMN_NAME_TITLE,
-                FeedsContract.FeedEntry.COLUMN_NAME_CREATOR,
+                FeedsContract.FeedEntry.COLUMN_NAME_TITLE, // 1
+                FeedsContract.FeedEntry.COLUMN_NAME_CREATOR, // 2
+                FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL // 3
         };
 
         // How you want the results sorted in the resulting Cursor
@@ -106,7 +109,9 @@ public class FeedSelectorFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        mCallback.onFeedSelected(position, podcastFeedList.get(position).getFeedUrl());
+        Cursor cursor = (Cursor) l.getItemAtPosition(position);
+        Log.d("onListItemClick", cursor.getString(3));
+        mCallback.onFeedSelected(position, cursor.getString(3));
         super.onListItemClick(l, v, position, id);
     }
 }

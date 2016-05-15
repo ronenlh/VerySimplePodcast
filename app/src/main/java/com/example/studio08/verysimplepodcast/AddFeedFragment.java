@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.studio08.verysimplepodcast.database.DbHelper;
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
@@ -25,21 +27,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+
 /**
  * Created by studio08 on 5/10/2016.
  */
-public class AddFeedFragment extends Fragment {
+public class AddFeedFragment extends Fragment implements View.OnClickListener {
+
+    View view;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_add_feed, container, false);
+        view = inflater.inflate(R.layout.fragment_add_feed, container, false);
+        Button button = (Button) view.findViewById(R.id.add_button);
+        button.setOnClickListener(this);
+        return view;
     }
 
-    private void retrofitCaller(String feedUrl) {
+    private void retrofitCaller(final String feedUrl) {
 
         // database
-        DbHelper mDbHelper = new DbHelper(getActivity());
-        final SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
+        DbHelper dbHelper = new DbHelper(getActivity());
+        final SQLiteDatabase db = dbHelper.getWritableDatabase();
         ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<RSS> call = service.feed(feedUrl);
         call.enqueue(new Callback<RSS>() {
@@ -53,8 +61,8 @@ public class AddFeedFragment extends Fragment {
                 if (feed != null) {
                     Log.d("feed", "feed is not null: \n" + feed.toString());
                     String title = feed.getChannel().getTitle();
-                    String creator = "";
-                    String feedUrl = "";
+                    String creator = feed.getChannel().getItemList().get(0).getAuthor();
+//                    String innerFeedUrl = feedUrl;
                     String thumbnail = "";
                     databaseHelper(db, title, creator, feedUrl, thumbnail);
 
@@ -92,5 +100,14 @@ public class AddFeedFragment extends Fragment {
                 values,SQLiteDatabase.CONFLICT_IGNORE);
 
         return primaryKey;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        EditText editText = (EditText) view.findViewById(R.id.feed_editText);
+//        retrofitCaller(editText.getText().toString());
+//        retrofitCaller("https://simplecast.com/podcasts/1684/rss");
+        retrofitCaller("http://feeds.serialpodcast.org/serialpodcast");
     }
 }
