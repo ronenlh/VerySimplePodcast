@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                     commit();
         }
 
+        // ImageView Downloader
+        new DownloadImageTask((ImageView) findViewById(R.id.thumbnail_imageView))
+                .execute("http://www.techinsights.com/uploadedImages/Public_Website/Content_-_Primary/Teardowncom/Sample_Reports/sample-icon.png");
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
