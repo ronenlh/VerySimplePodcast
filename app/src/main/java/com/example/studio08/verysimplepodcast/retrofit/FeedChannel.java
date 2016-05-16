@@ -43,7 +43,7 @@ public class FeedChannel {
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
     public ItunesImage itunesImage;
 
-    public String getImage() {
+    public String getImageHref() {
         return itunesImage.getHref();
     }
 

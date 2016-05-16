@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.studio08.verysimplepodcast.database.DatabaseHelper;
@@ -58,9 +59,12 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         }
     }
 
+    View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.feed_selector_listfragment, container, false);
+        view = inflater.inflate(R.layout.feed_selector_listfragment, container, false);
+        return view;
     }
 
     @Override
@@ -86,6 +90,10 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         setListAdapter(adapter);
 
         getListView().setOnItemLongClickListener(this);
+
+        // ImageView Downloader
+        DownloadImageTask imageTask = new DownloadImageTask((ImageView) view.findViewById(R.id.thumbnail_imageView));
+        imageTask.execute("http://www.online-image-editor.com//styles/2014/images/example_image.png");
     }
 
     private Cursor cursor(SQLiteDatabase db) {

@@ -24,6 +24,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
                 R.id.creator_textView};
         int layout = R.layout.main_row;
         int flags = CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER;
+
         return new FeedCursorAdapter(context, layout, c, from, to, flags);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -14,16 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.studio08.verysimplepodcast.database.DbHelper;
-import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.example.studio08.verysimplepodcast.database.FeedsContract;
 import com.example.studio08.verysimplepodcast.retrofit.ApiService;
-import com.example.studio08.verysimplepodcast.retrofit.FeedChannel;
 import com.example.studio08.verysimplepodcast.retrofit.RSS;
 import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.TooManyListenersException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +60,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener {
                     String title = feed.getChannel().getTitle();
                     String creator = feed.getChannel().getItemList().get(0).getAuthor();
 //                    String innerFeedUrl = feedUrl;
-                    String thumbnail = "";
+                    String thumbnail = feed.getChannel().getImageHref();
                     databaseHelper(db, title, creator, feedUrl, thumbnail);
 
                 } else
