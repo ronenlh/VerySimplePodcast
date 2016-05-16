@@ -21,6 +21,7 @@ import java.util.List;
 })
 @Root(strict = false)
 public class FeedChannel {
+
     // Tricky part in Simple XML because the link is named twice
     @ElementList(entry = "link", inline = true, required = false)
     public List<Link> links;
@@ -34,8 +35,13 @@ public class FeedChannel {
 
     @Element
     String title;
+
     @Element
     String language;
+
+    @Element(name = "image", required = true)
+    @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
+    public ItunesImage itunesImage;
 
     @Element(name = "ttl", required = false)
     int ttl;
@@ -54,6 +60,7 @@ public class FeedChannel {
                 ", itemList=" + itemList +
                 ", title='" + title + '\'' +
                 ", language='" + language + '\'' +
+                ", ItunesImage='" + itunesImage + '\'' +
                 ", ttl=" + ttl +
                 ", pubDate='" + pubDate + '\'' +
                 '}';
@@ -186,4 +193,15 @@ public class FeedChannel {
         }
     }
 
+    @Root(name = "image", strict = false)
+    @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
+    public static class ItunesImage {
+        @Attribute(required = false)
+        public String href;
+
+        @Override
+        public String toString() {
+            return href;
+        }
+    }
 }
