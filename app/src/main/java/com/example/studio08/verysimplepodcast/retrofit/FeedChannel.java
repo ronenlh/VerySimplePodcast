@@ -43,6 +43,10 @@ public class FeedChannel {
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
     public ItunesImage itunesImage;
 
+    public String getImage() {
+        return itunesImage.getHref();
+    }
+
     @Element(name = "ttl", required = false)
     int ttl;
 
@@ -198,6 +202,10 @@ public class FeedChannel {
     public static class ItunesImage {
         @Attribute(required = false)
         public String href;
+
+        public String getHref() {
+            return href;
+        }
 
         @Override
         public String toString() {
