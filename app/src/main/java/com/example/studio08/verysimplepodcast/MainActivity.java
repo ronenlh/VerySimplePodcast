@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
             FeedSelectorFragment feedSelectorFragment = new FeedSelectorFragment();
             feedSelectorFragment.setArguments(getIntent().getExtras());
-            getFragmentManager().
+            getSupportFragmentManager().
                     beginTransaction().
                     add(R.id.feed_selector_container, feedSelectorFragment).
                     commit();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         episodeSelectorFragment.setArguments(args);
 
         // now switching Fragments
-        getFragmentManager().
+        getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.feed_selector_container, episodeSelectorFragment).
                 addToBackStack("toEpisode").
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     public void addFeed(View view) {
         Toast.makeText(this, R.string.add_feed, Toast.LENGTH_SHORT).show();
         AddFeedFragment addFeedFragment = new AddFeedFragment();
-        getFragmentManager().
+        getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.feed_selector_container, addFeedFragment).
                 addToBackStack("toAdd").

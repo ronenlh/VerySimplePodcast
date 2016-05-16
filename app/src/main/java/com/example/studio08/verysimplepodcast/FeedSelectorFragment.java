@@ -1,13 +1,15 @@
 package com.example.studio08.verysimplepodcast;
 
-import android.app.DialogFragment;
-import android.app.ListFragment;
+
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.ListFragment;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
