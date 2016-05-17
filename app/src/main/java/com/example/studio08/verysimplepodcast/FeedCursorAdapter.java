@@ -69,13 +69,9 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
                  into(imageView);
     }
 
-    @Override
-    public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return super.newView(context, cursor, parent);
-    }
-
     public class CropSquareTransformation implements Transformation {
-        @Override public Bitmap transform(Bitmap source) {
+        @Override
+        public Bitmap transform(Bitmap source) {
             int size = Math.min(source.getWidth(), source.getHeight());
             int x = (source.getWidth() - size) / 2;
             int y = (source.getHeight() - size) / 2;
@@ -86,6 +82,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
             return result;
         }
 
-        @Override public String key() { return "square()"; }
+        @Override
+        public String key() { return "square()"; }
     }
 }
