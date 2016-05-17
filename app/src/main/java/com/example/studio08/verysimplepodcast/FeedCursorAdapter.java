@@ -2,6 +2,7 @@ package com.example.studio08.verysimplepodcast;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.SimpleCursorAdapter;
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.example.studio08.verysimplepodcast.database.FeedsContract;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 /**
  * Created by studio08 on 5/4/2016.
@@ -59,11 +61,31 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
         ImageView imageView = (ImageView) view.findViewById(R.id.thumbnail_imageView);
          String imageHref = cursor.getString(cursor.getColumnIndex(FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL));
         // This cursor is from the projection in the cursor of FeedSelectorFragment
-         Picasso.with(context).load(imageHref).into(imageView);
+         Picasso.with(context).
+                 load(imageHref).
+                 transform(new CropSquareTransformation()).
+                 placeholder(R.drawable.ic_image_black_24dp).
+                 error(R.drawable.ic_broken_image_black_24dp).
+                 into(imageView);
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return super.newView(context, cursor, parent);
+    }
+
+    public class CropSquareTransformation implements Transformation {
+        @Override public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+            Bitmap result = Bitmap.createBitmap(source, x, y, size, size);
+            if (result != source) {
+                source.recycle();
+            }
+            return result;
+        }
+
+        @Override public String key() { return "square()"; }
     }
 }
