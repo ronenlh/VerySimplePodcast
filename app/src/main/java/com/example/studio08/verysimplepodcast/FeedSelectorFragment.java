@@ -98,7 +98,8 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
                 FeedsContract.FeedEntry._ID, //
                 FeedsContract.FeedEntry.COLUMN_NAME_TITLE, // 1
                 FeedsContract.FeedEntry.COLUMN_NAME_CREATOR, // 2
-                FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL // 3
+                FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL, // 3
+                FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL // 4
         };
 
         // How you want the results sorted in the resulting Cursor

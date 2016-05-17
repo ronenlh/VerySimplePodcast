@@ -65,7 +65,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener {
                     String title = feed.getChannel().getTitle();
                     String creator = feed.getChannel().getItemList().get(0).getAuthor();
 //                    String innerFeedUrl = feedUrl;
-                    String thumbnail = "";
+                    String thumbnail = feed.getChannel().getImage();
                     databaseHelper(db, title, creator, feedUrl, thumbnail);
 
                 } else

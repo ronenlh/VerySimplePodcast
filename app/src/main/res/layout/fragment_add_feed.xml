@@ -24,7 +24,8 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="http://" />
+        android:hint="http://"
+        android:text="http://www.podcast411.com/new_demo_feed.xml" />
 
     <Button
         android:layout_width="wrap_content"
