@@ -18,6 +18,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     FeedsContract.FeedEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL + TEXT_TYPE + COMMA_SEP +
                     FeedsContract.FeedEntry.COLUMN_NAME_CREATOR + TEXT_TYPE + COMMA_SEP +
+                    FeedsContract.FeedEntry.COLUMN_NAME_SUBTITLE + TEXT_TYPE + COMMA_SEP +
                     FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL + TEXT_TYPE +
                     // Any other options for the CREATE command, remember the COMMA_SEP
                     " )";
@@ -26,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + FeedsContract.FeedEntry.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Feeds.db";
 
     public DbHelper(Context context) {

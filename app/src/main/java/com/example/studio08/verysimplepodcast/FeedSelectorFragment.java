@@ -69,22 +69,11 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // sets sample array
-//        podcastFeedList = new ArrayList<>();
-//        for (int i = 1; i < 20; i++) {
-//            podcastFeedList.add(new PodcastFeed("Sample Podcast " + i));
-//        }
-//        podcastFeedList.add(new Feed("Serial", "http://feeds.serialpodcast.org/serialpodcast"));
-//        podcastFeedList.add(new Feed("99% Invisible", "https://feeds.feedburner.com/99pi"));
-
-//        FeedBaseAdapter adapter = new FeedBaseAdapter(getContext(), podcastFeedList);
-
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = cursor(db);
         FeedCursorAdapter adapter = FeedCursorAdapter.FeedCursorAdapterFactory(getActivity(), cursor);
 
-//        ArrayAdapter<PodcastFeed> adapter = new ArrayAdapter<PodcastFeed>(getContext(),android.R.layout.simple_list_item_1,podcastFeedList);
         setListAdapter(adapter);
 
         getListView().setOnItemLongClickListener(this);
@@ -99,7 +88,8 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
                 FeedsContract.FeedEntry.COLUMN_NAME_TITLE, // 1
                 FeedsContract.FeedEntry.COLUMN_NAME_CREATOR, // 2
                 FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL, // 3
-                FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL // 4
+                FeedsContract.FeedEntry.COLUMN_NAME_SUBTITLE, // 4
+                FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL // 5
         };
 
         // How you want the results sorted in the resulting Cursor

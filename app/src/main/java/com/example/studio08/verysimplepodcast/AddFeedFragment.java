@@ -75,15 +75,17 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
             /**  Similar to Episode Selector Fragment, but here we want info about the feed and add it to SQLite database.
                  In the FeedSelectorFragment we pull info from that Database, Feeds.db */
 
-                RSS feed = response.body(); // <-- this is the feed!
+                RSS feedChannel = response.body(); // <-- this is the feed!
 
-                if (feed != null) {
-                    Log.d("feed", "feed is not null: \n" + feed.toString());
-                    String title = feed.getChannel().getTitle();
-                    String creator = feed.getChannel().getItemList().get(0).getAuthor();
-//                    String innerFeedUrl = feedUrl;
-                    String thumbnail = feed.getChannel().getImage();
-                    databaseHelper(db, title, creator, feedUrl, thumbnail);
+                if (feedChannel != null) {
+                    Log.d("feed", "feed is not null: \n" + feedChannel.toString());
+                    String title = feedChannel.getChannel().getTitle();
+                    String creator = "";
+                    if ((creator = feedChannel.getChannel().getAuthor()) == null)
+                        creator = feedChannel.getChannel().getItemList().get(0).getAuthor();
+                    String subtitle = feedChannel.getChannel().getSubtitle();
+                    String thumbnail = feedChannel.getChannel().getImage();
+                    databaseHelper(db, title, creator, feedUrl, subtitle, thumbnail);
 
                 } else
                     try {
@@ -102,13 +104,14 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
     }
 
 
-    private long databaseHelper(SQLiteDatabase db, String title, String creator, String feedUrl, String thumbnail) {
+    private long databaseHelper(SQLiteDatabase db, String title, String creator, String feedUrl, String subtitle, String thumbnail) {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(FeedsContract.FeedEntry.COLUMN_NAME_TITLE, title);
         values.put(FeedsContract.FeedEntry.COLUMN_NAME_CREATOR, creator);
         values.put(FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL, feedUrl);
+        values.put(FeedsContract.FeedEntry.COLUMN_NAME_SUBTITLE, subtitle);
         values.put(FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL, thumbnail);
 
         // Insert the new row, returning the primary key value of the new row

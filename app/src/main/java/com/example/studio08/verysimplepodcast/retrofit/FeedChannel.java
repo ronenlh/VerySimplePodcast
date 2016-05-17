@@ -39,6 +39,22 @@ public class FeedChannel {
     @Element
     String language;
 
+    @Element(name = "author", required = false)
+    @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
+    String author;
+
+    @Element(name = "subtitle", required = false)
+    @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
+    String subtitle;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
     @Element(name = "image", required = true)
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
     public ItunesImage itunesImage;
@@ -61,12 +77,14 @@ public class FeedChannel {
     public String toString() {
         return "Channel{" +
                 "links=" + links +
-                ", itemList=" + itemList +
                 ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", subtitle='" + subtitle + '\'' +
                 ", language='" + language + '\'' +
                 ", ItunesImage='" + itunesImage + '\'' +
                 ", ttl=" + ttl +
                 ", pubDate='" + pubDate + '\'' +
+                ", itemList=" + itemList +
                 '}';
     }
 

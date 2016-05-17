@@ -17,6 +17,7 @@ public final class FeedsContract {
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_FEED_URL = "url";
         public static final String COLUMN_NAME_CREATOR = "creator";
+        public static final String COLUMN_NAME_SUBTITLE = "subtitle";
         public static final String COLUMN_NAME_THUMBNAIL = "thumbnail";
         public static final String COLUMN_NAME_NULLABLE = "null";
 
