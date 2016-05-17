@@ -58,7 +58,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
 
         ImageView imageView = (ImageView) view.findViewById(R.id.thumbnail_imageView);
          String imageHref = cursor.getString(cursor.getColumnIndex(FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL));
-        // Thus cursor is from the projection in the cursor of FeedSelectorFragment
+        // This cursor is from the projection in the cursor of FeedSelectorFragment
          Picasso.with(context).load(imageHref).into(imageView);
     }
 

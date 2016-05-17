@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.studio08.verysimplepodcast.database.DbHelper;
@@ -23,6 +26,7 @@ import com.example.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TooManyListenersException;
 
 import retrofit2.Call;
@@ -34,14 +38,27 @@ import retrofit2.Response;
 /**
  * Created by studio08 on 5/10/2016.
  */
-public class AddFeedFragment extends Fragment implements View.OnClickListener {
+public class AddFeedFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     View view;
+    List<Feed> sampleFeedList;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_feed, container, false);
         Button button = (Button) view.findViewById(R.id.add_button);
         button.setOnClickListener(this);
+
+        // sample Feed List
+        sampleFeedList = new ArrayList<>();
+        sampleFeedList.add(new Feed("99% Invisible","http://feeds.feedburner.com/99pi?format=xml"));
+        sampleFeedList.add(new Feed("Serial","http://feeds.serialpodcast.org/serialpodcast"));
+        sampleFeedList.add(new Feed("Fragmented","https://simplecast.com/podcasts/1684/rss"));
+        sampleFeedList.add(new Feed("podCast 411","http://www.podcast411.com/new_demo_feed.xml"));
+        ArrayAdapter<Feed> adapter = new ArrayAdapter<Feed>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
+        ListView listView = (ListView) view.findViewById(R.id.sample_feeds);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+
         return view;
     }
 
@@ -107,10 +124,12 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
         EditText editText = (EditText) view.findViewById(R.id.feed_editText);
         retrofitCaller(editText.getText().toString());
-//        retrofitCaller("https://simplecast.com/podcasts/1684/rss");
-//        retrofitCaller("http://feeds.serialpodcast.org/serialpodcast");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        retrofitCaller(sampleFeedList.get(position).getFeedUrl());
     }
 }
