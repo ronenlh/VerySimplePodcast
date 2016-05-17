@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 
 import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
@@ -64,9 +65,9 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
          Picasso.with(context).
                  load(imageHref).
                  transform(new CropSquareTransformation()).
-                 placeholder(R.drawable.ic_image_black_24dp).
                  error(R.drawable.ic_broken_image_black_24dp).
                  into(imageView);
+        view.findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
     }
 
     public class CropSquareTransformation implements Transformation {
