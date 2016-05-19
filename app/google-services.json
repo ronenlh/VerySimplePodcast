@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "556071517847",
+    "firebase_url": "https://podcast-b8875.firebaseio.com",
+    "project_id": "podcast-b8875",
+    "storage_bucket": "podcast-b8875.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556071517847:android:401460a15688bf0c",
+        "android_client_info": {
+          "package_name": "com.example.studio08.verysimplepodcast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556071517847-p8j0qor3mscg0ejf7khs80tn88h17dd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVlqys9lqddbn7m5DHILl4Vrv6lBfcnWM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
