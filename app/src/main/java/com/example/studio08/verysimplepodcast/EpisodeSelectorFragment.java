@@ -60,7 +60,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.feed_selector_listfragment, container, false);
+        return inflater.inflate(R.layout.episode_selector_listfragment, container, false);
     }
 
     @Override

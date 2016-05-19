@@ -11,4 +11,5 @@
     <string name="episode_info">Episode Info</string>
     <string name="dialog_info">website</string>
     <string name="error_feed">There was an Error with the feed.</string>
+    <string name="episode_error">an error has ocurred, try reloading the app.</string>
 </resources>
