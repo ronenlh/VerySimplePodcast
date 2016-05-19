@@ -65,7 +65,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
          Picasso.with(context).
                  load(imageHref).
                  transform(new CropSquareTransformation()).
-                 error(R.drawable.ic_broken_image_black_24dp).
+                 // error(R.drawable.ic_broken_image_black_24dp).
                  into(imageView);
         view.findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
     }
