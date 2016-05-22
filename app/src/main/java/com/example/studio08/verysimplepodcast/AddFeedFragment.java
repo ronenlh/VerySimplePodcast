@@ -1,6 +1,7 @@
 package com.example.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -134,5 +135,6 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         retrofitCaller(sampleFeedList.get(position).getFeedUrl());
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 }

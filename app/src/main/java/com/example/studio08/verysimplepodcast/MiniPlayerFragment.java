@@ -1,9 +1,7 @@
 package com.example.studio08.verysimplepodcast;
 
-import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -24,15 +22,12 @@ import java.io.IOException;
  */
 public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 
-    View miniplayer = null;
-
     private ImageView playButton;
     private boolean isPlayButton = true;
-    private MediaPlayer mediaPlayer = null;
+    private MediaPlayer mediaPlayer;
     private int fileDuration;
-    private SeekBar progressBar = null;
-    private Handler progressBarHandler = new Handler();
-
+    private SeekBar seekBar;
+    private Handler progressBarHandler;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -43,9 +38,27 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        miniplayer = inflater.inflate(R.layout.miniplayer_fragment, container, false);
-        startViews();
-        return miniplayer;
+        return inflater.inflate(R.layout.miniplayer_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        playButton = (ImageView) view.findViewById(R.id.play_imageView);
+        seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPlayButton) play();
+                else pause();
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        playButton = null;
     }
 
     public void startPlayer(String mediaUrl) {
@@ -65,8 +78,12 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     }
 
     private void play() {
-        mediaPlayer.start();
-        changeToPause();
+        if (mediaPlayer != null) {
+            mediaPlayer.start();
+            changeToPause();
+        } else {
+            Toast.makeText(getActivity(), "No episode selected.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void pause() {
@@ -77,6 +94,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private void changeToPause() {
         isPlayButton = false;
         playButton.setImageResource(R.drawable.ic_pause_24dp);
+
     }
 
     private void changeToPlay() {
@@ -84,23 +102,38 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         playButton.setImageResource(R.drawable.ic_play_arrow_24dp);
     }
 
-    private void startViews() {
+    @Override
+    public void onPrepared(final MediaPlayer mp) {
+        play();
+        seekBar.setMax(mp.getDuration());
+        progressBarHandler = new Handler();
 
-        /** TODO: release and set to null MediaPlayer */
-        playButton = (ImageView) miniplayer.findViewById(R.id.play_imageView);
-        playButton.setOnClickListener(new View.OnClickListener() {
+        getActivity().runOnUiThread(new Runnable() {
             @Override
-            public void onClick(View v) {
-                if (isPlayButton)
-                    changeToPause();
-                else
-                    changeToPlay();
+            public void run() {
+                int currentPosition = mp.getCurrentPosition() / 1000;
+                seekBar.setProgress(currentPosition);
+                progressBarHandler.postDelayed(this, 1000);
             }
         });
-    }
 
-    @Override
-    public void onPrepared(MediaPlayer mp) {
-        play();
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            // https://stackoverflow.com/questions/17168215/seekbar-and-media-player-in-android
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (mp != null && fromUser) {
+                    mp.seekTo(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
     }
 }
