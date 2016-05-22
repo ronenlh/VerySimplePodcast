@@ -17,7 +17,8 @@
         android:layout_alignRight="@id/thumbnail_imageView"
         android:layout_alignLeft="@id/thumbnail_imageView"
         android:layout_alignTop="@id/thumbnail_imageView"
-        android:layout_alignBottom="@id/thumbnail_imageView"/>
+        android:layout_alignBottom="@id/thumbnail_imageView"
+        android:padding="15dp" />
 
     <LinearLayout
         android:orientation="vertical"
