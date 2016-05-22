@@ -111,7 +111,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                int currentPosition = mp.getCurrentPosition() / 1000;
+                int currentPosition = mp.getCurrentPosition();
                 seekBar.setProgress(currentPosition);
                 progressBarHandler.postDelayed(this, 1000);
             }
