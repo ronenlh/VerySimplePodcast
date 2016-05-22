@@ -4,15 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 
-import com.example.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.example.studio08.verysimplepodcast.database.FeedsContract;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -54,7 +51,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(final View view, Context context, Cursor cursor) {
         // view: Existing view, returned earlier by newView
         // cursor: The cursor from which to get the data. The cursor is already moved to the correct position.
         super.bindView(view, context, cursor);
@@ -66,8 +63,17 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
                  load(imageHref).
                  transform(new CropSquareTransformation()).
                  // error(R.drawable.ic_broken_image_black_24dp).
-                 into(imageView);
-        view.findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+                 into(imageView, new Callback() {
+                     @Override
+                     public void onSuccess() {
+                         view.findViewById(R.id.seekBar).setVisibility(View.INVISIBLE);
+                     }
+
+                     @Override
+                     public void onError() {
+
+                     }
+                 });
     }
 
     public class CropSquareTransformation implements Transformation {

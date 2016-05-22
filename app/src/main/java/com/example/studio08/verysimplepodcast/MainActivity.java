@@ -126,7 +126,8 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     @Override
     public void onPlaySelected(String mediaUrl) {
-        MiniPlayerFragment miniPlayerFragment = new MiniPlayerFragment();
+//        MiniPlayerFragment miniPlayerFragment = new MiniPlayerFragment();
+        MiniPlayerFragment miniPlayerFragment = (MiniPlayerFragment) getSupportFragmentManager().findFragmentById(R.id.miniplayer_fragment);
         miniPlayerFragment.startPlayer(mediaUrl);
     }
 
@@ -135,4 +136,5 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemUrl));
         startActivity(browserIntent);
     }
+
 }
