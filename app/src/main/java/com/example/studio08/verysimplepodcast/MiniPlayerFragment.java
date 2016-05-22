@@ -18,10 +18,11 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+
 /**
  * Created by Ronen on 16/4/16.
  */
-public class MiniPlayerFragment extends Fragment {
+public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 
     View miniplayer = null;
 
@@ -49,42 +50,38 @@ public class MiniPlayerFragment extends Fragment {
 
     public void startPlayer(String mediaUrl) {
         Log.d("miniplayer", mediaUrl);
-        MediaPlayer mediaPlayer = null;
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
                 mediaPlayer.setDataSource(mediaUrl);
+                mediaPlayer.prepareAsync();
+                mediaPlayer.setOnPreparedListener(this);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            mediaPlayer.prepareAsync();
 
-            // finalMediaPlayer autocompleted to comply with inner class requirements
-            final MediaPlayer finalMediaPlayer = mediaPlayer;
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    finalMediaPlayer.start();
-//                    changePlayButtonState();
-                }
-            });
         }
     }
 
-    public void changePlayButtonState(){
-        if(isPlayButton) {
-            if (mediaPlayer != null) {
-                playButton.setImageResource(R.drawable.ic_pause_24dp);
-                mediaPlayer.start();
-            }
-        } else {
-            if (mediaPlayer != null) {
-                playButton.setImageResource(R.drawable.ic_play_arrow_24dp);
-                mediaPlayer.pause();
-            }
-        }
-        isPlayButton = !isPlayButton;
+    private void play() {
+        mediaPlayer.start();
+        changeToPause();
+    }
+
+    private void pause() {
+        mediaPlayer.pause();
+        changeToPlay();
+    }
+
+    private void changeToPause() {
+        isPlayButton = false;
+        playButton.setImageResource(R.drawable.ic_pause_24dp);
+    }
+
+    private void changeToPlay() {
+        isPlayButton = true;
+        playButton.setImageResource(R.drawable.ic_play_arrow_24dp);
     }
 
     private void startViews() {
@@ -94,9 +91,16 @@ public class MiniPlayerFragment extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changePlayButtonState();
+                if (isPlayButton)
+                    changeToPause();
+                else
+                    changeToPlay();
             }
         });
     }
 
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        play();
+    }
 }
