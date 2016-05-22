@@ -31,6 +31,10 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private TextView counter;
     private Handler progressBarHandler;
     private Utilities utilities;
+    public final static int SKIP30 = 30;
+    public final static int SKIP10 = 10;
+    public final static int SKIP5 = 5;
+    private int skipmode = SKIP30;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -47,8 +51,22 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
-        replayButton = (ImageView) view.findViewById(R.id.replay_iw);;
-        forwardButton = (ImageView) view.findViewById(R.id.forward_iw);;
+        replayButton = (ImageView) view.findViewById(R.id.replay_iw);
+        forwardButton = (ImageView) view.findViewById(R.id.forward_iw);
+
+        switch (skipmode) {
+            case SKIP30:
+                break;
+            case SKIP10:
+                replayButton.setImageResource(R.drawable.ic_replay_10_black_24dp);
+                forwardButton.setImageResource(R.drawable.ic_forward_10_black_24dp);
+                break;
+            case SKIP5:
+                replayButton.setImageResource(R.drawable.ic_replay_5_black_24dp);
+                forwardButton.setImageResource(R.drawable.ic_forward_5_black_24dp);
+                break;
+            default:
+        }
 
         if (mediaPlayer == null) disableButtons();
 
@@ -70,7 +88,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
                 @Override
                 public void onClick(View v) {
                     if (mediaPlayer != null)
-                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 30 * 1000);
+                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - skipmode * 1000);
                 }
             });
 
@@ -78,7 +96,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
                 @Override
                 public void onClick(View v) {
                     if (mediaPlayer != null)
-                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 30 * 1000);
+                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + skipmode * 1000);
                 }
             });
 
