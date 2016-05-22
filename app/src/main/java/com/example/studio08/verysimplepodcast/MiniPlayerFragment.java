@@ -23,7 +23,7 @@ import java.io.IOException;
  */
 public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 
-    private ImageView playButton;
+    private ImageView playButton, replayButton, forwardButton;
     private boolean isPlayButton = true;
     private MediaPlayer mediaPlayer;
     private int fileDuration;
@@ -47,6 +47,10 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
+        replayButton = (ImageView) view.findViewById(R.id.replay_iw);;
+        forwardButton = (ImageView) view.findViewById(R.id.forward_iw);;
+        disableButtons();
+
         seekBar = (SeekBar) view.findViewById(R.id.seekBar);
         counter = (TextView) view.findViewById(R.id.counter_textview);
         utilities = new Utilities();
@@ -58,6 +62,24 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
                 else pause();
             }
         });
+    }
+
+    private void disableButtons() {
+        playButton.setEnabled(false);
+        playButton.setAlpha(0.5F);
+        replayButton.setEnabled(false);
+        replayButton.setAlpha(0.5F);
+        forwardButton.setEnabled(false);
+        forwardButton.setAlpha(0.5F);
+    }
+
+    private void enableButtons() {
+        playButton.setEnabled(true);
+        playButton.setAlpha(1F);
+        replayButton.setEnabled(true);
+        replayButton.setAlpha(1F);
+        forwardButton.setEnabled(true);
+        forwardButton.setAlpha(1F);
     }
 
     @Override
@@ -109,6 +131,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
 
     @Override
     public void onPrepared(final MediaPlayer mp) {
+        enableButtons();
         play();
         seekBar.setMax(mp.getDuration());
         progressBarHandler = new Handler();
