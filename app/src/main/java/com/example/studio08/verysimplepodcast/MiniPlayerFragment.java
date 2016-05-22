@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -27,7 +28,9 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private MediaPlayer mediaPlayer;
     private int fileDuration;
     private SeekBar seekBar;
+    private TextView counter;
     private Handler progressBarHandler;
+    private Utilities utilities;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
         seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+        counter = (TextView) view.findViewById(R.id.counter_textview);
+        utilities = new Utilities();
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +116,11 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                int currentPosition = mp.getCurrentPosition();
-                seekBar.setProgress(currentPosition);
+                long totalDuration = mp.getDuration();
+                long currentPosition = mp.getCurrentPosition();
+                seekBar.setProgress((int) currentPosition);
                 progressBarHandler.postDelayed(this, 1000);
+                counter.setText(""+utilities.milliSecondsToTimer(currentPosition)+" / "+utilities.milliSecondsToTimer(totalDuration));
             }
         });
 
