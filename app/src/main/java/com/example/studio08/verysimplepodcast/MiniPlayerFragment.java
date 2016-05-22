@@ -49,19 +49,39 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
         replayButton = (ImageView) view.findViewById(R.id.replay_iw);;
         forwardButton = (ImageView) view.findViewById(R.id.forward_iw);;
-        disableButtons();
+
+        if (mediaPlayer == null) disableButtons();
 
         seekBar = (SeekBar) view.findViewById(R.id.seekBar);
         counter = (TextView) view.findViewById(R.id.counter_textview);
         utilities = new Utilities();
 
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isPlayButton) play();
-                else pause();
-            }
-        });
+
+
+            playButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isPlayButton) play();
+                    else pause();
+                }
+            });
+
+            replayButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mediaPlayer != null)
+                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 30 * 1000);
+                }
+            });
+
+            forwardButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mediaPlayer != null)
+                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 30 * 1000);
+                }
+            });
+
     }
 
     private void disableButtons() {
@@ -143,7 +163,8 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
                 long currentPosition = mp.getCurrentPosition();
                 seekBar.setProgress((int) currentPosition);
                 progressBarHandler.postDelayed(this, 1000);
-                counter.setText(""+utilities.milliSecondsToTimer(currentPosition)+" / "+utilities.milliSecondsToTimer(totalDuration));
+                counter.setText(""+utilities.milliSecondsToTimer(currentPosition)
+                        +" / "+utilities.milliSecondsToTimer(totalDuration));
             }
         });
 
