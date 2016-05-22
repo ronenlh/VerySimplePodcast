@@ -2,6 +2,7 @@ package com.example.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -96,12 +97,20 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         episodeSelectorFragment.setArguments(args);
 
         // now switching Fragments
-        getSupportFragmentManager().
-                beginTransaction().
-                replace(R.id.feed_selector_container, episodeSelectorFragment).
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
-                addToBackStack("toEpisode").
-                commit();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.feed_selector_container, episodeSelectorFragment).
+                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+                    addToBackStack("toEpisode").
+                    commit();
+        } else {
+            getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.episode_selector_container, episodeSelectorFragment).
+                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+                    commit();
+        }
     }
 
     @Override
