@@ -104,20 +104,20 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
 
     private void disableButtons() {
         playButton.setEnabled(false);
-        playButton.setAlpha(0.5F);
+        playButton.setAlpha(0.26F);
         replayButton.setEnabled(false);
-        replayButton.setAlpha(0.5F);
+        replayButton.setAlpha(0.26F);
         forwardButton.setEnabled(false);
-        forwardButton.setAlpha(0.5F);
+        forwardButton.setAlpha(0.26F);
     }
 
     private void enableButtons() {
         playButton.setEnabled(true);
-        playButton.setAlpha(1F);
+        playButton.setAlpha(0.54F);
         replayButton.setEnabled(true);
-        replayButton.setAlpha(1F);
+        replayButton.setAlpha(0.54F);
         forwardButton.setEnabled(true);
-        forwardButton.setAlpha(1F);
+        forwardButton.setAlpha(0.54F);
     }
 
     @Override
