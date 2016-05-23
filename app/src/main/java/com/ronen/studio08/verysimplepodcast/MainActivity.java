@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.studio08.verysimplepodcast/http/host/path")
+                Uri.parse("android-app://com.ronen.studio08.verysimplepodcast/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
@@ -179,7 +179,13 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
     public void feedDeleted(int position, String feedUrl) {
-        final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        final CoordinatorLayout coordinatorLayout;
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        }
+        else {
+            coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_land);
+        }
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, "Feed Deleted", Snackbar.LENGTH_LONG)
                 .setAction("UNDO", new View.OnClickListener() {
