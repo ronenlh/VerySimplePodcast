@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_skip_entries">pref_skip_entries</string-array>
+        <string name="skip30">30 seconds</string>
+        <string name="skip10">10 seconds</string>
+        <string name="skip5">5 seconds</string>
+    <string-array name="pref_skip_values">pref_skip_values</string-array>
+
+</resources>
