@@ -50,7 +50,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
         sampleFeedList.add(new Feed("Serial","http://feeds.serialpodcast.org/serialpodcast"));
         sampleFeedList.add(new Feed("Fragmented","https://simplecast.com/podcasts/1684/rss"));
         sampleFeedList.add(new Feed("podCast 411","http://www.podcast411.com/new_demo_feed.xml"));
-        ArrayAdapter<Feed> adapter = new ArrayAdapter<Feed>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
+        ArrayAdapter<Feed> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
         ListView listView = (ListView) view.findViewById(R.id.sample_feeds);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
@@ -76,7 +76,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
                 if (feedChannel != null) {
                     Log.d("feed", "feed is not null: \n" + feedChannel.toString());
                     String title = feedChannel.getChannel().getTitle();
-                    String creator = "";
+                    String creator;
                     if ((creator = feedChannel.getChannel().getAuthor()) == null)
                         creator = feedChannel.getChannel().getItemList().get(0).getAuthor();
                     String subtitle = feedChannel.getChannel().getSubtitle();
