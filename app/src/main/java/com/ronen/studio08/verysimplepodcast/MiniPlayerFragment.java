@@ -53,6 +53,8 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
         replayButton = (ImageView) view.findViewById(R.id.replay_iw);
         forwardButton = (ImageView) view.findViewById(R.id.forward_iw);
+        seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+        counter = (TextView) view.findViewById(R.id.counter_textview);
 
         switch (skipmode) {
             case SKIP30:
@@ -70,8 +72,6 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
 
         if (mediaPlayer == null) disableButtons();
 
-        seekBar = (SeekBar) view.findViewById(R.id.seekBar);
-        counter = (TextView) view.findViewById(R.id.counter_textview);
         utilities = new Utilities();
 
 
@@ -103,6 +103,8 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     }
 
     private void disableButtons() {
+        seekBar.setEnabled(false);
+        seekBar.setAlpha(0.26F);
         playButton.setEnabled(false);
         playButton.setAlpha(0.26F);
         replayButton.setEnabled(false);
@@ -112,6 +114,8 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     }
 
     private void enableButtons() {
+        seekBar.setEnabled(true);
+        seekBar.setAlpha(1F);
         playButton.setEnabled(true);
         playButton.setAlpha(0.54F);
         replayButton.setEnabled(true);
