@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.studio08.verysimplepodcast/http/host/path")
+                Uri.parse("android-app://com.ronen.studio08.verysimplepodcast/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
     }
