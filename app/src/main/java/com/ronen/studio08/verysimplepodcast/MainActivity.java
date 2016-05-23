@@ -181,11 +181,11 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     public void feedDeleted(int position, String feedUrl) {
         final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
         Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, "Feed deleted", Snackbar.LENGTH_LONG)
+                .make(coordinatorLayout, "Feed Deleted", Snackbar.LENGTH_LONG)
                 .setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Episode restored!", Snackbar.LENGTH_SHORT);
+                        Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Feed Restored!", Snackbar.LENGTH_SHORT);
                         snackbar1.show();
                     }
                 });
