@@ -20,22 +20,22 @@
         android:padding="5dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/replay_iw"
             android:src="@drawable/ic_replay_30_black_24dp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/play_imageView"
             android:textSize="30sp"
             android:textColor="#000000"
             android:src="@drawable/ic_play_arrow_24dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/forward_iw"
             android:src="@drawable/ic_forward_30_black_24dp"/>
 
