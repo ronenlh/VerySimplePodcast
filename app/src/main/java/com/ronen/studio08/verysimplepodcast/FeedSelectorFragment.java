@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -34,11 +36,16 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
 //    ArrayList<Feed> podcastFeedList;
     onFeedSelectedListener mCallback;
+    feedDeletedListener dCallback;
 
     ActionMode mActionMode;
 
     interface onFeedSelectedListener {
         void onFeedSelected(int position, String feedUrl);
+    }
+
+    interface feedDeletedListener {
+        void feedDeleted(int position, String feedUrl);
     }
 
     @Override
@@ -51,6 +58,12 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement onEpisodeSelectedListener");
+        }
+        try {
+            dCallback = (feedDeletedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement feedDeletedListener");
         }
     }
 
@@ -113,9 +126,6 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         mCallback.onFeedSelected(position, cursor.getString(3));
     }
 
-    public void deleteRow() {
-
-    }
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
@@ -140,7 +150,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.delete:
-                    deleteRow();
+                    dCallback.feedDeleted(0, "");
                     mode.finish(); // Action picked, so close the CAB
                     return true;
                 default:

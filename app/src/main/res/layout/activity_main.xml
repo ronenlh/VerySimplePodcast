@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--android.support.design.widget.CoordinatorLayout-->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coordinator"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -10,8 +11,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/feed_selector_container">
-    </FrameLayout>
+        android:id="@+id/feed_selector_container" />
 
     <fragment
         android:layout_width="match_parent"

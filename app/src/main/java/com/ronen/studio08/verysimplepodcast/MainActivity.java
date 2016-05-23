@@ -3,6 +3,8 @@ package com.ronen.studio08.verysimplepodcast;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +20,10 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity implements FeedSelectorFragment.onFeedSelectedListener,
-        EpisodeSelectorFragment.onEpisodeSelectedListener, EpisodeDialogFragment.onPlaySelectedListener, EpisodeDialogFragment.onInfoSelectedListener {
+        EpisodeSelectorFragment.onEpisodeSelectedListener,
+        EpisodeDialogFragment.onPlaySelectedListener,
+        EpisodeDialogFragment.onInfoSelectedListener,
+        FeedSelectorFragment.feedDeletedListener {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     @Override
@@ -170,5 +176,19 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void feedDeleted(int position, String feedUrl) {
+        final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Feed deleted", Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Episode restored!", Snackbar.LENGTH_SHORT);
+                        snackbar1.show();
+                    }
+                });
+        snackbar.show();
     }
 }
