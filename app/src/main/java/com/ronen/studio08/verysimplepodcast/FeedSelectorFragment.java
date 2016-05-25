@@ -45,7 +45,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     }
 
     interface feedDeletedListener {
-        void feedDeleted(int position, String feedUrl);
+        void feedDeleted();
     }
 
     @Override
@@ -127,6 +127,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     }
 
 
+    // Action menu when long clicking in the Feed list.
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         // Called when the action mode is created; startActionMode() was called
@@ -150,7 +151,15 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.delete:
-                    dCallback.feedDeleted(0, "");
+                    DbHelper dbHelper = new DbHelper(getActivity());
+//                    (new DbHelper(getContext())).deleteRow((String) mode.getTag());
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    String deleteQuery = "DELETE FROM  "+ FeedsContract.FeedEntry.TABLE_NAME +" where "+FeedsContract.FeedEntry._ID+"='" +  mode.getTag() + "'";
+                    Log.d("Query", deleteQuery);
+                    db.execSQL(deleteQuery);
+
+                    // UI feedback on UI thread:
+                    dCallback.feedDeleted();
                     mode.finish(); // Action picked, so close the CAB
                     return true;
                 default:
@@ -167,15 +176,16 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//        Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+        Cursor cursor = (Cursor) parent.getItemAtPosition(position);
 //        DialogFragment dialogFragment = FeedDialogFragment.newInstance(cursor.getString(1));
 //        dialogFragment.show(getFragmentManager(), "dialog");
+        long rowId = cursor.getLong(cursor.getColumnIndex("_id"));
 
         if (mActionMode != null) {
             return false;
         }
-
         mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(mActionModeCallback);
+        mActionMode.setTag(String.valueOf(rowId));
         view.setSelected(true);
         return true;
     }
