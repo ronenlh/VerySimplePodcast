@@ -2,6 +2,7 @@ package com.ronen.studio08.verysimplepodcast;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -178,7 +179,8 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         }
     }
 
-    public void feedDeleted(int position, String feedUrl) {
+    public void feedDeleted() {
+        // UI feedback
         final CoordinatorLayout coordinatorLayout;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
@@ -191,8 +193,9 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                 .setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Feed Restored!", Snackbar.LENGTH_SHORT);
-                        snackbar1.show();
+                        Snackbar
+                                .make(coordinatorLayout, "Feed Restored", Snackbar.LENGTH_SHORT)
+                                .show();
                     }
                 });
         snackbar.show();
