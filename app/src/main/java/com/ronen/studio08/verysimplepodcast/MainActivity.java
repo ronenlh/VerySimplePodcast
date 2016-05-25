@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
-                Uri.parse(null),
+//                Uri.parse(null),
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.ronen.studio08.verysimplepodcast/http/host/path")
         );
