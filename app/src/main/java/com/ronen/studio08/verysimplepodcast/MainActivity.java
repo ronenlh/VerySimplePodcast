@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "FeedSelector Page", // TODO: Define a title for the content shown.
+                "Feed Selector", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
+                Uri.parse(null),
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.ronen.studio08.verysimplepodcast/http/host/path")
         );

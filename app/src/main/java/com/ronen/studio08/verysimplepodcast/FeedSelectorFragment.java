@@ -145,7 +145,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             return false; // Return false if nothing is done
         }
-
+        /** TODO: implement undo button, modularize */
         // Called when the user selects a contextual menu item
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
