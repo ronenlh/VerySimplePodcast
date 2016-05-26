@@ -14,7 +14,8 @@ android:layout_height="match_parent">
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:elevation="8dp">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -36,7 +37,8 @@ android:layout_height="match_parent">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/episode_selector_container">
+            android:id="@+id/episode_selector_container"
+            android:elevation="2dp">
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>
