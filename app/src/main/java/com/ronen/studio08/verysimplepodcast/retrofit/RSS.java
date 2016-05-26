@@ -14,10 +14,10 @@ public class RSS {
     String version;
 
     @Element
-    FeedChannel channel;
+    Channel channel;
 
 
-    public FeedChannel getChannel() {
+    public Channel getChannel() {
         return channel;
     }
 

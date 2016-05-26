@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.ronen.studio08.verysimplepodcast.retrofit.FeedChannel;
+import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class EpisodeBaseAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<FeedChannel.Item> items;
+    ArrayList<Channel.Item> items;
 
-    public EpisodeBaseAdapter(Context context, ArrayList<FeedChannel.Item> items) {
+    public EpisodeBaseAdapter(Context context, ArrayList<Channel.Item> items) {
         this.context = context;
         this.items = items;
     }
@@ -30,7 +30,7 @@ public class EpisodeBaseAdapter extends BaseAdapter {
     }
 
     @Override
-    public FeedChannel.Item getItem(int position) {
+    public Channel.Item getItem(int position) {
         return items.get(position);
     }
 

@@ -22,7 +22,7 @@ public class FeedDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        String title = getArguments().getString("title", "Feed");
+        String title = getArguments().getString("title", "FeedSample");
 
         return new AlertDialog.Builder(getActivity())
 //                .setIcon(R.drawable.alert_dialog_icon)

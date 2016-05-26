@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "Feed Selector", // TODO: Define a title for the content shown.
+                "FeedSample Selector", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -196,12 +196,12 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
             coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_land);
         }
         Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, "Feed Deleted", Snackbar.LENGTH_LONG)
+                .make(coordinatorLayout, "FeedSample Deleted", Snackbar.LENGTH_LONG)
                 .setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Snackbar
-                                .make(coordinatorLayout, "Feed Restored", Snackbar.LENGTH_SHORT)
+                                .make(coordinatorLayout, "FeedSample Restored", Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 });

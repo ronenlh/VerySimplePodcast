@@ -20,7 +20,7 @@ import java.util.List;
         @Namespace(reference = "http://www.w3.org/2005/Atom", prefix = "atom")
 })
 @Root(strict = false)
-public class FeedChannel {
+public class Channel {
 
     // Tricky part in Simple XML because the link is named twice
     @ElementList(entry = "link", inline = true, required = false)
@@ -55,12 +55,17 @@ public class FeedChannel {
         return subtitle;
     }
 
-    @Element(name = "image", required = true)
+    @ElementList(name = "image", required = false, inline = true)
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
-    public ItunesImage itunesImage;
+    public List<Image> image;
 
     public String getImage() {
-        return itunesImage.getHref();
+        if (image.get(0).href != null)
+            return image.get(0).href;
+        else if (image.get(0).url != null)
+            return image.get(0).url;
+        else
+            return "error, image is empty";
     }
 
     @Element(name = "ttl", required = false)
@@ -81,7 +86,7 @@ public class FeedChannel {
                 ", author='" + author + '\'' +
                 ", subtitle='" + subtitle + '\'' +
                 ", language='" + language + '\'' +
-                ", ItunesImage='" + itunesImage + '\'' +
+                ", Image='" + image + '\'' +
                 ", ttl=" + ttl +
                 ", pubDate='" + pubDate + '\'' +
                 ", itemList=" + itemList +
@@ -113,10 +118,10 @@ public class FeedChannel {
         public String description;
         @Element(name = "author", required = false)
         public String author;
-        @Element(name = "category", required = false)
-        public String category;  // should check this: https://stackoverflow.com/questions/31999265/parsing-xml-feed-die-with-element-is-already-used
-        @Element(name = "comments", required = false)
-        public String comments;
+        @ElementList(name = "category", required = false, inline = true)
+        public List<String> category;  // should check this: https://stackoverflow.com/questions/31999265/parsing-xml-feed-die-with-element-is-already-used
+//        @ElementList(name = "comments", required = false, inline = true)
+//        public List<String> comments;
         @Element(name = "enclosure", required = true)
         public Enclosure enclosure;//	Describes a media object that is attached to the item. More.	<enclosure url="http://live.curry.com/mp3/celebritySCms.mp3" length="1069871" type="audio/mpeg"/>
         @Element(name = "guid", required = false)
@@ -145,13 +150,13 @@ public class FeedChannel {
             return author;
         }
 
-        public String getCategory() {
+        public List<String> getCategory() {
             return category;
         }
 
-        public String getComments() {
-            return comments;
-        }
+//        public List<String> getComments() {
+//            return comments;
+//        }
 
         public Enclosure getEnclosure() {
             return enclosure;
@@ -183,7 +188,7 @@ public class FeedChannel {
                     ", description='" + description + '\'' +
                     ", author='" + author + '\'' +
                     ", category='" + category + '\'' +
-                    ", comments='" + comments + '\'' +
+//                    ", comments='" + comments + '\'' +
                     ", enclosure='" + enclosure + '\'' +
                     ", guid='" + guid + '\'' +
                     ", pubDate='" + pubDate + '\'' +
@@ -217,13 +222,22 @@ public class FeedChannel {
 
     @Root(name = "image", strict = false)
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
-    public static class ItunesImage {
+    public static class Image {
+
+        // There are two different objects being mapped in here, one has three elements, the other (namespaced itunes) has one attribute.
+        // If there are both in the XML, then the second one will be mapped, so carefull on NullPointerExceptions.
+
+        @Element(name = "title", required = false)
+        public String title;
+
+        @Element(name = "url", required = false)
+        public String url;
+
+        @Element(name = "link", required = false)
+        public String link;
+
         @Attribute(required = false)
         public String href;
-
-        public String getHref() {
-            return href;
-        }
 
         @Override
         public String toString() {

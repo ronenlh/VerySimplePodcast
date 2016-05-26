@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class FeedBaseAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<Feed> podcastFeeds;
+    ArrayList<FeedSample> podcastFeeds;
 
-    public FeedBaseAdapter(Context context, ArrayList<Feed> podcastFeeds) {
+    public FeedBaseAdapter(Context context, ArrayList<FeedSample> podcastFeeds) {
         this.context = context;
         this.podcastFeeds = podcastFeeds;
     }
@@ -29,7 +29,7 @@ public class FeedBaseAdapter extends BaseAdapter {
     }
 
     @Override
-    public Feed getItem(int position) {
+    public FeedSample getItem(int position) {
         return podcastFeeds.get(position);
     }
 
