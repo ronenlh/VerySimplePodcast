@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         EpisodeDialogFragment.onInfoSelectedListener,
         FeedSelectorFragment.feedDeletedListener {
 
+    private static final String TAG = "Main Activity";
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     @Override
     public void onFeedSelected(int position, String feedUrl){
-        Toast.makeText(this, R.string.feed_selected, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "feed selected");
         EpisodeSelectorFragment episodeSelectorFragment = new EpisodeSelectorFragment();
 
         // getting and adding the feedUrl to the Fragment, this is the parameter for Retrofit.
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     @Override
     public void onEpisodeSelected(int position) {
-        Toast.makeText(this, R.string.episode_selected, Toast.LENGTH_SHORT).show();
+       Log.d(TAG, "episode selected");
         // action in Fragment
     }
 
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
     public void addFeed(View view) {
-        Toast.makeText(this, R.string.add_feed, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "add feed");
         AddFeedFragment addFeedFragment = new AddFeedFragment();
         getSupportFragmentManager().
                 beginTransaction().
@@ -196,12 +198,12 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
             coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_land);
         }
         Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, "FeedSample Deleted", Snackbar.LENGTH_LONG)
+                .make(coordinatorLayout, R.string.feed_deleted, Snackbar.LENGTH_LONG)
                 .setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Snackbar
-                                .make(coordinatorLayout, "FeedSample Restored", Snackbar.LENGTH_SHORT)
+                                .make(coordinatorLayout, R.string.feed_restored, Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 });
