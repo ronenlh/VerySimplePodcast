@@ -168,7 +168,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         DialogFragment dialogFragment = new EpisodeDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", item.getTitle());
-        args.putString("author", item.getAuthor());
+        args.putString("author", item.getAuthorList().get(0));
         args.putString("description",item.getDescription());
         args.putString("itemUrl",item.getLink());
         args.putString("mediaUrl",item.getEnclosure().getUrl());

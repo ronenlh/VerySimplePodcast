@@ -64,6 +64,8 @@ public class EpisodeDialogFragment extends DialogFragment {
         author = getArguments().getString("author");
         pubDate = getArguments().getString("pubDate");
 
+        /** TODO: disable webview button if itemURL is "" */
+
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -114,5 +116,10 @@ public class EpisodeDialogFragment extends DialogFragment {
                 });
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

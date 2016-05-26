@@ -78,7 +78,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
                     String title = feedChannel.getChannel().getTitle();
                     String creator;
                     if ((creator = feedChannel.getChannel().getAuthor()) == null)
-                        creator = feedChannel.getChannel().getItemList().get(0).getAuthor();
+                        creator = feedChannel.getChannel().getItemList().get(0).getAuthorList().get(0);
                     String subtitle = feedChannel.getChannel().getSubtitle();
                     String thumbnail = feedChannel.getChannel().getImage();
                     databaseHelper(db, title, creator, feedUrl, subtitle, thumbnail);
