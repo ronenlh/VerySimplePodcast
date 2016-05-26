@@ -95,6 +95,9 @@ public class Channel {
 
     public static class Link {
         @Attribute(required = false)
+        public String title;
+
+        @Attribute(required = false)
         public String href;
 
         @Attribute(required = false)
