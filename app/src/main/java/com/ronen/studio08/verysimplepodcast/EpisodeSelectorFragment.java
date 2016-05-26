@@ -20,7 +20,7 @@ import android.widget.ListView;
 import com.ronen.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.ronen.studio08.verysimplepodcast.database.DatabaseHelper;
 import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
-import com.ronen.studio08.verysimplepodcast.retrofit.FeedChannel;
+import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
 import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
 import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 
@@ -163,7 +163,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         mCallback.onEpisodeSelected(position);
-        FeedChannel.Item item = feed.getChannel().getItemList().get(position);
+        Channel.Item item = feed.getChannel().getItemList().get(position);
 
         DialogFragment dialogFragment = new EpisodeDialogFragment();
         Bundle args = new Bundle();

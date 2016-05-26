@@ -37,20 +37,20 @@ import retrofit2.Response;
 public class AddFeedFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     View view;
-    List<Feed> sampleFeedList;
+    List<FeedSample> sampleFeedList;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_feed, container, false);
         Button button = (Button) view.findViewById(R.id.add_button);
         button.setOnClickListener(this);
 
-        // sample Feed List
+        // sample FeedSample List
         sampleFeedList = new ArrayList<>();
-        sampleFeedList.add(new Feed("99% Invisible","http://feeds.feedburner.com/99pi?format=xml"));
-        sampleFeedList.add(new Feed("Serial","http://feeds.serialpodcast.org/serialpodcast"));
-        sampleFeedList.add(new Feed("Fragmented","https://simplecast.com/podcasts/1684/rss"));
-        sampleFeedList.add(new Feed("podCast 411","http://www.podcast411.com/new_demo_feed.xml"));
-        ArrayAdapter<Feed> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
+        sampleFeedList.add(new FeedSample("99% Invisible","http://feeds.99percentinvisible.org/99percentinvisible"));
+        sampleFeedList.add(new FeedSample("Serial","http://feeds.serialpodcast.org/serialpodcast"));
+        sampleFeedList.add(new FeedSample("Fragmented","https://simplecast.com/podcasts/1684/rss"));
+        sampleFeedList.add(new FeedSample("podCast 411","http://www.podcast411.com/new_demo_feed.xml"));
+        ArrayAdapter<FeedSample> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
         ListView listView = (ListView) view.findViewById(R.id.sample_feeds);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
