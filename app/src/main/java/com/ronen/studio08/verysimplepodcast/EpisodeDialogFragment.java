@@ -94,20 +94,22 @@ public class EpisodeDialogFragment extends DialogFragment {
             ((TextView) content.findViewById(R.id.dialog_date)).setText(""+pubDate);
         }
 
-        ((TextView) content.findViewById(R.id.dialog_description)).setText(""+description);
+        ((TextView) content.findViewById(R.id.dialog_description)).setText("" + description);
 
+        if (!itemUrl.equals("")) {
+            builder.setNeutralButton(R.string.dialog_info, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    infoCallback.onInfoSelected(itemUrl);
+                }
+            });
+        }
         builder.setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        playCallback.onPlaySelected(mediaUrl);
-                    }
-                })
-                .setNeutralButton(R.string.dialog_info, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        infoCallback.onInfoSelected(itemUrl);
-                    }
-                })
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                playCallback.onPlaySelected(mediaUrl);
+            }
+        })
                 .setNegativeButton(R.string.dialog_close, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
