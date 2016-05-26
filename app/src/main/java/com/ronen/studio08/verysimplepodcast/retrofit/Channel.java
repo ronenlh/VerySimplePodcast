@@ -115,14 +115,14 @@ public class Channel {
 
         @Element(name = "title", required = true)
         public String title;
-        @Element(name = "link", required = true)
+        @Element(name = "link", required = false)
         public String link;
-        @Element(name = "description", required = true)
+        @Element(name = "description", required = false)
         public String description;
-        @Element(name = "author", required = false)
-        public String author;
-        @ElementList(name = "category", required = false, inline = true)
-        public List<String> category;  // should check this: https://stackoverflow.com/questions/31999265/parsing-xml-feed-die-with-element-is-already-used
+        @ElementList(name = "author", required = false, inline = true)
+        public List<String> author;
+//        @ElementList(name = "category", required = false, inline = true)
+//        public List<String> category;  // should check this: https://stackoverflow.com/questions/31999265/parsing-xml-feed-die-with-element-is-already-used
 //        @ElementList(name = "comments", required = false, inline = true)
 //        public List<String> comments;
         @Element(name = "enclosure", required = true)
@@ -140,22 +140,27 @@ public class Channel {
         }
 
         public String getLink() {
-            return link;
+            if (link != null)
+                return link;
+            else
+                return "";
         }
 
         public String getDescription() {
+            if (description == null)
+                return "";
             // remove html tags from description
             String sanitizedDescription = description.replaceAll("<[^>]*>", "");
             return sanitizedDescription;
         }
 
-        public String getAuthor() {
+        public List<String> getAuthorList() {
             return author;
         }
 
-        public List<String> getCategory() {
-            return category;
-        }
+//        public List<String> getCategoryList() {
+//            return category;
+//        }
 
 //        public List<String> getComments() {
 //            return comments;
@@ -190,7 +195,7 @@ public class Channel {
                     ",  link='" + link + '\'' +
                     ", description='" + description + '\'' +
                     ", author='" + author + '\'' +
-                    ", category='" + category + '\'' +
+//                    ", category='" + category + '\'' +
 //                    ", comments='" + comments + '\'' +
                     ", enclosure='" + enclosure + '\'' +
                     ", guid='" + guid + '\'' +
