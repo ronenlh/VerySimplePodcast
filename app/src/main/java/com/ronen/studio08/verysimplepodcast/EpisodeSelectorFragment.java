@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ronen.studio08.verysimplepodcast.database.FeedReaderContract;
 import com.ronen.studio08.verysimplepodcast.database.DatabaseHelper;
@@ -38,7 +39,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
 
     RSS feed;
     onEpisodeSelectedListener mCallback;
-    
+
     interface onEpisodeSelectedListener {
         void onEpisodeSelected(int position);
         void onLongEpisodeClick(int position, String url);
@@ -84,6 +85,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
+                (getView().findViewById(R.id.episode_progressbar)).setVisibility(View.INVISIBLE);
                 feed = response.body(); // <-- this is the feed!
                 if (feed != null) {
                     Log.d("feed", "feed is not null: \n" + feed.toString());
@@ -101,7 +103,9 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
             }
 
             @Override
-            public void onFailure(Call<RSS> call, Throwable t) {
+            public void onFailure(Call<RSS> call, Throwable t)
+            {
+                Toast.makeText(getActivity(), R.string.episode_error2, Toast.LENGTH_SHORT).show();
                 Log.d("failure", t.toString());
             }
         });
