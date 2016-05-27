@@ -17,4 +17,5 @@
     <string name="delete">delete</string>
     <string name="feed_deleted">Feed Deleted</string>
     <string name="feed_restored">Feed Restored</string>
+    <string name="episode_error2">Something went wrong. Check if the feed\'s URL is ok.</string>
 </resources>

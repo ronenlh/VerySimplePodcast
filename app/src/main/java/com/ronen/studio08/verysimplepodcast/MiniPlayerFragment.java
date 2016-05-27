@@ -53,7 +53,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
         replayButton = (ImageView) view.findViewById(R.id.replay_iw);
         forwardButton = (ImageView) view.findViewById(R.id.forward_iw);
-        seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+        seekBar = (SeekBar) view.findViewById(R.id.progressBar);
         counter = (TextView) view.findViewById(R.id.counter_textview);
 
         switch (skipmode) {
