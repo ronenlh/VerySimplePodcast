@@ -5,6 +5,15 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by Ronen on 27/5/16.
  */
@@ -23,10 +32,43 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
         // TODO: Implement this method to send any registration to your app's servers.
-        sendRegistrationToServer(refreshedToken);
+        if (refreshedToken != null)
+            sendRegistrationToServer(refreshedToken);
     }
 
     private void sendRegistrationToServer(String refreshedToken) {
+        try {
+            URL url = new URL("https://infinite-citadel-18717.herokuapp.com/fcm");
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            // Sets the flag indicating whether this {@code URLConnection} allows input.
+            conn.setDoInput(true);
+            // Sets the flag indicating whether this {@code URLConnection} allows output.
+            conn.setDoOutput(true);
 
+            OutputStream os = conn.getOutputStream();
+
+            // Writes text to a character-output stream, buffering characters so as to provide for the efficient writing of single characters, arrays, and strings.
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"), refreshedToken.length());
+            writer.write("key=" + refreshedToken);
+            writer.close();
+
+            os.close();
+
+            conn.connect();
+
+            if (conn.getResponseCode() == HttpsURLConnection.HTTP_OK) {
+                Log.d(TAG,"success");
+            } else {
+                Log.d(TAG,"failure");
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
