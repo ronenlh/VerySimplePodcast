@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class MainActivity extends AppCompatActivity implements FeedSelectorFragment.onFeedSelectedListener,
         EpisodeSelectorFragment.onEpisodeSelectedListener,
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
 
         if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
             FeedSelectorFragment feedSelectorFragment = new FeedSelectorFragment();
