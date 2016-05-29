@@ -20,6 +20,8 @@ import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
 import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
 import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
 import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
+import com.ronen.studio08.verysimplepodcast.retrofitHeroku.HerokuService;
+import com.ronen.studio08.verysimplepodcast.retrofitHeroku.ResponseFeeds;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +30,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -44,6 +47,8 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
         Button button = (Button) view.findViewById(R.id.add_button);
         button.setOnClickListener(this);
 
+        retrofitCaller();
+
         // sample FeedSample List
         sampleFeedList = new ArrayList<>();
         sampleFeedList.add(new FeedSample("99% Invisible","http://feeds.99percentinvisible.org/99percentinvisible"));
@@ -56,6 +61,30 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
         listView.setOnItemClickListener(this);
 
         return view;
+    }
+
+    private void retrofitCaller() {
+        // Retrofit is the class through which your API interfaces are turned into callable objects.
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://infinite-citadel-18717.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        HerokuService service = retrofit.create(HerokuService.class);
+
+        Call<ResponseFeeds> call = service.feed();
+        call.enqueue(new Callback<ResponseFeeds>() {
+            @Override
+            public void onResponse(Call<ResponseFeeds> call, Response<ResponseFeeds> response) {
+                Log.d("HerokuRetrofitCaller", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseFeeds> call, Throwable t) {
+                Log.d("HerokuRetrofitCaller", t.toString());
+            }
+        });
+
     }
 
     private void retrofitCaller(final String feedUrl) {
