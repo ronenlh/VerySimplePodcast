@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         AddFeedFragment addFeedFragment = new AddFeedFragment();
         getSupportFragmentManager().
                 beginTransaction().
-                replace(R.id.feed_selector_container, addFeedFragment).
+                replace(R.id.episode_selector_container, addFeedFragment).
                 addToBackStack("toAdd").
                 commit();
     }
