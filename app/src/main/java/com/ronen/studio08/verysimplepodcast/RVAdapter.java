@@ -3,6 +3,7 @@ package com.ronen.studio08.verysimplepodcast;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
 
     Context context;
     List<ResponseFeeds.FeedFromServer> feedsFromServer;
+    static View view;
 
     public RVAdapter(Context context, List<ResponseFeeds.FeedFromServer> feedsFromServer) {
         this.context = context;
@@ -43,25 +45,28 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
     @Override
     public void onBindViewHolder(feedViewHolder holder, int position) {
         // onBindViewHolder is called when the SO binds the view with the data -- or, in other words, the data is shown in the UI.
-        ResponseFeeds.FeedFromServer feedFromServer = feedsFromServer.get(position);
-        holder.thumbnail.setImageResource(R.drawable.thumbnail99pi);  // feedFromServer.getImgHref()
-/*        Picasso.with(context).
-                load(feedFromServer.getImgHref()).
-                transform(new CropSquareTransformation()).
+//        holder.thumbnail.setImageResource(R.drawable.thumbnail99pi);  // feedFromServer.getImgHref()
+        Log.d("onBindViewHolder",""+feedsFromServer.get(position).getImgHref());
+        Picasso.with(context).
+//                load("https://media.simplecast.com/podcast/image/1684/1455140618-artwork.jpg").
+                load(feedsFromServer.get(position).getImgHref()).
+                // transform(new CropSquareTransformation()).
                 // error(R.drawable.ic_broken_image_black_24dp).
                         into(holder.thumbnail, new Callback() {
                     @Override
                     public void onSuccess() {
-//                        view.findViewById(R.id.RVprogressBar).setVisibility(View.INVISIBLE);
+                        view.findViewById(R.id.RVprogressBar).setVisibility(View.INVISIBLE);
                     }
 
                     @Override
                     public void onError() {
 
                     }
-                });*/
+                });
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -74,6 +79,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
 
         public feedViewHolder(View itemView) {
             super(itemView);
+            view = itemView;
             thumbnail = (ImageView) itemView.findViewById(R.id.add_thumbnail);
         }
     }

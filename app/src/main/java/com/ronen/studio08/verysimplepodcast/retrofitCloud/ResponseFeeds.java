@@ -21,7 +21,7 @@ public class ResponseFeeds {
 
         @Override
         public String toString() {
-            return title;
+            return title + ", " + description + ", " + feedUrl + ", " + imgHref + "\n";
         }
 
         public String getTitle() {

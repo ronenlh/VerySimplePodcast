@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,7 +24,6 @@ import com.ronen.studio08.verysimplepodcast.retrofitCloud.CloudService;
 import com.ronen.studio08.verysimplepodcast.retrofitCloud.ResponseFeeds;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -49,22 +47,22 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
         Button button = (Button) view.findViewById(R.id.add_button);
         button.setOnClickListener(this);
 
-        cloudRetrofitCaller();
+        sampleFeedRetrofitCaller();
 
-        // sample FeedSample List
-        sampleFeedList = new ArrayList<>();
-        sampleFeedList.add(new FeedSample("99% Invisible","http://feeds.99percentinvisible.org/99percentinvisible"));
-        sampleFeedList.add(new FeedSample("Serial","http://feeds.serialpodcast.org/serialpodcast"));
-        sampleFeedList.add(new FeedSample("Fragmented","https://simplecast.com/podcasts/1684/rss"));
-        sampleFeedList.add(new FeedSample("podCast 411","http://www.podcast411.com/new_demo_feed.xml"));
-        ArrayAdapter<FeedSample> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
+//        // sample FeedSample List
+//        sampleFeedList = new ArrayList<>();
+//        sampleFeedList.add(new FeedSample("99% Invisible","http://feeds.99percentinvisible.org/99percentinvisible"));
+//        sampleFeedList.add(new FeedSample("Serial","http://feeds.serialpodcast.org/serialpodcast"));
+//        sampleFeedList.add(new FeedSample("Fragmented","https://simplecast.com/podcasts/1684/rss"));
+//        sampleFeedList.add(new FeedSample("podCast 411","http://www.podcast411.com/new_demo_feed.xml"));
+//        ArrayAdapter<FeedSample> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
 
 //        recyclerView.setAdapter(adapter);
 //        recyclerView.setOnItemClickListener(this);
         return view;
     }
 
-    private void cloudRetrofitCaller() {
+    private void sampleFeedRetrofitCaller() {
 
         // Retrofit is the class through which your API interfaces are turned into callable objects.
         Retrofit retrofit = new Retrofit.Builder()
@@ -79,7 +77,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
             @Override
             public void onResponse(Call<ResponseFeeds> call, Response<ResponseFeeds> response) {
 
-                Log.d("cloudRetrofitCaller", response.body().toString());
+                Log.d("RetrofitCaller", response.body().toString());
 
                 RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
                 recyclerView.setHasFixedSize(true);
@@ -93,7 +91,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
 
             @Override
             public void onFailure(Call<ResponseFeeds> call, Throwable t) {
-                Log.d("cloudRetrofitCaller", t.toString());
+                Log.d("RetrofitCaller", t.toString());
             }
         });
     }
