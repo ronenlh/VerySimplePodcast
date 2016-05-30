@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ronen.studio08.verysimplepodcast.retrofitCloud.ResponseFeeds;
 import com.squareup.picasso.Callback;
@@ -20,13 +19,15 @@ import java.util.List;
 /**
  * Created by studio08 on 5/30/2016.
  */
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
+public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feedViewHolder> {
 
     Context context;
     List<ResponseFeeds.FeedFromServer> feedsFromServer;
     static View view;
 
-    public RVAdapter(Context context, List<ResponseFeeds.FeedFromServer> feedsFromServer) {
+
+
+    public AddFeedRVAdapter(Context context, List<ResponseFeeds.FeedFromServer> feedsFromServer) {
         this.context = context;
         this.feedsFromServer = feedsFromServer;
     }
@@ -35,9 +36,18 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
     @Override
     public feedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // onCreateViewHolder is called whenever a new instance of our ViewHolder class is created
+
+
         View itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.add_feed_row, parent, false);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("setOnClickListener", "works");
+            }
+        });
 
         return new feedViewHolder(itemView);
     }
@@ -55,7 +65,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
                         into(holder.thumbnail, new Callback() {
                     @Override
                     public void onSuccess() {
-                        view.findViewById(R.id.RVprogressBar).setVisibility(View.INVISIBLE);
+//                        view.findViewById(R.id.RVprogressBar).setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -65,6 +75,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
                 });
 
     }
+
 
 
 
@@ -81,6 +92,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.feedViewHolder> {
             super(itemView);
             view = itemView;
             thumbnail = (ImageView) itemView.findViewById(R.id.add_thumbnail);
+        }
+
+        public interface AddFeedRVAdapterClickListener {
+            void AddFeedRVonClick(View caller);
         }
     }
 

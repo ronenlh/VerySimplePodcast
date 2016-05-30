@@ -85,7 +85,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
                 recyclerView.setLayoutManager(gridLayoutManager);
 
-                RVAdapter rvAdapter = new RVAdapter(getContext(), response.body().getFeeds());
+                AddFeedRVAdapter rvAdapter = new AddFeedRVAdapter(getContext(), response.body().getFeeds());
                 recyclerView.setAdapter(rvAdapter);
             }
 

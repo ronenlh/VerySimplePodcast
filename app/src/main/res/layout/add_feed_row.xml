@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     android:id="@+id/add_thumbnail" />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/RVprogressBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <!--<ProgressBar-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/RVprogressBar"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
 </RelativeLayout>
