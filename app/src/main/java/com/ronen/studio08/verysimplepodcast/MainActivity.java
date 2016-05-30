@@ -151,12 +151,21 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     public void addFeed(View view) {
         Log.d(TAG, "add feed");
-        AddFeedFragment addFeedFragment = new AddFeedFragment();
-        getSupportFragmentManager().
-                beginTransaction().
-                replace(R.id.episode_selector_container, addFeedFragment).
-                addToBackStack("toAdd").
-                commit();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            AddFeedFragment addFeedFragment = new AddFeedFragment();
+            getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.feed_selector_container, addFeedFragment).
+                    addToBackStack("toAdd").
+                    commit();
+        } else {
+            AddFeedFragment addFeedFragment = new AddFeedFragment();
+            getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.episode_selector_container, addFeedFragment).
+                    addToBackStack("toAdd").
+                    commit();
+        }
     }
 
     @Override
