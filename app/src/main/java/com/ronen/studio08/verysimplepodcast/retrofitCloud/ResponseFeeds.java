@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast.retrofitHeroku;
+package com.ronen.studio08.verysimplepodcast.retrofitCloud;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class ResponseFeeds {
         return feeds;
     }
 
-    private class FeedFromServer {
+    public class FeedFromServer {
 
         private String title;
         private String description;
@@ -22,6 +22,22 @@ public class ResponseFeeds {
         @Override
         public String toString() {
             return title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getFeedUrl() {
+            return feedUrl;
+        }
+
+        public String getImgHref() {
+            return imgHref;
         }
     }
 

@@ -1,14 +1,13 @@
-package com.ronen.studio08.verysimplepodcast.retrofitHeroku;
+package com.ronen.studio08.verysimplepodcast.retrofitCloud;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 /**
  * Created by studio08 on 4/17/2016.
  */
-public class ServiceGeneratorHeroku {
+public class ServiceGeneratorCloud {
 
     public static final String API_BASE_URL = "https://infinite-citadel-18717.herokuapp.com/";
 

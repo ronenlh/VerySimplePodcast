@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ronen.studio08.verysimplepodcast.database.DbHelper;
@@ -20,8 +21,8 @@ import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
 import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
 import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
 import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
-import com.ronen.studio08.verysimplepodcast.retrofitHeroku.HerokuService;
-import com.ronen.studio08.verysimplepodcast.retrofitHeroku.ResponseFeeds;
+import com.ronen.studio08.verysimplepodcast.retrofitCloud.CloudService;
+import com.ronen.studio08.verysimplepodcast.retrofitCloud.ResponseFeeds;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,10 +45,11 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_feed, container, false);
+
         Button button = (Button) view.findViewById(R.id.add_button);
         button.setOnClickListener(this);
 
-        retrofitCaller();
+        cloudRetrofitCaller();
 
         // sample FeedSample List
         sampleFeedList = new ArrayList<>();
@@ -56,35 +58,44 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
         sampleFeedList.add(new FeedSample("Fragmented","https://simplecast.com/podcasts/1684/rss"));
         sampleFeedList.add(new FeedSample("podCast 411","http://www.podcast411.com/new_demo_feed.xml"));
         ArrayAdapter<FeedSample> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,sampleFeedList);
-        ListView listView = (ListView) view.findViewById(R.id.sample_feeds);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
 
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setOnItemClickListener(this);
         return view;
     }
 
-    private void retrofitCaller() {
+    private void cloudRetrofitCaller() {
+
         // Retrofit is the class through which your API interfaces are turned into callable objects.
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://infinite-citadel-18717.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        HerokuService service = retrofit.create(HerokuService.class);
+        CloudService service = retrofit.create(CloudService.class);
 
         Call<ResponseFeeds> call = service.feed();
         call.enqueue(new Callback<ResponseFeeds>() {
             @Override
             public void onResponse(Call<ResponseFeeds> call, Response<ResponseFeeds> response) {
-                Log.d("HerokuRetrofitCaller", response.body().toString());
+
+                Log.d("cloudRetrofitCaller", response.body().toString());
+
+                RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+                recyclerView.setHasFixedSize(true);
+
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
+                recyclerView.setLayoutManager(gridLayoutManager);
+
+                RVAdapter rvAdapter = new RVAdapter(getContext(), response.body().getFeeds());
+                recyclerView.setAdapter(rvAdapter);
             }
 
             @Override
             public void onFailure(Call<ResponseFeeds> call, Throwable t) {
-                Log.d("HerokuRetrofitCaller", t.toString());
+                Log.d("cloudRetrofitCaller", t.toString());
             }
         });
-
     }
 
     private void retrofitCaller(final String feedUrl) {
@@ -100,16 +111,16 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
             /**  Similar to Episode Selector Fragment, but here we want info about the feed and add it to SQLite database.
                  In the FeedSelectorFragment we pull info from that Database, Feeds.db */
 
-                RSS feedChannel = response.body(); // <-- this is the feed!
+                RSS rss = response.body(); // <-- this is the feed!
 
-                if (feedChannel != null) {
-                    Log.d("feed", "feed is not null: \n" + feedChannel.toString());
-                    String title = feedChannel.getChannel().getTitle();
+                if (rss != null) {
+                    Log.d("feed", "feed is not null: \n" + rss.toString());
+                    String title = rss.getChannel().getTitle();
                     String creator;
-                    if ((creator = feedChannel.getChannel().getAuthor()) == null)
-                        creator = feedChannel.getChannel().getItemList().get(0).getAuthorList().get(0);
-                    String subtitle = feedChannel.getChannel().getSubtitle();
-                    String thumbnail = feedChannel.getChannel().getImage();
+                    if ((creator = rss.getChannel().getAuthor()) == null)
+                        creator = rss.getChannel().getItemList().get(0).getAuthorList().get(0);
+                    String subtitle = rss.getChannel().getSubtitle();
+                    String thumbnail = rss.getChannel().getImage();
                     databaseHelper(db, title, creator, feedUrl, subtitle, thumbnail);
 
                 } else
