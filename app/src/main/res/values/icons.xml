@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- http://fontawesome.io/icons/ -->
 <resources>
-    <string name="fa_plus">&#xf067;</string>
-    <string name="fa_play">&#xf04b;</string>
-    <string name="fa_pause">&#xf04c;</string>
-    <string name="fa_stop">&#xf04d;</string>
-    <string name="fa_step_backward">&#xf048;</string>
-    <string name="fa_step_forward">&#xf051;</string>
-    <string name="fa_info_circle">&#xf05a;</string>
+    <string name="fa_plus" translatable="false">&#xf067;</string>
+    <string name="fa_play" translatable="false">&#xf04b;</string>
+    <string name="fa_pause" translatable="false">&#xf04c;</string>
+    <string name="fa_stop" translatable="false">&#xf04d;</string>
+    <string name="fa_step_backward" translatable="false">&#xf048;</string>
+    <string name="fa_step_forward" translatable="false">&#xf051;</string>
+    <string name="fa_info_circle" translatable="false">&#xf05a;</string>
 </resources>

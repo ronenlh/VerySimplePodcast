@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VerySimplePodcast</string>
+    <string name="add_feed">הוסף תחנה</string>
+    <string name="add_feed_url">הוסף כתובת התחנה</string>
+    <string name="delete">מחק</string>
+    <string name="dialog_close">סגור</string>
+    <string name="dialog_info">אתר</string>
+    <string name="dialog_play">נגן</string>
+    <string name="done">הוסף</string>
+    <string name="episode_error">היתה שגיעה, נסה שנית</string>
+    <string name="episode_error2">היתה שגיעה, בדוק את הכתובת</string>
+    <string name="episode_info">מידע על הפרק</string>
+    <string name="episode_selected">פרק נבחר</string>
+    <string name="error_feed">היתה שגיעה עם התחנה</string>
+    <string name="feed_deleted">תחנה מחוקה</string>
+    <string name="feed_restored">תחנה </string>
+    <string name="feed_selected">נבחרה תחנה</string>
+    <string name="nothing_to_show">אין מה להראות</string>
+    <string name="settings">הגדרות</string>
+    <string name="skip">קדם</string>
+    <string name="skip10">10 שניות</string>
+    <string name="skip30">30 שניות</string>
+    <string name="skip5">5 שניות</string>
+</resources>

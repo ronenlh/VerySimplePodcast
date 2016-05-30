@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VerySimplePodcast</string>
+    <string name="add_feed">afegir episodi</string>
+    <string name="add_feed_url">afegir URL del episodi</string>
+    <string name="delete">eliminar</string>
+    <string name="dialog_close">tancar</string>
+    <string name="dialog_info">web</string>
+    <string name="dialog_play">play</string>
+    <string name="done">afegir</string>
+    <string name="episode_error">Hi ha hagut un error, intenta reobrir.</string>
+    <string name="episode_info">Info del episodi</string>
+    <string name="episode_selected">episodi escollit</string>
+    <string name="error_feed">Hi ha hagut un error amb el Feed</string>
+    <string name="feed_deleted">Feed eliminat</string>
+    <string name="feed_restored">Feed restaurat</string>
+    <string name="feed_selected">Feed escollit</string>
+    <string name="nothing_to_show">No hi ha lo que mostrar</string>
+    <string name="settings">Opcións</string>
+    <string name="skip">avançar</string>
+    <string name="skip10">10 segonds</string>
+    <string name="skip30">30 segons</string>
+    <string name="skip5">5 segons</string>
+    <string name="episode_error2">Hi ha hagut un error, examina la URL.</string>
+</resources>
