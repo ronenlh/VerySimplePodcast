@@ -167,7 +167,7 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        retrofitCaller(sampleFeedList.get(position).getFeedUrl());
-        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+//        retrofitCaller(sampleFeedList.get(position).getFeedUrl());
+//        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 }
