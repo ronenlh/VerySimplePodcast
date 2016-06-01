@@ -22,6 +22,7 @@ import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
 import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 import com.ronen.studio08.verysimplepodcast.retrofitCloud.CloudService;
 import com.ronen.studio08.verysimplepodcast.retrofitCloud.ResponseFeeds;
+import com.ronen.studio08.verysimplepodcast.retrofitCloud.SampleFeed;
 
 import java.io.IOException;
 import java.util.List;
@@ -72,10 +73,10 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
 
         CloudService service = retrofit.create(CloudService.class);
 
-        Call<ResponseFeeds> call = service.feed();
-        call.enqueue(new Callback<ResponseFeeds>() {
+        Call<List<SampleFeed>> call = service.feed();
+        call.enqueue(new Callback<List<SampleFeed>>() {
             @Override
-            public void onResponse(Call<ResponseFeeds> call, Response<ResponseFeeds> response) {
+            public void onResponse(Call<List<SampleFeed>> call, Response<List<SampleFeed>> response) {
 
                 Log.d("RetrofitCaller", response.body().toString());
 
@@ -85,12 +86,12 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
                 recyclerView.setLayoutManager(gridLayoutManager);
 
-                AddFeedRVAdapter rvAdapter = new AddFeedRVAdapter(getContext(), response.body().getFeeds());
+                AddFeedRVAdapter rvAdapter = new AddFeedRVAdapter(getContext(), response.body());
                 recyclerView.setAdapter(rvAdapter);
             }
 
             @Override
-            public void onFailure(Call<ResponseFeeds> call, Throwable t) {
+            public void onFailure(Call<List<SampleFeed>> call, Throwable t) {
                 Log.d("RetrofitCaller", t.toString());
             }
         });

@@ -1,5 +1,7 @@
 package com.ronen.studio08.verysimplepodcast.retrofitCloud;
 
+import java.util.List;
+
 import retrofit2.*;
 import retrofit2.http.GET;
 
@@ -11,5 +13,5 @@ public interface CloudService {
     // There are five built-in annotations: GET, POST, PUT, DELETE, and HEAD.
     // The relative URL of the resource is specified in the annotation.
     @GET("podcasts/")
-    Call<ResponseFeeds> feed();
+    Call<List<SampleFeed>> feed();
 }

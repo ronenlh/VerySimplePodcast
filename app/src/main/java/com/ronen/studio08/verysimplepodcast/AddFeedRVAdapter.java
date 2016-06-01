@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.ronen.studio08.verysimplepodcast.retrofitCloud.ResponseFeeds;
+import com.ronen.studio08.verysimplepodcast.retrofitCloud.SampleFeed;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -22,14 +22,14 @@ import java.util.List;
 public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feedViewHolder> {
 
     Context context;
-    List<ResponseFeeds.FeedFromServer> feedsFromServer;
+    List<SampleFeed> sampleFeeds;
     static View view;
 
 
 
-    public AddFeedRVAdapter(Context context, List<ResponseFeeds.FeedFromServer> feedsFromServer) {
+    public AddFeedRVAdapter(Context context, List<SampleFeed> sampleFeeds) {
         this.context = context;
-        this.feedsFromServer = feedsFromServer;
+        this.sampleFeeds = sampleFeeds;
     }
 
 
@@ -56,10 +56,10 @@ public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feed
     public void onBindViewHolder(feedViewHolder holder, int position) {
         // onBindViewHolder is called when the SO binds the view with the data -- or, in other words, the data is shown in the UI.
 //        holder.thumbnail.setImageResource(R.drawable.thumbnail99pi);  // feedFromServer.getImgHref()
-        Log.d("onBindViewHolder",""+feedsFromServer.get(position).getImgHref());
+        Log.d("onBindViewHolder",""+ sampleFeeds.get(position).getImgHref());
         Picasso.with(context).
 //                load("https://media.simplecast.com/podcast/image/1684/1455140618-artwork.jpg").
-                load(feedsFromServer.get(position).getImgHref()).
+                load(sampleFeeds.get(position).getImgHref()).
                 // transform(new CropSquareTransformation()).
                 // error(R.drawable.ic_broken_image_black_24dp).
                         into(holder.thumbnail, new Callback() {
@@ -81,7 +81,7 @@ public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feed
 
     @Override
     public int getItemCount() {
-        return feedsFromServer.size();
+        return sampleFeeds.size();
     }
 
     public static class feedViewHolder extends RecyclerView.ViewHolder {
