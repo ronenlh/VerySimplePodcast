@@ -2,8 +2,6 @@ package com.ronen.studio08.verysimplepodcast;
 
 import android.app.Application;
 
-import com.squareup.leakcanary.LeakCanary;
-
 /**
  * Created by studio08 on 5/19/2016.
  * Base class for maintaining global application state.
@@ -21,8 +19,5 @@ public class VerySimplePodcast extends Application {
     public void onCreate() {
         super.onCreate();
         // Created this class extending Application and added the android:name in the Manifest so I can add LeakCanary.
-        // It is a test/debug compile in Gradle, currently beta.
-        // https://github.com/square/leakcanary/wiki/FAQ
-        LeakCanary.install(this);
     }
 }
