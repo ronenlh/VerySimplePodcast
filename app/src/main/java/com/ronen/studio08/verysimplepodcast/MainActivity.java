@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     public void addFeed(View view) {
         Log.d(TAG, "add feed");
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+/*        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             AddFeedFragment addFeedFragment = new AddFeedFragment();
             getSupportFragmentManager().
                     beginTransaction().
@@ -165,7 +165,11 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                     replace(R.id.episode_selector_container, addFeedFragment).
                     addToBackStack("toAdd").
                     commit();
-        }
+        }*/
+
+        // substituted the Fragment above for an Activity
+        Intent intent = new Intent(this, AddFeedActivity.class);
+        startActivity(intent);
     }
 
     @Override
