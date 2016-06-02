@@ -66,7 +66,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
                  into(imageView, new Callback() {
                      @Override
                      public void onSuccess() {
-                         view.findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+                         view.findViewById(R.id.seekBar).setVisibility(View.INVISIBLE);
                      }
 
                      @Override

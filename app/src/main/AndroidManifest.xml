@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.ronen.studio08.verysimplepodcast.PlayerActivity" />
+        <activity android:name="com.ronen.studio08.verysimplepodcast.AddFeedActivity" />
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
