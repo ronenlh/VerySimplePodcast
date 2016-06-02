@@ -42,13 +42,6 @@ public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feed
                 from(parent.getContext()).
                 inflate(R.layout.add_feed_row, parent, false);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("setOnClickListener", "works");
-            }
-        });
-
         return new feedViewHolder(itemView);
     }
 
@@ -84,14 +77,21 @@ public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feed
         return sampleFeeds.size();
     }
 
-    public static class feedViewHolder extends RecyclerView.ViewHolder {
+    public static class feedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected ImageView thumbnail;
 
         public feedViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             view = itemView;
             thumbnail = (ImageView) itemView.findViewById(R.id.add_thumbnail);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.d("feedViewHolder", "test "+ getAdapterPosition());
+
         }
 
         public interface AddFeedRVAdapterClickListener {
