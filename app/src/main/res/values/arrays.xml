@@ -318,5 +318,209 @@
         Zimbabwe
 </item>
     </string-array>
+    <string-array name="country_codes_ISO">
+    <item>AE</item><item>    AG
+</item><item>    AI
+</item><item>    AL
+</item><item>    AM
+</item><item>    AO
+</item><item>    AR
+</item><item>    AT
+</item><item>    AU
+</item><item>    AZ
+</item><item>    BB
+</item><item>    BE
+</item><item>    BF
+</item><item>    BG
+</item><item>    BH
+</item><item>    BJ
+</item><item>    BM
+</item><item>    BN
+</item><item>    BO
+</item><item>    BR
+</item><item>    BS
+</item><item>    BT
+</item><item>    BW
+</item><item>    BY
+</item><item>    BZ
+</item><item>    CA
+</item><item>    CG
+</item><item>    CH
+</item><item>    CL
+</item><item>    CN
+</item><item>    CO
+</item><item>    CR
+</item><item>    CV
+</item><item>    CY
+</item><item>    CZ
+</item><item>    DE
+</item><item>    DK
+</item><item>    DM
+</item><item>    DO
+</item><item>    DZ
+</item><item>    EC
+</item><item>    EE
+</item><item>    EG
+</item><item>    ES
+</item><item>    FI
+</item><item>    FJ
+</item><item>    FM
+</item><item>    FR
+</item><item>    GB
+</item><item>    GD
+</item><item>    GH
+</item><item>    GM
+</item><item>    GR
+</item><item>    GT
+</item><item>    GW
+</item><item>    GY
+</item><item>    HK
+</item><item>    HN
+</item><item>    HR
+</item><item>    HU
+</item><item>    ID
+</item><item>    IE
+</item><item>    IL
+</item><item>    IN
+</item><item>    IS
+</item><item>    IT
+</item><item>    JM
+</item><item>    JO
+</item><item>    JP
+</item><item>    KE
+</item><item>    KG
+</item><item>    KH
+</item><item>    KN
+</item><item>    KR
+</item><item>    KW
+</item><item>    KY
+</item><item>    KZ
+</item><item>    LA
+</item><item>    LB
+</item><item>    LC
+</item><item>    LK
+</item><item>    LR
+</item><item>    LT
+</item><item>    LU
+</item><item>    LV
+</item><item>    MD
+</item><item>    MG
+</item><item>    MK
+</item><item>    ML
+</item><item>    MN
+</item><item>    MO
+</item><item>    MR
+</item><item>    MS
+</item><item>    MT
+</item><item>    MU
+</item><item>    MW
+</item><item>    MX
+</item><item>    MY
+</item><item>    MZ
+</item><item>    NA
+</item><item>    NE
+</item><item>    NG
+</item><item>    NI
+</item><item>    NL
+</item><item>    NO
+</item><item>    NP
+</item><item>    NZ
+</item><item>    OM </item>
+    <!--Oman-->
+    <!--PA-->
+    <!--Panama-->
+    <!--PE-->
+    <!--Peru-->
+    <!--PG-->
+    <!--Papua New Guinea-->
+    <!--PH-->
+    <!--Philippines-->
+    <!--PK-->
+    <!--Pakistan-->
+    <!--PL-->
+    <!--Poland-->
+    <!--PT-->
+    <!--Portugal-->
+    <!--PW-->
+    <!--Palau-->
+    <!--PY-->
+    <!--Paraguay-->
+    <!--QA-->
+    <!--Qatar-->
+    <!--RO-->
+    <!--Romania-->
+    <!--RU-->
+    <!--Russia-->
+    <!--SA-->
+    <!--Saudi Arabia-->
+    <!--SB-->
+    <!--Solomon Islands-->
+    <!--SC-->
+    <!--Seychelles-->
+    <!--SE-->
+    <!--Sweden-->
+    <!--SG-->
+    <!--Singapore-->
+    <!--SI-->
+    <!--Slovenia-->
+    <!--SK-->
+    <!--Slovakia-->
+    <!--SL-->
+    <!--Sierra Leone-->
+    <!--SN-->
+    <!--Senegal-->
+    <!--SR-->
+    <!--Suriname-->
+    <!--ST-->
+    <!--Sao Tome and Principe-->
+    <!--SV-->
+    <!--El Salvador-->
+    <!--SZ-->
+    <!--Swaziland-->
+    <!--TC-->
+    <!--Turks and Caicos-->
+    <!--TD-->
+    <!--Chad-->
+    <!--TH-->
+    <!--Thailand-->
+    <!--TJ-->
+    <!--Tajikistan-->
+    <!--TM-->
+    <!--Turkmenistan-->
+    <!--TN-->
+    <!--Tunisia-->
+    <!--TR-->
+    <!--Turkey-->
+    <!--TT-->
+    <!--Trinidad and Tobago-->
+    <!--TW-->
+    <!--Taiwan-->
+    <!--TZ-->
+    <!--Tanzania-->
+    <!--UA-->
+    <!--Ukraine-->
+    <!--UG-->
+    <!--Uganda-->
+    <!--US-->
+    <!--United States-->
+    <!--UY-->
+    <!--Uruguay-->
+    <!--UZ-->
+    <!--Uzbekistan-->
+    <!--VC-->
+    <!--St. Vincent and The Grenadines-->
+    <!--VE-->
+    <!--Venezuela-->
+    <!--VG-->
+    <!--British Virgin Islands-->
+    <!--VN-->
+    <!--Vietnam-->
+    <!--YE-->
+    <!--Yemen-->
+    <!--ZA-->
+    <!--South Africa-->
+    <!--ZW-->
+    <!--Zimbabwe-->
+</string-array>
 
 </resources>
