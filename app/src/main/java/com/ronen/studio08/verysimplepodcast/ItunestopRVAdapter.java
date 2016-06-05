@@ -1,6 +1,7 @@
 package com.ronen.studio08.verysimplepodcast;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ronen.studio08.verysimplepodcast.itunes.Search;
+import com.ronen.studio08.verysimplepodcast.itunestop.Entry;
 import com.ronen.studio08.verysimplepodcast.itunestop.Top;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 
 /**
@@ -39,26 +42,17 @@ public class ItunesTopRVAdapter extends RecyclerView.Adapter<ItunesTopRVAdapter.
     @Override
     public void onBindViewHolder(feedViewHolder holder, int position) {
         // onBindViewHolder is called when the SO binds the view with the data -- or, in other words, the data is shown in the UI.
-//        Result result = search.getResults().get(position);
-//        holder.title.setText(result.getCollectionCensoredName());
-//        holder.artist.setText(result.getArtistName());
-        Picasso.with(context).
-        load(top.getFeed().getEntry().get(position).getImImage().get(2).getLabel()).
-                // transform(new CropSquareTransformation()).
+        Entry entry = top.getFeed().getEntry().get(position);
+        holder.title.setText(entry.getImName().getLabel());
+        holder.artist.setText(entry.getImArtist().getLabel());
+        Picasso.
+                with(context).
+                load(entry.getImImage().get(2).getLabel()).
                 // error(R.drawable.ic_broken_image_black_24dp).
-                        into(holder.thumbnail, new Callback() {
-                    @Override
-                    public void onSuccess() {
-//                        view.findViewById(R.id.RVprogressBar).setVisibility(View.INVISIBLE);
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
+                into(holder.thumbnail);
 
     }
+
 
     @Override
     public int getItemCount() {
