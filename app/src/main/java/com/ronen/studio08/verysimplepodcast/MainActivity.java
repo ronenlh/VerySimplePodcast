@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         }*/
 
         // substituted the Fragment above for an Activity
-        Intent intent = new Intent(this, AddFeedActivity.class);
+        Intent intent = new Intent(this, ItunesSearchActivity.class);
         startActivity(intent);
     }
 
