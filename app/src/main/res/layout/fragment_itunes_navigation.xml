@@ -13,7 +13,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/countrySpinner"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dialog" />
 
         <android.support.v7.widget.SwitchCompat
             android:layout_width="wrap_content"
