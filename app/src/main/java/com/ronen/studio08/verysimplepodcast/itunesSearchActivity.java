@@ -1,8 +1,8 @@
 package com.ronen.studio08.verysimplepodcast;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -21,9 +21,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ItunesSearchActivity extends AppCompatActivity  {
 
     EditText searchBox;
-    Retrofit retrofit;
-    SearchAPI searchService;
-    RecyclerView recyclerView;
 
     Spinner countrySpinner;
     boolean explicit;
@@ -38,45 +35,24 @@ public class ItunesSearchActivity extends AppCompatActivity  {
 
         if(findViewById(R.id.itunes_selector_container) != null && savedInstanceState == null) {
             ItunesNavigationFragment itunesNavigationFragment = new ItunesNavigationFragment();
-//            itunesNavigationFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().
                     beginTransaction().
                     add(R.id.itunes_selector_container, itunesNavigationFragment).
                     commit();
         }
-
-
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://itunes.apple.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        searchService = retrofit.create(SearchAPI.class);
-
-
     }
 
-
-
-
     public void search(View view) {
-        findViewById(R.id.itunesNavigation).setVisibility(View.GONE);
-        Call<Search> call = searchService.search(searchBox.getText().toString());
-        call.enqueue(new Callback<Search>() {
-            @Override
-            public void onResponse(Call<Search> call, Response<Search> response) {
+        ItunesSearchFragment itunesSearchFragment = new ItunesSearchFragment();
+        Bundle args = new Bundle();
+        args.putString("search", searchBox.getText().toString());
+        itunesSearchFragment.setArguments(args);
+        getSupportFragmentManager().
+                beginTransaction().
+                replace(R.id.itunes_selector_container, itunesSearchFragment).
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+                addToBackStack("toSearch").
+                commit();
 
-                Log.d("SearchAPI", response.body().toString());
-
-                ItunesSeachRVAdapter rvAdapter = new ItunesSeachRVAdapter(ItunesSearchActivity.this, response.body());
-                recyclerView.setAdapter(rvAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<Search> call, Throwable t) {
-                Log.d("RetrofitCaller", t.toString());
-            }
-        });
     }
 }
