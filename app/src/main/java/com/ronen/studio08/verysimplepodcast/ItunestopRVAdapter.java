@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ronen.studio08.verysimplepodcast.itunes.Result;
 import com.ronen.studio08.verysimplepodcast.itunes.Search;
+import com.ronen.studio08.verysimplepodcast.itunestop.Top;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -17,19 +17,19 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by Ronen on 5/6/16.
  */
-public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdapter.feedViewHolder>{
+public class ItunesTopRVAdapter extends RecyclerView.Adapter<ItunesTopRVAdapter.feedViewHolder>{
     Context context;
-    Search search;
+    Top top;
     static View view;
 
-    public ItunesSeachRVAdapter(Context context, Search search) {
+    public ItunesTopRVAdapter(Context context, Top top) {
         this.context = context;
-        this.search = search;
+        this.top = top;
     }
 
 
     @Override
-    public ItunesSeachRVAdapter.feedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ItunesTopRVAdapter.feedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.itunes_feed_row, parent, false);
@@ -39,11 +39,11 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
     @Override
     public void onBindViewHolder(feedViewHolder holder, int position) {
         // onBindViewHolder is called when the SO binds the view with the data -- or, in other words, the data is shown in the UI.
-        Result result = search.getResults().get(position);
-        holder.title.setText(result.getCollectionCensoredName());
-        holder.artist.setText(result.getArtistName());
+//        Result result = search.getResults().get(position);
+//        holder.title.setText(result.getCollectionCensoredName());
+//        holder.artist.setText(result.getArtistName());
         Picasso.with(context).
-        load(search.getResults().get(position).getArtworkUrl100()).
+        load(top.getFeed().getEntry().get(position).getImImage().get(2).getLabel()).
                 // transform(new CropSquareTransformation()).
                 // error(R.drawable.ic_broken_image_black_24dp).
                         into(holder.thumbnail, new Callback() {
@@ -62,7 +62,7 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
 
     @Override
     public int getItemCount() {
-        return search.getResultCount();
+        return top.getFeed().getEntry().size();
     }
 
     public static class feedViewHolder extends RecyclerView.ViewHolder {

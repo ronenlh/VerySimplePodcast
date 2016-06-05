@@ -6,15 +6,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
-import com.ronen.studio08.verysimplepodcast.itunes.ItunesSearchService;
 import com.ronen.studio08.verysimplepodcast.itunes.Search;
 import com.ronen.studio08.verysimplepodcast.itunes.SearchAPI;
-import com.ronen.studio08.verysimplepodcast.retrofitCloud.CloudService;
-import com.ronen.studio08.verysimplepodcast.retrofitCloud.SampleFeed;
-
-import java.util.List;
+import com.ronen.studio08.verysimplepodcast.itunestop.ItunesTopApi;
+import com.ronen.studio08.verysimplepodcast.itunestop.Top;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +25,9 @@ public class ItunesSearchActivity extends AppCompatActivity {
 
     EditText searchBox;
     Retrofit retrofit;
-    SearchAPI service;
+    SearchAPI searchService;
+    ItunesTopApi topService;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +35,60 @@ public class ItunesSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_itunes_search);
         searchBox = (EditText) findViewById(R.id.searchBox);
 
+        // populate Spinner
+        Spinner spinner = (Spinner) findViewById(R.id.countrySpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.country_codes, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://itunes.apple.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        service = retrofit.create(SearchAPI.class);
+        topService = retrofit.create(ItunesTopApi.class);
+        searchService = retrofit.create(SearchAPI.class);
+
+        recyclerView = (RecyclerView) findViewById(R.id.itunesRecyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(ItunesSearchActivity.this,3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        loadTopFeeds();
+    }
+
+    private void loadTopFeeds() {
+        Call<Top> call = topService.search("EN",25,true);
+        call.enqueue(new Callback<Top>() {
+            @Override
+            public void onResponse(Call<Top> call, Response<Top> response) {
+
+                Log.d("SearchAPI", response.body().toString());
+
+                ItunesTopRVAdapter rvAdapter = new ItunesTopRVAdapter(ItunesSearchActivity.this, response.body());
+                recyclerView.setAdapter(rvAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<Top> call, Throwable t) {
+                Log.d("RetrofitCaller", t.toString());
+            }
+        });
     }
 
     public void search(View view) {
 
-        Call<Search> call = service.search(searchBox.getText().toString());
+        Call<Search> call = searchService.search(searchBox.getText().toString());
         call.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
 
                 Log.d("SearchAPI", response.body().toString());
-
-                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.itunesRecyclerView);
-                recyclerView.setHasFixedSize(true);
-
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(ItunesSearchActivity.this,3);
-                recyclerView.setLayoutManager(gridLayoutManager);
 
                 ItunesSeachRVAdapter rvAdapter = new ItunesSeachRVAdapter(ItunesSearchActivity.this, response.body());
                 recyclerView.setAdapter(rvAdapter);
