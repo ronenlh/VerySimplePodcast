@@ -37,6 +37,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 //    ArrayList<FeedSample> podcastFeedList;
     onFeedSelectedListener mCallback;
     feedDeletedListener dCallback;
+    FeedCursorAdapter adapter;
 
     ActionMode mActionMode;
 
@@ -79,7 +80,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = cursor(db);
-        FeedCursorAdapter adapter = FeedCursorAdapter.FeedCursorAdapterFactory(getActivity(), cursor);
+        adapter = FeedCursorAdapter.FeedCursorAdapterFactory(getActivity(), cursor);
 
         setListAdapter(adapter);
 
@@ -190,5 +191,11 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         return true;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        
+        adapter.notifyDataSetChanged();
+        setListAdapter(adapter);
+    }
 }
