@@ -3,33 +3,18 @@ package com.ronen.studio08.verysimplepodcast;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 
-import com.ronen.studio08.verysimplepodcast.itunes.Search;
-import com.ronen.studio08.verysimplepodcast.itunes.SearchAPI;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ItunesSearchActivity extends AppCompatActivity  {
 
     EditText searchBox;
 
-    Spinner countrySpinner;
-    boolean explicit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itunes_search);
-        explicit = false; /** TODO: need to add this to savedInstanceState **/
         searchBox = (EditText) findViewById(R.id.searchBox);
 
 
