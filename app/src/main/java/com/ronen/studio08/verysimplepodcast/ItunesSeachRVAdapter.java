@@ -1,6 +1,8 @@
 package com.ronen.studio08.verysimplepodcast;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,7 +36,7 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
         View itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.itunes_feed_row, parent, false);
-        return new searchViewHolder(itemView, search);
+        return new searchViewHolder(itemView, search /*, context */);
     }
 
     @Override
@@ -70,12 +72,14 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
         protected ImageView thumbnail;
         protected TextView title, artist;
         protected Search search;
+//        protected Context context;
 
-        public searchViewHolder(View itemView, Search search) {
+        public searchViewHolder(View itemView, Search search /*, Context context */) {
             super(itemView);
             itemView.setOnClickListener(this);
             view = itemView;
             this.search = search;
+//            this.context = context;
             thumbnail = (ImageView) itemView.findViewById(R.id.add_thumbnail);
             title = (TextView) itemView.findViewById(R.id.podTitle);
             artist = (TextView) itemView.findViewById(R.id.podArtist);
@@ -84,7 +88,15 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
         @Override
         public void onClick(View v) {
             Result result = search.getResults().get(getAdapterPosition());
-            Log.d("searchViewHolder",result.getArtistName());
+            Log.d("searchViewHolder",result.getCollectionName());
+
+//            ItunesSearchActivity itunesSearchActivity = new ItunesSearchActivity();
+//            itunesSearchActivity.openDialog(result);
+//            if(context instanceof ItunesSearchActivity){
+//                ((ItunesSearchActivity)context).openDialog(result);
+//            }
+
+
         }
     }
 }

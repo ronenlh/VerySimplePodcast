@@ -1,11 +1,13 @@
 package com.ronen.studio08.verysimplepodcast;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.ronen.studio08.verysimplepodcast.itunes.Result;
 import com.ronen.studio08.verysimplepodcast.itunestop.Entry;
 
 
@@ -56,5 +58,17 @@ public class ItunesSearchActivity extends AppCompatActivity  {
                 addToBackStack("toSearch").
                 commit();
 
+    }
+
+    public void openDialog(Result result) {
+        DialogFragment dialogFragment = new ItunesDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("title_e", result.getCollectionName());
+        args.putString("title", result.getCollectionCensoredName());
+        args.putString("explicit", result.getCollectionExplicitness());
+        args.putString("author", result.getArtistName());
+        args.putString("itemUrl",result.getFeedUrl());
+        dialogFragment.setArguments(args);
+        dialogFragment.show(getSupportFragmentManager(), "Collection "+result.getCollectionName());
     }
 }
