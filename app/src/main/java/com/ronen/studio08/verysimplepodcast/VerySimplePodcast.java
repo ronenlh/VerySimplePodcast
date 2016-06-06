@@ -1,7 +1,9 @@
 package com.ronen.studio08.verysimplepodcast;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import java.util.Locale;
@@ -42,4 +44,9 @@ public class VerySimplePodcast extends Application {
         sDefSystemLanguage = newConfig.locale.getLanguage();
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 }
