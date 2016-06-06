@@ -11,7 +11,7 @@ import com.ronen.studio08.verysimplepodcast.itunes.Result;
 import com.ronen.studio08.verysimplepodcast.itunestop.Entry;
 
 
-public class ItunesSearchActivity extends AppCompatActivity  {
+public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSearchFragment.OnSearchItemSelectedListener{
 
     EditText searchBox;
 
@@ -70,5 +70,10 @@ public class ItunesSearchActivity extends AppCompatActivity  {
         args.putString("itemUrl",result.getFeedUrl());
         dialogFragment.setArguments(args);
         dialogFragment.show(getSupportFragmentManager(), "Collection "+result.getCollectionName());
+    }
+
+    @Override
+    public void onItemSelected(Result result) {
+        openDialog(result);
     }
 }

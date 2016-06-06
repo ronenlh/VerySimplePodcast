@@ -24,6 +24,7 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
     Context context;
     Search search;
     static View view;
+    private ItunesSearchFragment.OnSearchItemSelectedListener listener;
 
     public ItunesSeachRVAdapter(Context context, Search search) {
         this.context = context;
@@ -68,7 +69,7 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
         return search.getResultCount();
     }
 
-    public static class searchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class searchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected ImageView thumbnail;
         protected TextView title, artist;
         protected Search search;
@@ -89,6 +90,9 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
         public void onClick(View v) {
             Result result = search.getResults().get(getAdapterPosition());
             Log.d("searchViewHolder",result.getCollectionName());
+            if (listener != null) {
+                listener.onItemSelected(result);
+            }
 
 //            ItunesSearchActivity itunesSearchActivity = new ItunesSearchActivity();
 //            itunesSearchActivity.openDialog(result);
@@ -98,5 +102,9 @@ public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdap
 
 
         }
+    }
+
+    public void setItemListener(ItunesSearchFragment.OnSearchItemSelectedListener listener) {
+        this.listener = listener;
     }
 }

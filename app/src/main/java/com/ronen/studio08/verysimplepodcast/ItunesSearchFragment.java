@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ronen.studio08.verysimplepodcast.itunes.Result;
 import com.ronen.studio08.verysimplepodcast.itunes.Search;
 import com.ronen.studio08.verysimplepodcast.itunes.SearchAPI;
 
@@ -28,6 +29,9 @@ public class ItunesSearchFragment extends Fragment {
     SearchAPI searchService;
     View view;
 
+    public interface OnSearchItemSelectedListener{
+        void onItemSelected(Result result);
+    }
 
     @Nullable
     @Override
@@ -60,7 +64,9 @@ public class ItunesSearchFragment extends Fragment {
                 Log.d("SearchAPI", response.body().toString());
 
                 ItunesSeachRVAdapter rvAdapter = new ItunesSeachRVAdapter(getContext(), response.body());
+                rvAdapter.setItemListener((OnSearchItemSelectedListener) getActivity());
                 recyclerView.setAdapter(rvAdapter);
+
             }
 
             @Override

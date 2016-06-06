@@ -189,4 +189,6 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         view.setSelected(true);
         return true;
     }
+
+
 }
