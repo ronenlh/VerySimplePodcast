@@ -3,10 +3,7 @@
     package="com.ronen.studio08.verysimplepodcast">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Leak canary needs access to External storage to save heap dumps -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <service android:name=".MyFirebaseMessagingService">
         <intent-filter>

@@ -194,7 +194,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     @Override
     public void onResume() {
         super.onResume();
-        
+
         adapter.notifyDataSetChanged();
         setListAdapter(adapter);
     }
