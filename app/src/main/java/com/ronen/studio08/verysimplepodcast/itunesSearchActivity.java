@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.ronen.studio08.verysimplepodcast.itunestop.Entry;
+
 
 public class ItunesSearchActivity extends AppCompatActivity  {
 
@@ -31,6 +33,21 @@ public class ItunesSearchActivity extends AppCompatActivity  {
         ItunesSearchFragment itunesSearchFragment = new ItunesSearchFragment();
         Bundle args = new Bundle();
         args.putString("search", searchBox.getText().toString());
+        itunesSearchFragment.setArguments(args);
+        getSupportFragmentManager().
+                beginTransaction().
+                replace(R.id.itunes_selector_container, itunesSearchFragment).
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+                addToBackStack("toSearch").
+                commit();
+
+    }
+
+    public void search(Entry entry) {
+
+        ItunesSearchFragment itunesSearchFragment = new ItunesSearchFragment();
+        Bundle args = new Bundle();
+        args.putString("search", entry.getImName().getLabel());
         itunesSearchFragment.setArguments(args);
         getSupportFragmentManager().
                 beginTransaction().
