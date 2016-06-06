@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/PreferenceFixTheme.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#79C9C5</item>
         <item name="colorPrimaryDark">#509D95</item>
@@ -9,8 +9,9 @@
         <!--D8E3DA-->
         <!--3C444A-->
     </style>
-    <style name="SettingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    <!-- to blame: https://github.com/Gericop/Android-Support-Preference-V7-Fix -->
+    <style name="SettingsTheme" parent="@style/PreferenceFixTheme.Light">
+        <item name="preferenceTheme">@style/PreferenceFixTheme</item>
     </style>
 
 </resources>

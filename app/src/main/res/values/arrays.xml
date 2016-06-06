@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="pref_skip_entries">pref_skip_entries</string-array>
-    <string name="skip30">30 seconds</string>
-    <string name="skip10">10 seconds</string>
-    <string name="skip5">5 seconds</string>
-    <string-array name="pref_skip_values">pref_skip_values</string-array>
+    <string-array name="pref_skip_entries">
+        <item>30 seconds</item>
+        <item>10 seconds</item>
+        <item>5 seconds</item>
+    </string-array>
+    <string-array name="pref_skip_values">
+        <item>30</item>
+        <item>10</item>
+        <item>5</item>
+    </string-array>
+
     <string-array name="country_codes">
          <item>
         United Arab Emirates

@@ -2,10 +2,18 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-    android:key="pref_skip"
+        android:key="pref_skip"
         android:title="@string/skip"
+        android:dialogTitle="Skip Amount"
         android:defaultValue="30"
         android:entries="@array/pref_skip_entries"
         android:entryValues="@array/pref_skip_values"/>
+    <ListPreference
+        android:key="country"
+        android:title="country"
+        android:dialogTitle="Select Country for Podcast Search"
+        android:defaultValue="US"
+        android:entries="@array/country_codes"
+        android:entryValues="@array/country_codes_ISO"/>
 
 </PreferenceScreen>
