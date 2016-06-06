@@ -10,13 +10,14 @@
         android:entryValues="@array/pref_skip_values"/>
     <ListPreference
         android:key="country"
-        android:title="country"
+        android:title="Country"
         android:dialogTitle="Select Country for Podcast Search"
+        android:summary="Select Country for Podcast Search"
         android:defaultValue="US"
         android:entries="@array/country_codes"
         android:entryValues="@array/country_codes_ISO"/>
     <CheckBoxPreference
         android:key="explicit"
-        android:title="explicit content"/>
+        android:title="Allow Explicit Content"/>
 
 </PreferenceScreen>

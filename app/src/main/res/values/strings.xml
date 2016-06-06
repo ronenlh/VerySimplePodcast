@@ -13,7 +13,7 @@
     <string name="error_feed">There was an Error with the feed.</string>
     <string name="episode_error">an error has ocurred, try reloading the app.</string>
     <string name="settings">Settings</string>
-    <string name="skip">skip</string>
+    <string name="skip">Skip Amount</string>
     <string name="delete">delete</string>
     <string name="feed_deleted">Feed Deleted</string>
     <string name="feed_restored">Feed Restored</string>
