@@ -1,8 +1,6 @@
 package com.ronen.studio08.verysimplepodcast;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,13 +18,13 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by Ronen on 5/6/16.
  */
-public class ItunesSeachRVAdapter extends RecyclerView.Adapter<ItunesSeachRVAdapter.searchViewHolder>{
+public class ItunesSearchRVAdapter extends RecyclerView.Adapter<ItunesSearchRVAdapter.searchViewHolder>{
     Context context;
     Search search;
     static View view;
     private ItunesSearchFragment.OnSearchItemSelectedListener listener;
 
-    public ItunesSeachRVAdapter(Context context, Search search) {
+    public ItunesSearchRVAdapter(Context context, Search search) {
         this.context = context;
         this.search = search;
     }

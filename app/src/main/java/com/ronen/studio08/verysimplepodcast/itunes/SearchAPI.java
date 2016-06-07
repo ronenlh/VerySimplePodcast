@@ -1,9 +1,5 @@
 package com.ronen.studio08.verysimplepodcast.itunes;
 
-import com.ronen.studio08.verysimplepodcast.retrofitCloud.SampleFeed;
-
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

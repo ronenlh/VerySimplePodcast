@@ -63,7 +63,7 @@ public class ItunesSearchFragment extends Fragment {
 
                 Log.d("SearchAPI", response.body().toString());
 
-                ItunesSeachRVAdapter rvAdapter = new ItunesSeachRVAdapter(getContext(), response.body());
+                ItunesSearchRVAdapter rvAdapter = new ItunesSearchRVAdapter(getContext(), response.body());
                 rvAdapter.setItemListener((OnSearchItemSelectedListener) getActivity());
                 recyclerView.setAdapter(rvAdapter);
 
