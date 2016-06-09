@@ -93,9 +93,9 @@ public class ItunesSearchRVAdapter extends RecyclerView.Adapter<ItunesSearchRVAd
             }
 
 //            ItunesSearchActivity itunesSearchActivity = new ItunesSearchActivity();
-//            itunesSearchActivity.openDialog(result);
+//            itunesSearchActivity.retrofitCaller(result);
 //            if(context instanceof ItunesSearchActivity){
-//                ((ItunesSearchActivity)context).openDialog(result);
+//                ((ItunesSearchActivity)context).retrofitCaller(result);
 //            }
 
 

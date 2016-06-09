@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.ronen.studio08.verysimplepodcast.database.DbHelper;
 import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
 import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
+import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
 import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
 import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 import com.ronen.studio08.verysimplepodcast.retrofitCloud.CloudService;
@@ -114,12 +115,13 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
 
                 if (rss != null) {
                     Log.d("feed", "feed is not null: \n" + rss.toString());
-                    String title = rss.getChannel().getTitle();
+                    Channel channel = rss.getChannel();
+                    String title = channel.getTitle();
                     String creator;
-                    if ((creator = rss.getChannel().getAuthor()) == null)
-                        creator = rss.getChannel().getItemList().get(0).getAuthorList().get(0);
-                    String subtitle = rss.getChannel().getSubtitle();
-                    String thumbnail = rss.getChannel().getImage();
+                    if ((creator = channel.getAuthor()) == null)
+                        creator = channel.getItemList().get(0).getAuthorList().get(0);
+                    String subtitle = channel.getSubtitle();
+                    String thumbnail = channel.getImage();
                     databaseHelper(db, title, creator, feedUrl, subtitle, thumbnail);
 
                 } else
