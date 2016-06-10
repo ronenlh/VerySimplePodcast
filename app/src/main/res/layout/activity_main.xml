@@ -11,7 +11,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/feed_selector_container" />
+        android:id="@+id/feed_selector_container"
+        android:paddingTop="5dp" />
 
     <fragment
         android:layout_width="match_parent"
