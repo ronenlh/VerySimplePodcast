@@ -53,7 +53,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         counter = (TextView) view.findViewById(R.id.counter_textview);
 
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        switch (sharedPref.getString("skip", "30")) {
+        switch (sharedPref.getString(SettingsFragment.KEY_SKIP, "30")) {
             case SKIP30:
                 skipmode = 30;
                 break;

@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Ronen on 5/6/16.
  */
-public class ItunesNavigationFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
+public class ItunesNavigationFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Spinner countrySpinner;
     private String countryCode;
     private ItunesTopApi topService;
@@ -58,7 +58,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
 
         // get explicitness from the SharedPreferences
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        explicit = sharedPref.getBoolean("explicit", false);
+        explicit = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT, false);
 
         return view;
     }
@@ -91,11 +91,5 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        explicit = isChecked;
-        loadTopFeeds();
     }
 }
