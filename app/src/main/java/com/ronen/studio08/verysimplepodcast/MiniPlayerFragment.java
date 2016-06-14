@@ -53,23 +53,17 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         counter = (TextView) view.findViewById(R.id.counter_textview);
 
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        switch (sharedPref.getString(SettingsFragment.KEY_SKIP, "30")) {
-            case SKIP30:
-                skipmode = 30;
-                break;
-            case SKIP10:
-                replayButton.setImageResource(R.drawable.ic_replay_10_black_24dp);
-                forwardButton.setImageResource(R.drawable.ic_forward_10_black_24dp);
-                skipmode = 10;
-                break;
-            case SKIP5:
-                replayButton.setImageResource(R.drawable.ic_replay_5_black_24dp);
-                forwardButton.setImageResource(R.drawable.ic_forward_5_black_24dp);
-                skipmode = 5;
-                break;
-            default:
-                skipmode = 30;
-        }
+        SharedPreferences.OnSharedPreferenceChangeListener listener =
+                new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                        setUIchanges(sharedPref.getString(SettingsFragment.KEY_SKIP, "30"));
+                        Log.d("OnSharedPreference", key+" "+sharedPref.getString(SettingsFragment.KEY_SKIP, "30"));
+                    }
+                };
+        //   You must store a strong reference to the listener, or it will be susceptible to garbage collection:
+        sharedPref.registerOnSharedPreferenceChangeListener(listener);
+
+        setUIchanges(sharedPref.getString(SettingsFragment.KEY_SKIP, "30"));
 
         if (mediaPlayer == null) disableButtons();
 
@@ -101,6 +95,26 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
                 }
             });
 
+    }
+
+    private void setUIchanges(String key_skip) {
+        switch (key_skip) {
+            case SKIP30:
+                skipmode = 30;
+                break;
+            case SKIP10:
+                replayButton.setImageResource(R.drawable.ic_replay_10_black_24dp);
+                forwardButton.setImageResource(R.drawable.ic_forward_10_black_24dp);
+                skipmode = 10;
+                break;
+            case SKIP5:
+                replayButton.setImageResource(R.drawable.ic_replay_5_black_24dp);
+                forwardButton.setImageResource(R.drawable.ic_forward_5_black_24dp);
+                skipmode = 5;
+                break;
+            default:
+                skipmode = 30;
+        }
     }
 
     private void disableButtons() {

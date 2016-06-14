@@ -63,6 +63,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
                 new SharedPreferences.OnSharedPreferenceChangeListener() {
                     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
                         loadTopFeeds();
+                        Log.d("OnSharedPreference", key);
                     }
                 };
         //   You must store a strong reference to the listener, or it will be susceptible to garbage collection:

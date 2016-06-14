@@ -31,12 +31,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(KEY_EXPLICIT)) {
+        if (key.equals(KEY_SKIP)) {
             Preference connectionPref = findPreference(key);
-            // Set summary to be the user-description for the selected value
-            //  when the setting is a ListPreference or other multiple choice setting,
-            // you should call setSummary() when the setting changes to display the current status
-//            connectionPref.setSummary(sharedPreferences.getString(key, ""));
+            connectionPref.setSummary(sharedPreferences.getString(key, "")+" seconds");
         }
     }
 
