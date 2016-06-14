@@ -28,7 +28,7 @@ public class VerySimplePodcast extends Application {
     * That's all there is. Whenever you need to know what the system default language was before you used your setDefault call,
     * sDefSystemLanguage will give you the answer.
     * */
-    public static String sDefSystemLanguage;
+    private static String sDefSystemLanguage;
 
     @Override
     public void onCreate() {

@@ -29,14 +29,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Ronen on 5/6/16.
  */
 public class ItunesNavigationFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
-    Spinner countrySpinner;
-    String countryCode;
-    ItunesTopApi topService;
-    RecyclerView recyclerView;
-    SwitchCompat explicitSwitch;
-    boolean explicit;
+    private Spinner countrySpinner;
+    private String countryCode;
+    private ItunesTopApi topService;
+    private RecyclerView recyclerView;
+    private SwitchCompat explicitSwitch;
+    private boolean explicit;
 
-    View view;
+    private View view;
 
     @Nullable
     @Override

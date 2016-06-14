@@ -5,8 +5,8 @@ import java.util.List;
 /**
  * Created by Ronen on 29/5/16.
  */
-public class ResponseFeeds {
-    List<FeedFromServer> feeds;
+class ResponseFeeds {
+    private List<FeedFromServer> feeds;
 
     public List<FeedFromServer> getFeeds() {
         return feeds;

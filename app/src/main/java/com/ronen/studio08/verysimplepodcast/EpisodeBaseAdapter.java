@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 public class EpisodeBaseAdapter extends BaseAdapter {
 
-    Context context;
-    ArrayList<Channel.Item> items;
+    private final Context context;
+    private final ArrayList<Channel.Item> items;
 
     public EpisodeBaseAdapter(Context context, ArrayList<Channel.Item> items) {
         this.context = context;

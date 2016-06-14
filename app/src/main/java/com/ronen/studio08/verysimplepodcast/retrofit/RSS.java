@@ -11,9 +11,11 @@ import org.simpleframework.xml.Root;
 public class RSS {
 
     @Attribute
+    private
     String version;
 
     @Element
+    private
     Channel channel;
 
 

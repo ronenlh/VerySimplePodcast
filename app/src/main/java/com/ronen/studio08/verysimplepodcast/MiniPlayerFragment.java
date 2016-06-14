@@ -31,16 +31,10 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private TextView counter;
     private Handler progressBarHandler;
     private Utilities utilities;
-    public final static int SKIP30 = 30;
-    public final static int SKIP10 = 10;
-    public final static int SKIP5 = 5;
+    private final static int SKIP30 = 30;
+    private final static int SKIP10 = 10;
+    private final static int SKIP5 = 5;
     private int skipmode = SKIP30;
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
 
     @Nullable
     @Override

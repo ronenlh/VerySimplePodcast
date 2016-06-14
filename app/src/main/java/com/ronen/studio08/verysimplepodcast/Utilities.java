@@ -3,7 +3,7 @@ package com.ronen.studio08.verysimplepodcast;
 /**
  * Created by Ronen on 22/5/16.
  */
-public class Utilities {
+class Utilities {
 
     /**
      * Function to convert milliseconds time to
@@ -61,7 +61,7 @@ public class Utilities {
      * */
     public int progressToTimer(int progress, int totalDuration) {
         int currentDuration = 0;
-        totalDuration = (int) (totalDuration / 1000);
+        totalDuration = totalDuration / 1000;
         currentDuration = (int) ((((double)progress) / 100) * totalDuration);
 
         // return current duration in milliseconds

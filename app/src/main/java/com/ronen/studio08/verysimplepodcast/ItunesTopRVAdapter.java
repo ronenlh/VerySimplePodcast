@@ -18,9 +18,9 @@ import com.squareup.picasso.Picasso;
  * Created by Ronen on 5/6/16.
  */
 public class ItunesTopRVAdapter extends RecyclerView.Adapter<ItunesTopRVAdapter.topViewHolder>{
-    Context context;
-    Top top;
-    static View view;
+    private final Context context;
+    private final Top top;
+    private static View view;
 
     public ItunesTopRVAdapter(Context context, Top top) {
         this.context = context;
@@ -58,9 +58,10 @@ public class ItunesTopRVAdapter extends RecyclerView.Adapter<ItunesTopRVAdapter.
     }
 
     public static class topViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        protected ImageView thumbnail;
-        protected TextView title, artist;
-        Top top;
+        final ImageView thumbnail;
+        final TextView title;
+        final TextView artist;
+        final Top top;
 
         public topViewHolder(View itemView, Top top) {
             super(itemView);

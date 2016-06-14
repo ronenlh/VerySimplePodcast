@@ -24,7 +24,7 @@ public class Channel {
 
     // Tricky part in Simple XML because the link is named twice
     @ElementList(entry = "link", inline = true, required = false)
-    public List<Link> links;
+    private List<Link> links;
 
     @ElementList(name = "item", required = true, inline = true)
     public List<Item> itemList;
@@ -34,17 +34,21 @@ public class Channel {
     }
 
     @Element
+    private
     String title;
 
     @Element
+    private
     String language;
 
     @Element(name = "author", required = false)
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
+    private
     String author;
 
     @Element(name = "subtitle", required = false)
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
+    private
     String subtitle;
 
     public String getAuthor() {
@@ -57,7 +61,7 @@ public class Channel {
 
     @ElementList(name = "image", required = false, inline = true)
     @Namespace(reference = "http://www.itunes.com/dtds/podcast-1.0.dtd", prefix = "itunes")
-    public List<Image> image;
+    private List<Image> image;
 
     public String getImage() {
         if (image.get(0).href != null)
@@ -69,9 +73,11 @@ public class Channel {
     }
 
     @Element(name = "ttl", required = false)
+    private
     int ttl;
 
     @Element(name = "pubDate", required = false)
+    private
     String pubDate;
 
     public String getTitle() {
@@ -93,7 +99,7 @@ public class Channel {
                 '}';
     }
 
-    public static class Link {
+    private static class Link {
         @Attribute(required = false)
         public String title;
 

@@ -37,8 +37,8 @@ import retrofit2.Response;
  */
 public class EpisodeSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
-    RSS feed;
-    onEpisodeSelectedListener mCallback;
+    private RSS feed;
+    private onEpisodeSelectedListener mCallback;
 
     interface onEpisodeSelectedListener {
         void onEpisodeSelected(int position);
@@ -157,12 +157,6 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
                 sortOrder                                 // The sort order
         );
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {

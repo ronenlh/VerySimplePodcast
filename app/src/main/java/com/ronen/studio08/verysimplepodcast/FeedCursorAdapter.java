@@ -36,7 +36,7 @@ import com.squareup.picasso.Transformation;
  */
 public class FeedCursorAdapter extends SimpleCursorAdapter {
 
-    public FeedCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+    private FeedCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
     }
 
@@ -76,7 +76,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
                  });
     }
 
-    public class CropSquareTransformation implements Transformation {
+    private class CropSquareTransformation implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {
             int size = Math.min(source.getWidth(), source.getHeight());

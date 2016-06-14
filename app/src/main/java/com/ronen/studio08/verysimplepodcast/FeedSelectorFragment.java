@@ -30,11 +30,11 @@ import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
 public class FeedSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
 //    ArrayList<FeedSample> podcastFeedList;
-    onFeedSelectedListener mCallback;
-    feedDeletedListener dCallback;
-    FeedCursorAdapter adapter;
+private onFeedSelectedListener mCallback;
+    private feedDeletedListener dCallback;
+    private FeedCursorAdapter adapter;
 
-    ActionMode mActionMode;
+    private ActionMode mActionMode;
 
     interface onFeedSelectedListener {
         void onFeedSelected(int position, String feedUrl);
@@ -109,11 +109,6 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         );
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -124,7 +119,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
 
     // Action menu when long clicking in the FeedSample list.
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    private final ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         // Called when the action mode is created; startActionMode() was called
         @Override

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 /**
  * Created by studio08 on 4/10/2016.
  */
-public class FeedBaseAdapter extends BaseAdapter {
+class FeedBaseAdapter extends BaseAdapter {
 
-    Context context;
-    ArrayList<FeedSample> podcastFeeds;
+    private final Context context;
+    private final ArrayList<FeedSample> podcastFeeds;
 
     public FeedBaseAdapter(Context context, ArrayList<FeedSample> podcastFeeds) {
         this.context = context;

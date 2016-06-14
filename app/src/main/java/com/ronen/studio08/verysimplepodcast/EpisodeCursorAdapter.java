@@ -12,7 +12,7 @@ import com.ronen.studio08.verysimplepodcast.database.FeedReaderContract;
  */
 public class EpisodeCursorAdapter extends SimpleCursorAdapter {
 
-    public EpisodeCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+    private EpisodeCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
     }
 

@@ -7,13 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by studio08 on 4/17/2016.
  */
-public class ServiceGeneratorCloud {
+class ServiceGeneratorCloud {
 
-    public static final String API_BASE_URL = "https://infinite-citadel-18717.herokuapp.com/";
+    private static final String API_BASE_URL = "https://infinite-citadel-18717.herokuapp.com/";
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-    private static Retrofit.Builder builder =
+    private static final Retrofit.Builder builder =
             new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(API_BASE_URL);

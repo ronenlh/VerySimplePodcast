@@ -39,7 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class AddFeedFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    View view;
+    private View view;
     List<FeedSample> sampleFeedList;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

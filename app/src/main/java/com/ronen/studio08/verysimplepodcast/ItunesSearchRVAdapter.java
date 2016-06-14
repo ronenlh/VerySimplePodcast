@@ -19,9 +19,9 @@ import com.squareup.picasso.Picasso;
  * Created by Ronen on 5/6/16.
  */
 public class ItunesSearchRVAdapter extends RecyclerView.Adapter<ItunesSearchRVAdapter.searchViewHolder>{
-    Context context;
-    Search search;
-    static View view;
+    private final Context context;
+    private final Search search;
+    private static View view;
     private ItunesSearchFragment.OnSearchItemSelectedListener listener;
 
     public ItunesSearchRVAdapter(Context context, Search search) {
@@ -68,9 +68,10 @@ public class ItunesSearchRVAdapter extends RecyclerView.Adapter<ItunesSearchRVAd
     }
 
     public class searchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        protected ImageView thumbnail;
-        protected TextView title, artist;
-        protected Search search;
+        final ImageView thumbnail;
+        final TextView title;
+        final TextView artist;
+        final Search search;
 //        protected Context context;
 
         public searchViewHolder(View itemView, Search search /*, Context context */) {

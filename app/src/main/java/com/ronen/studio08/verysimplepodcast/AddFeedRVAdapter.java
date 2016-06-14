@@ -21,9 +21,9 @@ import java.util.List;
  */
 public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feedViewHolder> {
 
-    Context context;
-    List<SampleFeed> sampleFeeds;
-    static View view;
+    private final Context context;
+    private final List<SampleFeed> sampleFeeds;
+    private static View view;
 
 
 
@@ -86,7 +86,7 @@ public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feed
 
     public static class feedViewHolder extends RecyclerView.ViewHolder {
 
-        protected ImageView thumbnail;
+        final ImageView thumbnail;
 
         public feedViewHolder(View itemView) {
             super(itemView);
@@ -99,7 +99,7 @@ public class AddFeedRVAdapter extends RecyclerView.Adapter<AddFeedRVAdapter.feed
         }
     }
 
-    public class CropSquareTransformation implements Transformation {
+    private class CropSquareTransformation implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {
             int size = Math.min(source.getWidth(), source.getHeight());

@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSearchFragment.OnSearchItemSelectedListener{
 
-    EditText searchBox;
+    private EditText searchBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSe
 
     }
 
-    public void retrofitCaller(final Result result) {
+    private void retrofitCaller(final Result result) {
         ApiService service = ServiceGenerator.createService(ApiService.class);
         DbHelper dbHelper = new DbHelper(this);
         final SQLiteDatabase db = dbHelper.getWritableDatabase();

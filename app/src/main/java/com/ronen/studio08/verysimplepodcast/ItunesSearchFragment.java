@@ -25,9 +25,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ItunesSearchFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    SearchAPI searchService;
-    View view;
+    private RecyclerView recyclerView;
+    private SearchAPI searchService;
+    private View view;
 
     public interface OnSearchItemSelectedListener{
         void onItemSelected(Result result);

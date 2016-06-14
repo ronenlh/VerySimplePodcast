@@ -22,15 +22,15 @@ import java.util.Locale;
  */
 public class EpisodeDialogFragment extends DialogFragment {
 
-    String title;
-    String description;
-    String itemUrl;
-    String mediaUrl;
-    String author;
-    String pubDate;
+    private String title;
+    private String description;
+    private String itemUrl;
+    private String mediaUrl;
+    private String author;
+    private String pubDate;
 
-    onPlaySelectedListener playCallback;
-    onInfoSelectedListener infoCallback;
+    private onPlaySelectedListener playCallback;
+    private onInfoSelectedListener infoCallback;
 
     interface onPlaySelectedListener {
         void onPlaySelected(String itemUrl);
@@ -118,10 +118,5 @@ public class EpisodeDialogFragment extends DialogFragment {
                 });
         // Create the AlertDialog object and return it
         return builder.create();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 }
