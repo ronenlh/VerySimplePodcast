@@ -1,11 +1,13 @@
 package com.ronen.studio08.verysimplepodcast;
 
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +33,10 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private TextView counter;
     private Handler progressBarHandler;
     private Utilities utilities;
-    private final static int SKIP30 = 30;
-    private final static int SKIP10 = 10;
-    private final static int SKIP5 = 5;
-    private int skipmode = SKIP30;
+    private final static String SKIP30 = "30";
+    private final static String SKIP10 = "10";
+    private final static String SKIP5 = "5";
+    private static int skipmode = 30;
 
     @Nullable
     @Override
@@ -50,18 +52,23 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         seekBar = (SeekBar) view.findViewById(R.id.seekBar);
         counter = (TextView) view.findViewById(R.id.counter_textview);
 
-        switch (skipmode) {
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        switch (sharedPref.getString("skip", "30")) {
             case SKIP30:
+                skipmode = 30;
                 break;
             case SKIP10:
                 replayButton.setImageResource(R.drawable.ic_replay_10_black_24dp);
                 forwardButton.setImageResource(R.drawable.ic_forward_10_black_24dp);
+                skipmode = 10;
                 break;
             case SKIP5:
                 replayButton.setImageResource(R.drawable.ic_replay_5_black_24dp);
                 forwardButton.setImageResource(R.drawable.ic_forward_5_black_24dp);
+                skipmode = 5;
                 break;
             default:
+                skipmode = 30;
         }
 
         if (mediaPlayer == null) disableButtons();

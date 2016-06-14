@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        android:key="pref_skip"
+        android:key="skip"
         android:title="@string/skip"
         android:dialogTitle="Skip Amount"
         android:defaultValue="30"
