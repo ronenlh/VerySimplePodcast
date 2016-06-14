@@ -59,6 +59,14 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
         // get explicitness from the SharedPreferences
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         explicit = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT, false);
+        SharedPreferences.OnSharedPreferenceChangeListener listener =
+                new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                        loadTopFeeds();
+                    }
+                };
+        //   You must store a strong reference to the listener, or it will be susceptible to garbage collection:
+        sharedPref.registerOnSharedPreferenceChangeListener(listener);
 
         return view;
     }
@@ -90,6 +98,10 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void sharedPrefListener() {
 
     }
 }
