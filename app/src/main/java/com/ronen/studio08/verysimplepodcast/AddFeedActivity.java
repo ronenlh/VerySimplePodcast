@@ -42,7 +42,9 @@ public class AddFeedActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_feed);
         Button button = (Button) findViewById(R.id.add_button1);
-        button.setOnClickListener(this);
+        if (button != null) {
+            button.setOnClickListener(this);
+        }
 
         sampleFeedRetrofitCaller();
     }
@@ -65,7 +67,9 @@ public class AddFeedActivity extends AppCompatActivity implements View.OnClickLi
                 Log.d("RetrofitCaller", response.body().toString());
 
                 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
-                recyclerView.setHasFixedSize(true);
+                if (recyclerView != null) {
+                    recyclerView.setHasFixedSize(true);
+                }
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(AddFeedActivity.this,3);
                 recyclerView.setLayoutManager(gridLayoutManager);
@@ -145,7 +149,9 @@ public class AddFeedActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         EditText editText = (EditText) findViewById(R.id.feed_editText1);
-        retrofitCaller(editText.getText().toString());
+        if (editText != null) {
+            retrofitCaller(editText.getText().toString());
+        }
     }
 
     @Override

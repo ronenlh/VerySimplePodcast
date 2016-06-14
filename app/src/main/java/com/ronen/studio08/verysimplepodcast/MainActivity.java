@@ -211,16 +211,19 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         else {
             coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_land);
         }
-        Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, R.string.feed_deleted, Snackbar.LENGTH_LONG)
-                .setAction("UNDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar
-                                .make(coordinatorLayout, R.string.feed_restored, Snackbar.LENGTH_SHORT)
-                                .show();
-                    }
-                });
+        Snackbar snackbar = null;
+        if (coordinatorLayout != null) {
+            snackbar = Snackbar
+                    .make(coordinatorLayout, R.string.feed_deleted, Snackbar.LENGTH_LONG)
+                    .setAction("UNDO", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Snackbar
+                                    .make(coordinatorLayout, R.string.feed_restored, Snackbar.LENGTH_SHORT)
+                                    .show();
+                        }
+                    });
+        }
         snackbar.show();
     }
 }

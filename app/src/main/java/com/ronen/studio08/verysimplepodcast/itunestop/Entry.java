@@ -13,7 +13,7 @@ public class Entry {
     private ImName imName;
     @SerializedName("im:image")
     @Expose
-    private List<ImImage> imImage = new ArrayList<ImImage>();
+    private List<ImImage> imImage = new ArrayList<>();
     @SerializedName("summary")
     @Expose
     private Summary summary;

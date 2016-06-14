@@ -17,7 +17,7 @@ public class Search {
     private Integer resultCount;
     @SerializedName("results")
     @Expose
-    private List<Result> results = new ArrayList<Result>();
+    private List<Result> results = new ArrayList<>();
 
     /**
      *

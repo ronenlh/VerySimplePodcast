@@ -13,7 +13,7 @@ public class Feed {
     private Author author;
     @SerializedName("entry")
     @Expose
-    private List<Entry> entry = new ArrayList<Entry>();
+    private List<Entry> entry = new ArrayList<>();
     @SerializedName("updated")
     @Expose
     private Updated updated;
@@ -28,7 +28,7 @@ public class Feed {
     private Icon icon;
     @SerializedName("link")
     @Expose
-    private List<Link_> link = new ArrayList<Link_>();
+    private List<Link_> link = new ArrayList<>();
     @SerializedName("id")
     @Expose
     private Id_ id;

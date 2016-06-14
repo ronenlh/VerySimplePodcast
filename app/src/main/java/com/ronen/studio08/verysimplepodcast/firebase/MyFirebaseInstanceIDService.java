@@ -64,9 +64,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
             } else {
                 Log.d(TAG,"failure");
             }
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

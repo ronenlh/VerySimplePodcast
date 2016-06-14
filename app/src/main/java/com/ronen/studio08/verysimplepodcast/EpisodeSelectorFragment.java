@@ -85,14 +85,15 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
-                (getView().findViewById(R.id.episode_progressbar)).setVisibility(View.INVISIBLE);
+                View view = getView();
+                if (view != null) {
+                    view.findViewById(R.id.episode_progressbar).setVisibility(View.INVISIBLE);
+                }
                 feed = response.body(); // <-- this is the feed!
                 if (feed != null) {
                     Log.d("feed", "feed is not null: \n" + feed.toString());
                     EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
                     setListAdapter(adapter);
-
-                    Cursor cursor = cursor(db);
 
                 } else
                     try {

@@ -42,7 +42,6 @@ public class FeedBaseAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View row = null;
 
         if (convertView == null) {
             holder = new Holder();

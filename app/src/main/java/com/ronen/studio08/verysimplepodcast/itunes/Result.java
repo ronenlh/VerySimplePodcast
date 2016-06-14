@@ -104,10 +104,10 @@ public class Result {
     private String artworkUrl600;
     @SerializedName("genreIds")
     @Expose
-    private List<String> genreIds = new ArrayList<String>();
+    private List<String> genreIds = new ArrayList<>();
     @SerializedName("genres")
     @Expose
-    private List<String> genres = new ArrayList<String>();
+    private List<String> genres = new ArrayList<>();
 
     /**
      *

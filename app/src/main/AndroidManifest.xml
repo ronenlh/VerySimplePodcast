@@ -30,7 +30,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ItunesSearchActivity"></activity>
+        <activity android:name=".ItunesSearchActivity" />
         <service android:name="firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
