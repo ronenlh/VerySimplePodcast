@@ -34,7 +34,7 @@ public class ItunesSearchRVAdapter extends RecyclerView.Adapter<ItunesSearchRVAd
     public searchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.
                 from(parent.getContext()).
-                inflate(R.layout.itunes_feed_row, parent, false);
+                inflate(R.layout.itunes_feed_row_card, parent, false);
         return new searchViewHolder(itemView, search /*, context */);
     }
 
