@@ -2,7 +2,6 @@ package com.ronen.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -142,12 +141,11 @@ public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSe
         // Insert the new row, returning the primary key value of the new row
         Log.d("databaseHelper()", title);
         // insertWithConflict instead of insert.
-        long primaryKey = db.insertWithOnConflict(
+
+        return db.insertWithOnConflict(
                 FeedsContract.FeedEntry.TABLE_NAME,
                 FeedsContract.FeedEntry.COLUMN_NAME_NULLABLE,
                 values, SQLiteDatabase.CONFLICT_IGNORE);
-
-        return primaryKey;
     }
 
     @Override

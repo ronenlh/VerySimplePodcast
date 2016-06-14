@@ -124,12 +124,11 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
         // Insert the new row, returning the primary key value of the new row
 //        Log.d("databaseHelper()", ""+newRowId+" "+title);
         //insertWithConflict instead of insert.
-        long primaryKey = db.insertWithOnConflict(
+
+        return db.insertWithOnConflict(
                 FeedReaderContract.FeedEntry.TABLE_NAME,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_NULLABLE,
                 values,SQLiteDatabase.CONFLICT_IGNORE);
-
-        return primaryKey;
     }
 
     private Cursor cursor(SQLiteDatabase db) {

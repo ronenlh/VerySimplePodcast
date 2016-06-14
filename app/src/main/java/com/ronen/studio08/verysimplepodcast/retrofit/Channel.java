@@ -150,8 +150,7 @@ public class Channel {
             if (description == null)
                 return "";
             // remove html tags from description
-            String sanitizedDescription = description.replaceAll("<[^>]*>", "");
-            return sanitizedDescription;
+            return description.replaceAll("<[^>]*>", "");
         }
 
         public List<String> getAuthorList() {
@@ -179,9 +178,7 @@ public class Channel {
         }
 
         public Date getPubDateParsed() throws ParseException {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z "); // Thu, 31 Mar 2016 09:30:00 +0000
-            Date parsedDate = dateFormat.parse(getPubDate());
-            return parsedDate;
+            return new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z ").parse(getPubDate());
         }
 
         public String getSource() {

@@ -3,14 +3,11 @@ package com.ronen.studio08.verysimplepodcast;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -139,12 +136,10 @@ public class AddFeedActivity extends AppCompatActivity implements View.OnClickLi
         // Insert the new row, returning the primary key value of the new row
         Log.d("databaseHelper()", title);
         // insertWithConflict instead of insert.
-        long primaryKey = db.insertWithOnConflict(
+        return db.insertWithOnConflict(
                 FeedsContract.FeedEntry.TABLE_NAME,
                 FeedsContract.FeedEntry.COLUMN_NAME_NULLABLE,
                 values,SQLiteDatabase.CONFLICT_IGNORE);
-
-        return primaryKey;
     }
 
     @Override

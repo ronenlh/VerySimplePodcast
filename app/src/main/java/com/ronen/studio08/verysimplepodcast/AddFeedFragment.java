@@ -22,7 +22,6 @@ import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
 import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
 import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
 import com.ronen.studio08.verysimplepodcast.retrofitCloud.CloudService;
-import com.ronen.studio08.verysimplepodcast.retrofitCloud.ResponseFeeds;
 import com.ronen.studio08.verysimplepodcast.retrofitCloud.SampleFeed;
 
 import java.io.IOException;
@@ -154,12 +153,11 @@ public class AddFeedFragment extends Fragment implements View.OnClickListener, A
         // Insert the new row, returning the primary key value of the new row
         Log.d("databaseHelper()", title);
         // insertWithConflict instead of insert.
-        long primaryKey = db.insertWithOnConflict(
+
+        return db.insertWithOnConflict(
                 FeedsContract.FeedEntry.TABLE_NAME,
                 FeedsContract.FeedEntry.COLUMN_NAME_NULLABLE,
                 values,SQLiteDatabase.CONFLICT_IGNORE);
-
-        return primaryKey;
     }
 
     @Override
