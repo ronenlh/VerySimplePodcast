@@ -32,7 +32,9 @@
             android:title="Language"
             android:dialogTitle="Select Language for Podcast Search"
             android:summary="Language Used for Podcast Search"
-            android:defaultValue="en_US" />
+            android:defaultValue="en_US"
+            android:entries="@array/lang"
+            android:entryValues="@array/lang_codes"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

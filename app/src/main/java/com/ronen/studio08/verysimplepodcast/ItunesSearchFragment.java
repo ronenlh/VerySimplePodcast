@@ -32,6 +32,7 @@ public class ItunesSearchFragment extends Fragment {
     private View view;
     private String countryCode = "US";
     private String explicitString = "No";
+    private String lang = "en_us";
 
     public interface OnSearchItemSelectedListener{
         void onItemSelected(Result result);
@@ -57,7 +58,8 @@ public class ItunesSearchFragment extends Fragment {
 
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         explicitString = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT, false)?"Yes":"No";
-        countryCode = sharedPref.getString(SettingsFragment.KEY_COUNTRY, "US");;
+        countryCode = sharedPref.getString(SettingsFragment.KEY_COUNTRY, "US");
+        lang = sharedPref.getString(SettingsFragment.KEY_LANG, "en_us");
         SharedPreferences.OnSharedPreferenceChangeListener listener =
                 new SharedPreferences.OnSharedPreferenceChangeListener() {
                     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -73,7 +75,7 @@ public class ItunesSearchFragment extends Fragment {
     }
 
     private void retrofitCaller() {
-        Call<Search> call = searchService.search(countryCode, 25, getArguments().getString("search"), explicitString);
+        Call<Search> call = searchService.search(countryCode, 25, getArguments().getString("search"), explicitString, lang);
         call.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {

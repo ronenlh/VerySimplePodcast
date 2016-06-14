@@ -16,5 +16,9 @@ import retrofit2.http.Query;
 public interface SearchAPI {
     // all params listed at https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/#searching
     @GET("search?media=podcast")
-    Call<Search> search(@Query("country") String country, @Query("limit") int limit, @Query("term") String term, @Query("explicit") String explicit);
+    Call<Search> search(@Query("country") String country,
+                        @Query("limit") int limit,
+                        @Query("term") String term,
+                        @Query("explicit") String explicit,
+                        @Query("lang") String lang);
 }
