@@ -9,16 +9,16 @@
         android:entries="@array/pref_skip_entries"
         android:entryValues="@array/pref_skip_values"/>
     <CheckBoxPreference
-        android:key="explicit"
-        android:title="Allow Explicit Content"
-        android:defaultValue="true"/>
-    <CheckBoxPreference
         android:key="nigth_theme"
         android:title="Night Theme"
         android:defaultValue="false"/>
     <PreferenceCategory
         android:title="Podcast Search"
         android:key="pref_key_podcast_search">
+        <CheckBoxPreference
+            android:key="explicit"
+            android:title="Allow Explicit Content"
+            android:defaultValue="true"/>
         <ListPreference
             android:key="country"
             android:title="Country"

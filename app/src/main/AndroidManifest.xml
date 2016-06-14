@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:logo="@drawable/ic_action_logo_flat"
         android:supportsRtl="true"
-        android:theme="@style/PreferenceFixTheme.Light">
+        android:theme="@style/PreferenceFixTheme.DayNight">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

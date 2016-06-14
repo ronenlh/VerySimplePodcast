@@ -1,17 +1,17 @@
 package com.ronen.studio08.verysimplepodcast;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 
@@ -33,7 +33,6 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
     private String countryCode;
     private ItunesTopApi topService;
     private RecyclerView recyclerView;
-    private SwitchCompat explicitSwitch;
     private boolean explicit;
 
     private View view;
@@ -42,12 +41,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_itunes_navigation, container, false);
-        initSpinner();
         countryCode = "EN";
-
-        explicitSwitch = (SwitchCompat) view.findViewById(R.id.explicitSwitch);
-        explicitSwitch.setOnCheckedChangeListener(this);
-
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://itunes.apple.com/")
@@ -62,26 +56,17 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        return view;
-    }
+        // get explicitness from the SharedPreferences
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        explicit = sharedPref.getBoolean("explicit", false);
 
-    private void initSpinner() {
-        // populate Spinner
-        countrySpinner = (Spinner) view.findViewById(R.id.countrySpinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.country_codes, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        countrySpinner.setAdapter(adapter);
-        countrySpinner.setOnItemSelectedListener(this);
+        return view;
     }
 
     private void loadTopFeeds() {
 
         /* TODO: personalize country code, already begun running into crashes. */
-        Call<Top> call = topService.search("EN",25,explicit);
+        Call<Top> call = topService.search(countryCode,25,explicit);
         call.enqueue(new Callback<Top>() {
             @Override
             public void onResponse(Call<Top> call, Response<Top> response) {

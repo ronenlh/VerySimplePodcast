@@ -1,6 +1,7 @@
 package com.ronen.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -151,5 +153,24 @@ public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSe
     @Override
     public void onItemSelected(Result result) {
         retrofitCaller(result);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.itunes_selector_container, new SettingsFragment())
+                            .commit();
+                } else {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.itunes_selector_container, new SettingsFragment())
+                            .commit();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
