@@ -25,8 +25,8 @@
             android:dialogTitle="Select Country for Podcast Search"
             android:summary="Country used for Podcast Search"
             android:defaultValue="US"
-            android:entries="@array/country_codes"
-            android:entryValues="@array/country_codes_ISO"/>
+            android:entries="@array/country_names"
+            android:entryValues="@array/country_codes"/>
         <ListPreference
             android:key="language"
             android:title="Language"

@@ -11,7 +11,7 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="country_codes">
+    <string-array name="country_names">
          <item>
         United Arab Emirates
         </item><item>
@@ -324,8 +324,8 @@
         Zimbabwe
 </item>
     </string-array>
-    <string-array name="country_codes_ISO">
-    <item>AE</item><item>    AG
+    <string-array name="country_codes">
+        <item>AE</item><item>    AG
 </item><item>    AI
 </item><item>    AL
 </item><item>    AM
@@ -431,102 +431,91 @@
 </item><item>    NO
 </item><item>    NP
 </item><item>    NZ
-</item><item>    OM </item>
-    <!--Oman-->
-    <!--PA-->
-    <!--Panama-->
-    <!--PE-->
-    <!--Peru-->
-    <!--PG-->
-    <!--Papua New Guinea-->
-    <!--PH-->
-    <!--Philippines-->
-    <!--PK-->
-    <!--Pakistan-->
-    <!--PL-->
-    <!--Poland-->
-    <!--PT-->
-    <!--Portugal-->
-    <!--PW-->
-    <!--Palau-->
-    <!--PY-->
-    <!--Paraguay-->
-    <!--QA-->
-    <!--Qatar-->
-    <!--RO-->
-    <!--Romania-->
-    <!--RU-->
-    <!--Russia-->
-    <!--SA-->
-    <!--Saudi Arabia-->
-    <!--SB-->
-    <!--Solomon Islands-->
-    <!--SC-->
-    <!--Seychelles-->
-    <!--SE-->
-    <!--Sweden-->
-    <!--SG-->
-    <!--Singapore-->
-    <!--SI-->
-    <!--Slovenia-->
-    <!--SK-->
-    <!--Slovakia-->
-    <!--SL-->
-    <!--Sierra Leone-->
-    <!--SN-->
-    <!--Senegal-->
-    <!--SR-->
-    <!--Suriname-->
-    <!--ST-->
-    <!--Sao Tome and Principe-->
-    <!--SV-->
-    <!--El Salvador-->
-    <!--SZ-->
-    <!--Swaziland-->
-    <!--TC-->
-    <!--Turks and Caicos-->
-    <!--TD-->
-    <!--Chad-->
-    <!--TH-->
-    <!--Thailand-->
-    <!--TJ-->
-    <!--Tajikistan-->
-    <!--TM-->
-    <!--Turkmenistan-->
-    <!--TN-->
-    <!--Tunisia-->
-    <!--TR-->
-    <!--Turkey-->
-    <!--TT-->
-    <!--Trinidad and Tobago-->
-    <!--TW-->
-    <!--Taiwan-->
-    <!--TZ-->
-    <!--Tanzania-->
-    <!--UA-->
-    <!--Ukraine-->
-    <!--UG-->
-    <!--Uganda-->
-    <!--US-->
-    <!--United States-->
-    <!--UY-->
-    <!--Uruguay-->
-    <!--UZ-->
-    <!--Uzbekistan-->
-    <!--VC-->
-    <!--St. Vincent and The Grenadines-->
-    <!--VE-->
-    <!--Venezuela-->
-    <!--VG-->
-    <!--British Virgin Islands-->
-    <!--VN-->
-    <!--Vietnam-->
-    <!--YE-->
-    <!--Yemen-->
-    <!--ZA-->
-    <!--South Africa-->
-    <!--ZW-->
-    <!--Zimbabwe-->
-</string-array>
+</item>
+        <item>    OM </item>
+    <item>
+PA
+    </item><item>
+        PE
+    </item><item>
+        PG
+</item><item>     PH
+    </item><item>
+        PK
+    </item><item>
+        PL
+    </item><item>
+        PT
+    </item><item>
+        PW
+    </item><item>
+        PY
+    </item><item>
+        QA
+    </item><item>
+        RO
+    </item><item>
+        RU
+    </item><item>
+        SA
+</item><item>     SB
+</item><item>     SC
+    </item><item>
+        SE
+    </item><item>
+        SG
+    </item><item>
+        SI
+    </item><item>
+        SK
+    </item><item>
+        SL
+</item><item>     SN
+    </item><item>
+        SR
+    </item><item>
+        ST
+</item><item>     SV
+</item><item>     SZ
+    </item><item>
+        TC
+</item><item>     TD
+    </item><item>
+        TH
+    </item><item>
+        TJ
+    </item><item>
+        TM
+    </item><item>
+        TN
+    </item><item>
+        TR
+    </item><item>
+        TT
+</item><item>     TW
+    </item><item>
+        TZ
+    </item><item>
+        UA
+    </item><item>
+        UG
+    </item><item>
+        US
+</item><item>     UY
+    </item><item>
+        UZ
+    </item><item>
+        VC
+</item><item>     VE
+    </item><item>
+        VG
+</item><item>     VN
+    </item><item>
+        YE
+    </item><item>
+        ZA
+</item><item>     ZW
+    Zimbabwe </item>
+    </string-array>
 
 </resources>

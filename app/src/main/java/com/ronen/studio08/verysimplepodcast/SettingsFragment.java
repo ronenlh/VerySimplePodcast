@@ -31,9 +31,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(KEY_SKIP)) {
-            Preference connectionPref = findPreference(key);
-            connectionPref.setSummary(sharedPreferences.getString(key, "")+" seconds");
+        Preference connectionPref = findPreference(key);
+        switch (key) {
+            case KEY_SKIP:
+                connectionPref.setSummary(sharedPreferences.getString(key, "")+" seconds");
+                break;
+            case KEY_COUNTRY:
+                connectionPref.setSummary(sharedPreferences.getString(key, "Country Used for Podcast search"));
         }
     }
 

@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 import com.ronen.studio08.verysimplepodcast.itunestop.ItunesTopApi;
@@ -93,7 +92,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        countryCode = getResources().getStringArray(R.array.country_codes)[position];
+        countryCode = getResources().getStringArray(R.array.country_names)[position];
         loadTopFeeds();
     }
 
