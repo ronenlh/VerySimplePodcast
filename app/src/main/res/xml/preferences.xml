@@ -5,13 +5,14 @@
         android:key="skip"
         android:title="@string/skip"
         android:dialogTitle="Skip Amount"
+        android:summary="Seconds to Skip in Rewind and Forward."
         android:defaultValue="30"
         android:entries="@array/pref_skip_entries"
         android:entryValues="@array/pref_skip_values"/>
-    <CheckBoxPreference
-        android:key="nigth_theme"
-        android:title="Night Theme"
-        android:defaultValue="false"/>
+    <!--<CheckBoxPreference-->
+        <!--android:key="nigth_theme"-->
+        <!--android:title="Night Theme"-->
+        <!--android:defaultValue="false"/>-->
     <PreferenceCategory
         android:title="Podcast Search"
         android:key="pref_key_podcast_search">
