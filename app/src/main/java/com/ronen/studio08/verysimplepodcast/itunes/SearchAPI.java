@@ -2,6 +2,7 @@ package com.ronen.studio08.verysimplepodcast.itunes;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -14,6 +15,6 @@ import retrofit2.http.Query;
  */
 public interface SearchAPI {
     // all params listed at https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/#searching
-    @GET("search?media=podcast&country=US&limit=25")
-    Call<Search> search(@Query("term") String term);
+    @GET("search?media=podcast")
+    Call<Search> search(@Query("country") String country, @Query("limit") int limit, @Query("term") String term, @Query("explicit") String explicit);
 }

@@ -1,8 +1,10 @@
 package com.ronen.studio08.verysimplepodcast;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,6 +30,8 @@ public class ItunesSearchFragment extends Fragment {
     private RecyclerView recyclerView;
     private SearchAPI searchService;
     private View view;
+    private String countryCode = "US";
+    private String explicitString = "No";
 
     public interface OnSearchItemSelectedListener{
         void onItemSelected(Result result);
@@ -51,12 +55,25 @@ public class ItunesSearchFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        explicitString = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT, false)?"Yes":"No";
+        countryCode = sharedPref.getString(SettingsFragment.KEY_COUNTRY, "US");;
+        SharedPreferences.OnSharedPreferenceChangeListener listener =
+                new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                        retrofitCaller();
+                        Log.d("OnSharedPreference", key);
+                    }
+                };
+        //   You must store a strong reference to the listener, or it will be susceptible to garbage collection:
+        sharedPref.registerOnSharedPreferenceChangeListener(listener);
+
         retrofitCaller();
         return view;
     }
 
     private void retrofitCaller() {
-        Call<Search> call = searchService.search(getArguments().getString("search"));
+        Call<Search> call = searchService.search(countryCode, 25, getArguments().getString("search"), explicitString);
         call.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
