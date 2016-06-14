@@ -181,6 +181,10 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                             .commit();
                 }
                 return true;
+            case R.id.add_item:
+                Intent intent = new Intent(this, ItunesSearchActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
