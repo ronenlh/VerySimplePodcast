@@ -36,8 +36,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class AddFeedActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    List<FeedSample> sampleFeedList;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_feed);
@@ -72,10 +70,14 @@ public class AddFeedActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(AddFeedActivity.this,3);
-                recyclerView.setLayoutManager(gridLayoutManager);
+                if (recyclerView != null) {
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                }
 
                 AddFeedRVAdapter rvAdapter = new AddFeedRVAdapter(AddFeedActivity.this, response.body());
-                recyclerView.setAdapter(rvAdapter);
+                if (recyclerView != null) {
+                    recyclerView.setAdapter(rvAdapter);
+                }
             }
 
             @Override
