@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ItunesNavigationFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Spinner countrySpinner;
-    private String countryCode;
+    private String countryCode = "EN";
     private ItunesTopApi topService;
     private RecyclerView recyclerView;
     private boolean explicit;
@@ -40,7 +40,6 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_itunes_navigation, container, false);
-        countryCode = "EN";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://itunes.apple.com/")
@@ -58,6 +57,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
         // get explicitness from the SharedPreferences
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         explicit = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT, false);
+        countryCode = sharedPref.getString(SettingsFragment.KEY_COUNTRY, "EN");;
         SharedPreferences.OnSharedPreferenceChangeListener listener =
                 new SharedPreferences.OnSharedPreferenceChangeListener() {
                     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -101,7 +101,4 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
 
     }
 
-    public void sharedPrefListener() {
-
-    }
 }
