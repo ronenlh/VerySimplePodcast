@@ -1,6 +1,8 @@
 package com.ronen.studio08.verysimplepodcast;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +44,11 @@ public class ItunesSearchRVAdapter extends RecyclerView.Adapter<ItunesSearchRVAd
     public void onBindViewHolder(searchViewHolder holder, int position) {
         // onBindViewHolder is called when the SO binds the view with the data -- or, in other words, the data is shown in the UI.
         Result result = search.getResults().get(position);
-        holder.title.setText(result.getCollectionCensoredName());
+        // is explicit enabled in settings?
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String name = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT,false)?result.getCollectionName():result.getCollectionCensoredName();
+        holder.title.setText(name);
+
         holder.artist.setText(result.getArtistName());
         Picasso.with(context).
         load(search.getResults().get(position).getArtworkUrl100()).
