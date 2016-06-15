@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         EpisodeDialogFragment.onInfoSelectedListener,
         FeedSelectorFragment.feedDeletedListener {
 
-    private static final String TAG = "Main Activity";
+    private static final String TAG = "MainActivity";
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d(TAG, "onCreate()");
         Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
 
         if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
@@ -173,11 +173,13 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
             case R.id.settings:
                 if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                     getSupportFragmentManager().beginTransaction()
+                            .addToBackStack("settings")
                             .replace(R.id.feed_selector_container, new SettingsFragment())
                             .commit();
                 } else {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.episode_selector_container, new SettingsFragment())
+                            .addToBackStack("settings")
                             .commit();
                 }
                 return true;
@@ -213,5 +215,23 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                     });
         }
         snackbar.show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
     }
 }

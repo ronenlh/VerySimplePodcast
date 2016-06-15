@@ -32,12 +32,14 @@ import retrofit2.Response;
 
 public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSearchFragment.OnSearchItemSelectedListener{
 
+    private static final String TAG = "ItunesSearchActivity";
     private EditText searchBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itunes_search);
+        Log.d(TAG, "onCreate()");
         searchBox = (EditText) findViewById(R.id.searchBox);
 
 
@@ -172,5 +174,23 @@ public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
     }
 }

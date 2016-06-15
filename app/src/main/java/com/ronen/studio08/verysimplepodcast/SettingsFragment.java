@@ -3,6 +3,7 @@ package com.ronen.studio08.verysimplepodcast;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.util.Log;
 
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
@@ -17,10 +18,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public static final String KEY_COUNTRY = "country";
     public static final String KEY_LANG = "language";
 
+    private static final String TAG = "SettingsFragment";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+        Log.d(TAG, "onCreate()");
     }
 
     @Override
@@ -47,6 +51,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         we recommend that you register and unregister your
         SharedPreferences.OnSharedPreferenceChangeListener during the onResume() and onPause() callbacks, respectively: */
         super.onResume();
+        Log.d(TAG, "onResume()");
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
     }
@@ -54,7 +59,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause()");
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
     }
 }

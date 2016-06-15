@@ -25,6 +25,7 @@ import java.io.IOException;
  */
 public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 
+    private static final String TAG = "MiniPlayerFragment";
     private ImageView playButton, replayButton, forwardButton;
     private boolean isPlayButton = true;
     private MediaPlayer mediaPlayer;
@@ -223,5 +224,29 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause()");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume()");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
     }
 }
