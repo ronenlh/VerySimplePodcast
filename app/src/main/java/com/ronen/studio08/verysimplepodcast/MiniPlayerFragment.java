@@ -39,6 +39,12 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private final static String SKIP5 = "5";
     private static int skipmode = 30;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,31 +76,29 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
 
         utilities = new Utilities();
 
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPlayButton) play();
+                else pause();
+            }
+        });
 
+        replayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer != null)
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - skipmode * 1000);
+            }
+        });
 
-            playButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (isPlayButton) play();
-                    else pause();
-                }
-            });
-
-            replayButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mediaPlayer != null)
-                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - skipmode * 1000);
-                }
-            });
-
-            forwardButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mediaPlayer != null)
-                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + skipmode * 1000);
-                }
-            });
+        forwardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer != null)
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + skipmode * 1000);
+            }
+        });
 
     }
 
@@ -147,7 +151,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     }
 
     public void startPlayer(String mediaUrl) {
-        Log.d("miniplayer", mediaUrl);
+        Log.d(TAG, "play: "+mediaUrl);
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -224,12 +228,6 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate()");
     }
 
     @Override
