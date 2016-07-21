@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate()");
-        Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
+//        Log.d(TAG, "onCreate()");
+//        Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
 
         if(findViewById(R.id.feed_selector_container) != null && savedInstanceState == null) {
             FeedSelectorFragment feedSelectorFragment = new FeedSelectorFragment();
@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                     beginTransaction().
                     replace(R.id.episode_selector_container, episodeSelectorFragment).
                     setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+                    addToBackStack("toEpisode").
                     commit();
         }
     }
@@ -150,8 +151,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
     public void addFeed(View view) {
-        Intent intent = new Intent(this, ItunesSearchActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, ItunesSearchActivity.class));
     }
 
     @Override
