@@ -29,18 +29,16 @@ import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
  */
 public class FeedSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
-//    ArrayList<FeedSample> podcastFeedList;
-private onFeedSelectedListener mCallback;
-    private feedDeletedListener dCallback;
+    private OnFeedSelectedListener mCallback;
+    private FeedDeletedListener dCallback;
     private FeedCursorAdapter adapter;
-
     private ActionMode mActionMode;
 
-    interface onFeedSelectedListener {
+    interface OnFeedSelectedListener {
         void onFeedSelected(int position, String feedUrl);
     }
 
-    interface feedDeletedListener {
+    interface FeedDeletedListener {
         void feedDeleted();
     }
 
@@ -49,17 +47,19 @@ private onFeedSelectedListener mCallback;
         // To allow a Fragment to communicate up to its Activity, you can define an interface in the Fragment class and implement it within the Activity.
         // The Fragment captures the interface implementation during its onAttach() lifecycle method and can then call the Interface methods in order to communicate with the Activity.
         super.onAttach(context);
+
+        // Checks if context implements the required interfaces
         try {
-            mCallback = (onFeedSelectedListener) context;
+            mCallback = (OnFeedSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement onEpisodeSelectedListener");
         }
         try {
-            dCallback = (feedDeletedListener) context;
+            dCallback = (FeedDeletedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement feedDeletedListener");
+                    + " must implement FeedDeletedListener");
         }
     }
 
@@ -75,7 +75,7 @@ private onFeedSelectedListener mCallback;
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = cursor(db);
-        adapter = FeedCursorAdapter.FeedCursorAdapterFactory(getActivity(), cursor);
+        adapter = FeedCursorAdapter.get(getActivity(), cursor);
 
         setListAdapter(adapter);
 

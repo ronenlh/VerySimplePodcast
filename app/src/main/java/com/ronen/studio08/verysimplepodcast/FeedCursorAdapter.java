@@ -40,7 +40,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
         super(context, layout, c, from, to, flags);
     }
 
-    static public FeedCursorAdapter FeedCursorAdapterFactory(Context context, Cursor c) {
+    static public FeedCursorAdapter get(Context context, Cursor c) {
         String[] from = {FeedsContract.FeedEntry.COLUMN_NAME_TITLE,
                 FeedsContract.FeedEntry.COLUMN_NAME_CREATOR};
         int[] to = {R.id.title_textView,
