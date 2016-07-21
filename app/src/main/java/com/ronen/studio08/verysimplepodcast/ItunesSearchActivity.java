@@ -161,15 +161,9 @@ public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.itunes_selector_container, new SettingsFragment())
-                            .commit();
-                } else {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.itunes_selector_container, new SettingsFragment())
-                            .commit();
-                }
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.itunes_selector_container, new SettingsFragment())
+                        .commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
