@@ -7,12 +7,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:id="@+id/feed_selector_container"
-        android:paddingTop="5dp" />
+        android:paddingTop="5dp"
+        android:layout_weight="1"/>
 
     <fragment
         android:layout_width="match_parent"
@@ -22,14 +27,16 @@
         android:layout_gravity="center_horizontal|bottom"
         tools:layout="@layout/miniplayer_fragment" />
 
-    <android.support.design.widget.FloatingActionButton
+</LinearLayout>
+
+<android.support.design.widget.FloatingActionButton
         android:onClick="addFeed"
         android:src="@drawable/ic_add_white_24dp"
         app:fabSize="normal"
         android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@+id/feed_selector_container"
+        app:layout_anchor="@+id/miniplayer_fragment"
         app:layout_anchorGravity="bottom|right|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
