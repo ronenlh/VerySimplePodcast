@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         }
     }
 
-    public void feedDeleted() {
+    public void feedDeletedFeedback() {
         // UI feedback
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {

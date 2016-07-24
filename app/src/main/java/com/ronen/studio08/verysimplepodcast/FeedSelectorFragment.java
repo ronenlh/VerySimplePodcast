@@ -39,7 +39,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     }
 
     interface FeedDeletedListener {
-        void feedDeleted();
+        void feedDeletedFeedback();
     }
 
     @Override
@@ -99,13 +99,13 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         String sortOrder = null; //FeedReaderContract.FeedEntry.TABLE_NAME + " DESC";
 
         return db.query(
-                FeedsContract.FeedEntry.TABLE_NAME,  // The table to query
-                projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
+                FeedsContract.FeedEntry.TABLE_NAME,     // The table to query
+                projection,                             // The columns to return
+                null,                                   // The columns for the WHERE clause
+                null,                                   // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                sortOrder                               // The sort order
         );
     }
 
@@ -150,7 +150,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
                     db.execSQL(deleteQuery);
 
                     // UI feedback on UI thread:
-                    dCallback.feedDeleted();
+                    dCallback.feedDeletedFeedback();
 
                     adapter.notifyDataSetInvalidated();
 

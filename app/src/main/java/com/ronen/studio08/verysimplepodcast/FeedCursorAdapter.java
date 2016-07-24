@@ -59,11 +59,11 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
         ImageView imageView = (ImageView) view.findViewById(R.id.thumbnail_imageView);
          String imageHref = cursor.getString(cursor.getColumnIndex(FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL));
         // This cursor is from the projection in the cursor of FeedSelectorFragment
-         Picasso.with(context).
-                 load(imageHref).
-                 transform(new CropSquareTransformation()).
-                 // error(R.drawable.ic_broken_image_black_24dp).
-                 into(imageView, new Callback() {
+         Picasso.with(context)
+                 .load(imageHref)
+                 .transform(new CropSquareTransformation())
+                 .error(R.drawable.ic_action_logo_flat)
+                 .into(imageView, new Callback() {
                      @Override
                      public void onSuccess() {
                          view.findViewById(R.id.seekBar).setVisibility(View.INVISIBLE);
@@ -71,7 +71,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
 
                      @Override
                      public void onError() {
-
+                         view.findViewById(R.id.seekBar).setVisibility(View.INVISIBLE);
                      }
                  });
     }
