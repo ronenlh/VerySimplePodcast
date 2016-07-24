@@ -151,6 +151,9 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
                     // UI feedback on UI thread:
                     dCallback.feedDeleted();
+
+                    adapter.notifyDataSetInvalidated();
+
                     mode.finish(); // Action picked, so close the CAB
                     return true;
                 default:

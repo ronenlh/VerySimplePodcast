@@ -190,27 +190,23 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
 
     public void feedDeleted() {
         // UI feedback
-        final CoordinatorLayout coordinatorLayout;
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
-        }
-        else {
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_land);
         }
-        Snackbar snackbar = null;
-        if (coordinatorLayout != null) {
-            snackbar = Snackbar
-                    .make(coordinatorLayout, R.string.feed_deleted, Snackbar.LENGTH_LONG)
-                    .setAction("UNDO", new View.OnClickListener() {
+
+        final CoordinatorLayout finalCoordinatorLayout = coordinatorLayout;
+        Snackbar.make(coordinatorLayout, R.string.feed_deleted, Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Snackbar
-                                    .make(coordinatorLayout, R.string.feed_restored, Snackbar.LENGTH_SHORT)
+                                    .make(finalCoordinatorLayout, R.string.feed_restored, Snackbar.LENGTH_SHORT)
                                     .show();
                         }
-                    });
-        }
-        snackbar.show();
+                    })
+                .show();
+
     }
 
     @Override
