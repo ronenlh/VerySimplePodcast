@@ -1,7 +1,6 @@
 package com.ronen.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
-import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -30,9 +29,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSearchFragment.OnSearchItemSelectedListener{
+public class ItunesActivity extends AppCompatActivity implements ItunesSearchFragment.OnSearchItemSelectedListener {
 
-    private static final String TAG = "ItunesSearchActivity";
+    private static final String TAG = "ItunesActivity";
     private EditText searchBox;
 
     @Override
@@ -116,10 +115,11 @@ public class ItunesSearchActivity extends AppCompatActivity  implements ItunesSe
                     String thumbnail = channel.getImage();
                     databaseHelper(db, title, creator, feedUrl, subtitle, thumbnail);
 
+                    Toast.makeText(ItunesActivity.this, "Feed Added to Playlist.", Toast.LENGTH_SHORT).show();
                 } else
                     try {
                         Log.e("feed", response.errorBody().string());
-                        Toast.makeText(ItunesSearchActivity.this, R.string.error_feed, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ItunesActivity.this, R.string.error_feed, Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

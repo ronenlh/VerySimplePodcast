@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:focusableInTouchMode="true"
-    tools:context=".ItunesSearchActivity"
+    tools:context=".ItunesActivity"
     android:orientation="vertical">
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 

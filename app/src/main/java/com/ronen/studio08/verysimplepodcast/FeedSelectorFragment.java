@@ -84,15 +84,15 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
     private Cursor cursor(SQLiteDatabase db) {
 
-        // Define a projection that specifies which columns from the database
+        // Defines a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
-                FeedsContract.FeedEntry._ID, //
-                FeedsContract.FeedEntry.COLUMN_NAME_TITLE, // 1
-                FeedsContract.FeedEntry.COLUMN_NAME_CREATOR, // 2
-                FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL, // 3
-                FeedsContract.FeedEntry.COLUMN_NAME_SUBTITLE, // 4
-                FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL // 5
+                FeedsContract.FeedEntry._ID,                    // 0
+                FeedsContract.FeedEntry.COLUMN_NAME_TITLE,      // 1
+                FeedsContract.FeedEntry.COLUMN_NAME_CREATOR,    // 2
+                FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL,   // 3
+                FeedsContract.FeedEntry.COLUMN_NAME_SUBTITLE,   // 4
+                FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL   // 5
         };
 
         // How you want the results sorted in the resulting Cursor

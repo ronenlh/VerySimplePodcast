@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     }
 
     public void addFeed(View view) {
-        startActivity(new Intent(this, ItunesSearchActivity.class));
+        startActivity(new Intent(this, ItunesActivity.class));
     }
 
     @Override
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
                 }
                 return true;
             case R.id.add_item:
-                Intent intent = new Intent(this, ItunesSearchActivity.class);
+                Intent intent = new Intent(this, ItunesActivity.class);
                 startActivity(intent);
                 return true;
             default:

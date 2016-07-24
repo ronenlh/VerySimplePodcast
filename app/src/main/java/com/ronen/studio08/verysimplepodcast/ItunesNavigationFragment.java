@@ -1,5 +1,6 @@
 package com.ronen.studio08.verysimplepodcast;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.ronen.studio08.verysimplepodcast.itunestop.Entry;
 import com.ronen.studio08.verysimplepodcast.itunestop.ItunesTopApi;
 import com.ronen.studio08.verysimplepodcast.itunestop.Top;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,7 +84,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
             @Override
             public void onResponse(Call<Top> call, Response<Top> response) {
 
-                ItunesTopRVAdapter rvAdapter = new ItunesTopRVAdapter(getContext(), response.body());
+                ItunesNavigationAdapter rvAdapter = new ItunesNavigationAdapter(getContext(), response.body());
                 recyclerView.setAdapter(rvAdapter);
             }
 
@@ -101,4 +106,62 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
 
     }
 
+    public static class ItunesNavigationHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        final ImageView thumbnail;
+        final TextView title;
+        final TextView artist;
+        final Top top;
+
+        public ItunesNavigationHolder(View itemView, Top top) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+            this.top = top;
+            thumbnail = (ImageView) itemView.findViewById(R.id.add_thumbnail);
+            title = (TextView) itemView.findViewById(R.id.podTitle);
+            artist = (TextView) itemView.findViewById(R.id.podArtist);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            // there is no direct link to the RSS feed in top podcasts API so need to workaround
+            Entry entry = top.getFeed().getEntry().get(getAdapterPosition());
+        }
+    }
+
+    public class ItunesNavigationAdapter extends RecyclerView.Adapter<ItunesNavigationHolder>{
+        private final Context context;
+        private final Top top;
+
+        public ItunesNavigationAdapter(Context context, Top top) {
+            this.context = context;
+            this.top = top;
+        }
+
+
+        @Override
+        public ItunesNavigationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.
+                    from(parent.getContext()).
+                    inflate(R.layout.itunes_feed_row, parent, false);
+            return new ItunesNavigationHolder(itemView, top);
+        }
+
+        @Override
+        public void onBindViewHolder(ItunesNavigationHolder holder, int position) {
+            // onBindViewHolder is called when the SO binds the view with the data -- or, in other words, the data is shown in the UI.
+            Entry entry = top.getFeed().getEntry().get(position);
+            holder.title.setText(entry.getImName().getLabel());
+            holder.artist.setText(entry.getImArtist().getLabel());
+            Picasso.with(context)
+                    .load(entry.getImImage().get(2).getLabel())
+                    // error(R.drawable.ic_broken_image_black_24dp).
+                    .into(holder.thumbnail);
+        }
+
+        @Override
+        public int getItemCount() {
+            return top.getFeed().getEntry().size();
+        }
+    }
 }
