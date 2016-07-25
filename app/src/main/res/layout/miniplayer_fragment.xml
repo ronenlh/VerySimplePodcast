@@ -49,13 +49,5 @@
             android:id="@+id/counter_textview"
             android:layout_margin="5dp" />
 
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/visualize_iw"
-            android:contentDescription="Replay"
-            android:src="@drawable/ic_action_logo_flat"
-            android:layout_gravity="right"/>
-
     </LinearLayout>
 </LinearLayout>

@@ -39,11 +39,6 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private final static String SKIP10 = "10";
     private final static String SKIP5 = "5";
     private static int skipmode = 30;
-    private VisualizationOpenedListener mInterface;
-
-    interface VisualizationOpenedListener {
-        void visualizationOpened();
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,12 +55,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
-            mInterface = (VisualizationOpenedListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement VisualizationOpenedListener");
-        }
+
     }
 
     @Override
@@ -73,11 +63,8 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
         replayButton = (ImageView) view.findViewById(R.id.replay_iw);
         forwardButton = (ImageView) view.findViewById(R.id.forward_iw);
-        visualizerButton = (ImageView) view.findViewById(R.id.visualize_iw);
         seekBar = (SeekBar) view.findViewById(R.id.seekBar);
         counter = (TextView) view.findViewById(R.id.counter_textview);
-
-//        mInterface =
 
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.OnSharedPreferenceChangeListener listener =
@@ -119,16 +106,6 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
                     mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + skipmode * 1000);
             }
         });
-
-        visualizerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mInterface != null) {
-                    mInterface.visualizationOpened();
-                }
-            }
-        });
-
     }
 
     private void setUIchanges(String key_skip) {
@@ -198,11 +175,13 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private void play() {
         if (mediaPlayer != null) {
             mediaPlayer.start();
+
             changeToPause();
         } else {
             Toast.makeText(getActivity(), "No episode selected.", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void pause() {
         mediaPlayer.pause();
