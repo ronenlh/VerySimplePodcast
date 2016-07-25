@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
         EpisodeSelectorFragment.onEpisodeSelectedListener,
         EpisodeDialogFragment.onPlaySelectedListener,
         EpisodeDialogFragment.onInfoSelectedListener,
-        FeedSelectorFragment.FeedDeletedListener {
+        FeedSelectorFragment.FeedDeletedListener,
+        MiniPlayerFragment.VisualizationOpenedListener {
 
     private static final String TAG = "MainActivity";
 
@@ -225,5 +226,26 @@ public class MainActivity extends AppCompatActivity implements FeedSelectorFragm
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
+    }
+
+    @Override
+    public void visualizationOpened() {
+        VisualizerFragment visualizerFragment = new VisualizerFragment();
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.feed_selector_container, visualizerFragment).
+                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+                    addToBackStack("toEpisode").
+                    commit();
+        } else {
+            getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.episode_selector_container, visualizerFragment).
+                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+                    addToBackStack("toEpisode").
+                    commit();
+        }
     }
 }

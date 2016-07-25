@@ -1,5 +1,6 @@
 package com.ronen.studio08.verysimplepodcast;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -26,7 +27,7 @@ import java.io.IOException;
 public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 
     private static final String TAG = "MiniPlayerFragment";
-    private ImageView playButton, replayButton, forwardButton;
+    private ImageView playButton, replayButton, forwardButton, visualizerButton;
     private boolean isPlayButton = true;
     private MediaPlayer mediaPlayer;
     private int fileDuration;
@@ -38,6 +39,11 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     private final static String SKIP10 = "10";
     private final static String SKIP5 = "5";
     private static int skipmode = 30;
+    private VisualizationOpenedListener mInterface;
+
+    interface VisualizationOpenedListener {
+        void visualizationOpened();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,12 +58,26 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mInterface = (VisualizationOpenedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement VisualizationOpenedListener");
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         playButton = (ImageView) view.findViewById(R.id.play_imageView);
         replayButton = (ImageView) view.findViewById(R.id.replay_iw);
         forwardButton = (ImageView) view.findViewById(R.id.forward_iw);
+        visualizerButton = (ImageView) view.findViewById(R.id.visualize_iw);
         seekBar = (SeekBar) view.findViewById(R.id.seekBar);
         counter = (TextView) view.findViewById(R.id.counter_textview);
+
+//        mInterface =
 
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.OnSharedPreferenceChangeListener listener =
@@ -97,6 +117,15 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
             public void onClick(View v) {
                 if (mediaPlayer != null)
                     mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + skipmode * 1000);
+            }
+        });
+
+        visualizerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mInterface != null) {
+                    mInterface.visualizationOpened();
+                }
             }
         });
 
