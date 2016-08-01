@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Entry;
@@ -34,7 +33,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Ronen on 5/6/16.
  */
 public class ItunesNavigationFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    private Spinner countrySpinner;
     private String countryCode = "US";
     private ItunesTopApi topService;
     private RecyclerView recyclerView;
@@ -43,6 +41,22 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
     private View view;
 
     private static final String TAG = "ItunesNavigation";
+
+    interface OnNavigationItemClickedListener {
+        void OnNavigationItemClicked(Entry entry);
+    }
+
+    private static OnNavigationItemClickedListener mCallback;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (OnNavigationItemClickedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "must implement OnNavigationItemClickedListener");
+        }
+    }
 
     @Nullable
     @Override
@@ -76,7 +90,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
                         Log.d("OnSharedPreference", key);
                     }
                 };
-        //   You must store a strong reference to the listener, or it will be susceptible to garbage collection:
+        //   You must store a strong reference to the mCallback, or it will be susceptible to garbage collection:
         sharedPref.registerOnSharedPreferenceChangeListener(listener);
 
         return view;
@@ -132,7 +146,8 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
         public void onClick(View v) {
             // there is no direct link to the RSS feed in top podcasts API so need to workaround
             Entry entry = top.getFeed().getEntry().get(getAdapterPosition());
-            Log.d(TAG, entry.toString());
+            Log.d(TAG, entry.getImName().getLabel().toString());
+            mCallback.OnNavigationItemClicked(entry);
         }
     }
 

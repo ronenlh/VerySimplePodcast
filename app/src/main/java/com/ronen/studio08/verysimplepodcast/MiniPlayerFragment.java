@@ -74,7 +74,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
                         Log.d("OnSharedPreference", key+" "+sharedPref.getString(SettingsFragment.KEY_SKIP, "30"));
                     }
                 };
-        //   You must store a strong reference to the listener, or it will be susceptible to garbage collection:
+        //   You must store a strong reference to the mCallback, or it will be susceptible to garbage collection:
         sharedPref.registerOnSharedPreferenceChangeListener(listener);
 
         setUIchanges(sharedPref.getString(SettingsFragment.KEY_SKIP, "30"));

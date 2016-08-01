@@ -17,6 +17,7 @@ import com.ronen.studio08.verysimplepodcast.database.DbHelper;
 import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
 import com.ronen.studio08.verysimplepodcast.itunesSearchModelClass.Result;
 import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Entry;
+import com.ronen.studio08.verysimplepodcast.itunesSearchModelClass.Search;
 import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
 import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
 import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
@@ -29,17 +30,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ItunesActivity extends AppCompatActivity implements ItunesSearchFragment.OnSearchItemSelectedListener {
+public class ItunesActivity extends AppCompatActivity implements ItunesSearchFragment.OnSearchItemSelectedListener, ItunesNavigationFragment.OnNavigationItemClickedListener {
 
     private static final String TAG = "ItunesActivity";
-    private EditText searchBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itunes_search);
         Log.d(TAG, "onCreate()");
-        searchBox = (EditText) findViewById(R.id.searchBox);
+
 
 
         if(findViewById(R.id.itunes_selector_container) != null && savedInstanceState == null) {
@@ -59,26 +59,25 @@ public class ItunesActivity extends AppCompatActivity implements ItunesSearchFra
         return true;
     }
 
+    EditText searchBox;
 
     public void search(View view) {
-        ItunesSearchFragment itunesSearchFragment = new ItunesSearchFragment();
         Bundle args = new Bundle();
+        if (searchBox == null)
+            searchBox = (EditText) findViewById(R.id.searchBox);
         args.putString("search", searchBox.getText().toString());
-        itunesSearchFragment.setArguments(args);
-        getSupportFragmentManager().
-                beginTransaction().
-                replace(R.id.itunes_selector_container, itunesSearchFragment).
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
-                addToBackStack("toSearch").
-                commit();
-
+        search(args);
     }
 
     public void search(Entry entry) {
-
-        ItunesSearchFragment itunesSearchFragment = new ItunesSearchFragment();
         Bundle args = new Bundle();
         args.putString("search", entry.getImName().getLabel());
+        search(args);
+    }
+
+
+    public void search(Bundle args) {
+        ItunesSearchFragment itunesSearchFragment = new ItunesSearchFragment();
         itunesSearchFragment.setArguments(args);
         getSupportFragmentManager().
                 beginTransaction().
@@ -86,8 +85,8 @@ public class ItunesActivity extends AppCompatActivity implements ItunesSearchFra
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
                 addToBackStack("toSearch").
                 commit();
-
     }
+
 
     private void retrofitCaller(final Result result) {
         ApiService service = ServiceGenerator.createService(ApiService.class);
@@ -186,5 +185,10 @@ public class ItunesActivity extends AppCompatActivity implements ItunesSearchFra
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
+    }
+
+    @Override
+    public void OnNavigationItemClicked(Entry entry) {
+        search(entry);
     }
 }

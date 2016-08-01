@@ -71,7 +71,7 @@ public class ItunesSearchFragment extends Fragment {
                         Log.d("OnSharedPreference", key);
                     }
                 };
-        //   You must store a strong reference to the listener, or it will be susceptible to garbage collection:
+        //   You must store a strong reference to the mCallback, or it will be susceptible to garbage collection:
         sharedPref.registerOnSharedPreferenceChangeListener(listener);
 
         retrofitCallerAndSetAdapter();
