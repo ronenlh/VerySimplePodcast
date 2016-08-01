@@ -2,6 +2,7 @@ package com.ronen.studio08.verysimplepodcast;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.ronen.studio08.verysimplepodcast.itunestop.Entry;
-import com.ronen.studio08.verysimplepodcast.itunestop.ItunesTopApi;
-import com.ronen.studio08.verysimplepodcast.itunestop.Top;
+import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Entry;
+import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.ItunesTopApi;
+import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Top;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -37,9 +38,11 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
     private String countryCode = "US";
     private ItunesTopApi topService;
     private RecyclerView recyclerView;
-    private boolean explicit;
+    private boolean isExplicit;
 
     private View view;
+
+    private static final String TAG = "ItunesNavigation";
 
     @Nullable
     @Override
@@ -56,13 +59,16 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
         recyclerView = (RecyclerView) view.findViewById(R.id.itunesRecyclerView);
         recyclerView.setHasFixedSize(true);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
+        boolean isOrientationPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        int numberOfRows = isOrientationPortrait? 3 : 4;
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), numberOfRows);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         // get explicitness from the SharedPreferences
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        explicit = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT, false);
-        countryCode = sharedPref.getString(SettingsFragment.KEY_COUNTRY, "US");;
+        isExplicit = sharedPref.getBoolean(SettingsFragment.KEY_EXPLICIT, false);
+        countryCode = sharedPref.getString(SettingsFragment.KEY_COUNTRY, "US");
         SharedPreferences.OnSharedPreferenceChangeListener listener =
                 new SharedPreferences.OnSharedPreferenceChangeListener() {
                     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -79,7 +85,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
     private void loadTopFeeds() {
 
         /* TODO: personalize country code, already begun running into crashes. */
-        Call<Top> call = topService.search(countryCode,25,explicit);
+        Call<Top> call = topService.search(countryCode,25, isExplicit);
         call.enqueue(new Callback<Top>() {
             @Override
             public void onResponse(Call<Top> call, Response<Top> response) {
@@ -126,6 +132,7 @@ public class ItunesNavigationFragment extends Fragment implements AdapterView.On
         public void onClick(View v) {
             // there is no direct link to the RSS feed in top podcasts API so need to workaround
             Entry entry = top.getFeed().getEntry().get(getAdapterPosition());
+            Log.d(TAG, entry.toString());
         }
     }
 

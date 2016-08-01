@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 import com.ronen.studio08.verysimplepodcast.database.DbHelper;
 import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
-import com.ronen.studio08.verysimplepodcast.itunes.Result;
-import com.ronen.studio08.verysimplepodcast.itunestop.Entry;
+import com.ronen.studio08.verysimplepodcast.itunesSearchModelClass.Result;
+import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Entry;
 import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
 import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
 import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
