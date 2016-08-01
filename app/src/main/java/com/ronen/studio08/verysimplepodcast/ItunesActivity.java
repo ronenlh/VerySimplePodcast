@@ -2,6 +2,7 @@ package com.ronen.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +31,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ItunesActivity extends AppCompatActivity implements ItunesSearchFragment.OnSearchItemSelectedListener, ItunesNavigationFragment.OnNavigationItemClickedListener {
+public class ItunesActivity extends AppCompatActivity implements ItunesSearchFragment.OnSearchItemSelectedListener,
+        ItunesNavigationFragment.OnNavigationItemClickedListener {
 
     private static final String TAG = "ItunesActivity";
 
@@ -153,7 +155,19 @@ public class ItunesActivity extends AppCompatActivity implements ItunesSearchFra
 
     @Override
     public void onItemSelected(Result result) {
-        retrofitCaller(result);
+
+        DialogFragment dialogFragment = new ItunesDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("title", result.getCollectionName());
+        args.putString("author", result.getArtistName());
+        args.putString("description",result.getKind());
+        args.putString("itemUrl",result.getFeedUrl());
+        args.putString("mediaUrl",result.getArtworkUrl600());
+        args.putString("pubDate",result.getReleaseDate());
+        dialogFragment.setArguments(args);
+        dialogFragment.show(getSupportFragmentManager(), result.getCollectionId().toString());
+
+        // this calls and adds the feed: retrofitCaller(result);
     }
 
     @Override
