@@ -7,29 +7,29 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/feed_selector_container"
-        android:paddingTop="5dp"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.ronen.studio08.verysimplepodcast.MiniPlayerFragment"
-        android:id="@+id/miniplayer_fragment"
-        android:layout_gravity="center_horizontal|bottom"
-        tools:layout="@layout/miniplayer_fragment" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/feed_selector_container"
+            android:paddingTop="5dp"
+            android:layout_weight="1"/>
 
-</LinearLayout>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.ronen.studio08.verysimplepodcast.MiniPlayerFragment"
+            android:id="@+id/miniplayer_fragment"
+            android:layout_gravity="center_horizontal|bottom"
+            tools:layout="@layout/miniplayer_fragment" />
 
-<android.support.design.widget.FloatingActionButton
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.FloatingActionButton
         android:onClick="addFeed"
         android:src="@drawable/ic_add_white_24dp"
         app:fabSize="normal"
