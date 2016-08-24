@@ -23,6 +23,8 @@ import android.widget.ListView;
 
 import com.ronen.studio08.verysimplepodcast.FeedCursorAdapter;
 import com.ronen.studio08.verysimplepodcast.R;
+import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
+import com.ronen.studio08.verysimplepodcast.model.FeedSnippetCursorWrapper;
 import com.ronen.studio08.verysimplepodcast.model.PodcastLab;
 
 
@@ -31,6 +33,7 @@ import com.ronen.studio08.verysimplepodcast.model.PodcastLab;
  */
 public class FeedSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
+    private static final String TAG = "FeedSelectorFragment";
     private OnFeedSelectedListener mCallback;
     private FeedDeletedListener dCallback;
     private FeedCursorAdapter adapter;
@@ -41,7 +44,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
 
     interface OnFeedSelectedListener {
-        void onFeedSelected(int position, String feedUrl);
+        void onFeedSelected(FeedSnippet feed);
     }
 
     interface FeedDeletedListener {
@@ -108,9 +111,10 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Cursor cursor = (Cursor) l.getItemAtPosition(position);
-        Log.d("onListItemClick", cursor.getString(3));
-        mCallback.onFeedSelected(position, cursor.getString(3));
+        FeedSnippetCursorWrapper cursor = new FeedSnippetCursorWrapper((Cursor) l.getItemAtPosition(position));
+        FeedSnippet feed = cursor.getFeed();
+        Log.d(TAG, feed.getTitle());
+        mCallback.onFeedSelected(feed);
     }
 
 

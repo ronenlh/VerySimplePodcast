@@ -30,9 +30,9 @@ public final class FeedReaderContract {
         public static final String COLUMN_NAME_CREATOR = "creator";
         public static final String COLUMN_NAME_SUBTITLE = "subtitle";
         public static final String COLUMN_NAME_THUMBNAIL = "thumbnail";
-        public static final String COLUMN_NAME_NULLABLE = "nullable";
-        public static final String COLUMN_NAME_DATE = "date";
+        public static final String COLUMN_NAME_TIME_ADDED = "time_added";
         public static final String COLUMN_NAME_UUID = "uuid";
+        public static final String COLUMN_NAME_NULLABLE = "nullable";
     }
 
 

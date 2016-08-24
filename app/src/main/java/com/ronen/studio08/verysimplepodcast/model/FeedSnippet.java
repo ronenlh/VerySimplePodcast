@@ -1,37 +1,37 @@
 package com.ronen.studio08.verysimplepodcast.model;
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by Ronen on 24/8/16.
  */
 
-public class FeedSnippet {
+public class FeedSnippet implements Serializable {
 
     private UUID mUUID;
-    private Date mDate;
+    private long mTimeAdded;
     private String feedUrl, title, creator, subtitle, thumbnail;
 
     public FeedSnippet() {
         mUUID = UUID.randomUUID();
-        mDate = new Date();
+        mTimeAdded = System.currentTimeMillis();
     }
 
     public UUID getUUID() {
         return mUUID;
     }
 
-    public Date getDate() {
-        return mDate;
+    public long getTimeAdded() {
+        return mTimeAdded;
     }
 
     public void setUUID(UUID UUID) {
         mUUID = UUID;
     }
 
-    public void setDate(Date date) {
-        mDate = date;
+    public void setTimeAdded(long timeAdded) {
+        mTimeAdded = timeAdded;
     }
 
     public String getFeedUrl() {

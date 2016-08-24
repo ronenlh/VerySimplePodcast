@@ -10,9 +10,6 @@ import android.util.Log;
 import com.ronen.studio08.verysimplepodcast.model.database.DatabaseHelper;
 import com.ronen.studio08.verysimplepodcast.model.database.FeedReaderContract;
 
-import java.util.Date;
-import java.util.UUID;
-
 /**
  * Created by Ronen on 24/8/16.
  */
@@ -110,7 +107,7 @@ public class PodcastLab {
         values.put(FeedReaderContract.Feed.COLUMN_NAME_FEED_URL, feed.getFeedUrl());
         values.put(FeedReaderContract.Feed.COLUMN_NAME_SUBTITLE, feed.getSubtitle());
         values.put(FeedReaderContract.Feed.COLUMN_NAME_UUID, feed.getUUID().toString());
-        values.put(FeedReaderContract.Feed.COLUMN_NAME_DATE, feed.getDate().toString());
+        values.put(FeedReaderContract.Feed.COLUMN_NAME_TIME_ADDED, feed.getTimeAdded());
         values.put(FeedReaderContract.Feed.COLUMN_NAME_THUMBNAIL, feed.getThumbnail());
 
         // Insert the new row, returning the primary key value of the new row

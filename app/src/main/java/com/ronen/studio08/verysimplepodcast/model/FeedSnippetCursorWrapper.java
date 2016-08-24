@@ -3,10 +3,8 @@ package com.ronen.studio08.verysimplepodcast.model;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
 import com.ronen.studio08.verysimplepodcast.model.database.FeedReaderContract;
 
-import java.sql.Date;
 import java.util.UUID;
 
 /**
@@ -24,7 +22,7 @@ public class FeedSnippetCursorWrapper extends CursorWrapper {
         String creator = getString(getColumnIndexOrThrow(FeedReaderContract.Feed.COLUMN_NAME_CREATOR));
         String subtitle = getString(getColumnIndexOrThrow(FeedReaderContract.Feed.COLUMN_NAME_SUBTITLE));
         String thumbnail = getString(getColumnIndexOrThrow(FeedReaderContract.Feed.COLUMN_NAME_THUMBNAIL));
-        String date = getString(getColumnIndexOrThrow(FeedReaderContract.Feed.COLUMN_NAME_DATE));
+        long time = getLong(getColumnIndexOrThrow(FeedReaderContract.Feed.COLUMN_NAME_TIME_ADDED));
         String feedUUID = getString(getColumnIndexOrThrow(FeedReaderContract.Feed.COLUMN_NAME_UUID));
 
         FeedSnippet feed = new FeedSnippet();
@@ -33,7 +31,7 @@ public class FeedSnippetCursorWrapper extends CursorWrapper {
         feed.setCreator(creator);
         feed.setSubtitle(subtitle);
         feed.setThumbnail(thumbnail);
-        feed.setDate(Date.valueOf(date));
+        feed.setTimeAdded(time);
         feed.setUUID(UUID.fromString(feedUUID));
         return feed;
     }

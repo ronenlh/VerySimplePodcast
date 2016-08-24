@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     FeedReaderContract.Feed.COLUMN_NAME_CREATOR + TEXT_TYPE + COMMA_SEP +
                     FeedReaderContract.Feed.COLUMN_NAME_SUBTITLE + TEXT_TYPE + COMMA_SEP +
                     FeedReaderContract.Feed.COLUMN_NAME_THUMBNAIL + TEXT_TYPE + COMMA_SEP +
-                    FeedReaderContract.Feed.COLUMN_NAME_DATE + TEXT_TYPE + COMMA_SEP +
+                    FeedReaderContract.Feed.COLUMN_NAME_TIME_ADDED + " INTEGER " + COMMA_SEP +
                     FeedReaderContract.Feed.COLUMN_NAME_UUID + TEXT_TYPE + " UNIQUE " + COMMA_SEP +
                     FeedReaderContract.Feed.COLUMN_NAME_NULLABLE + TEXT_TYPE +
                     // Any other options for the CREATE command, remember the COMMA_SEP
@@ -46,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + FeedReaderContract.Feed.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "Feeds.db";
 
     public DatabaseHelper(Context context) {

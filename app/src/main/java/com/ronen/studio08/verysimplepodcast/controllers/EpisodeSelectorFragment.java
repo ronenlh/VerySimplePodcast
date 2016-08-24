@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.ronen.studio08.verysimplepodcast.EpisodeBaseAdapter;
 import com.ronen.studio08.verysimplepodcast.R;
+import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.ApiService;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.Channel;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.RSS;
@@ -64,8 +65,8 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        String feedUrl = getArguments().getString("feedUrl");
-        retrofitCaller(feedUrl);
+        FeedSnippet feed = (FeedSnippet) getArguments().getSerializable("feed");
+        retrofitCaller(feed.getFeedUrl());
         
         getListView().setOnItemLongClickListener(this);
 

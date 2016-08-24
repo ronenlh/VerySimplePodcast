@@ -19,6 +19,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.ronen.studio08.verysimplepodcast.R;
+import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
 
 public class MainActivity extends AppCompatActivity
         implements FeedSelectorFragment.OnFeedSelectedListener,
@@ -109,13 +110,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFeedSelected(int position, String feedUrl){
+    public void onFeedSelected(FeedSnippet feed){
         Log.d(TAG, "feed selected");
         EpisodeSelectorFragment episodeSelectorFragment = new EpisodeSelectorFragment();
 
         // getting and adding the feedUrl to the Fragment, this is the parameter for Retrofit.
         Bundle args = new Bundle();
-        args.putString("feedUrl", feedUrl);
+        args.putSerializable("feed", feed);
         episodeSelectorFragment.setArguments(args);
 
         // now switching Fragments
