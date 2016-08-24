@@ -1,10 +1,7 @@
 package com.ronen.studio08.verysimplepodcast;
 
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -18,12 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.ronen.studio08.verysimplepodcast.database.FeedReaderContract;
-import com.ronen.studio08.verysimplepodcast.database.DatabaseHelper;
-import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
-import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
-import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
-import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.ApiService;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.Channel;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.RSS;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.ServiceGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +32,7 @@ import retrofit2.Response;
  */
 public class EpisodeSelectorFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
 
-    private RSS feed;
+    private RSS mFeed;
     private onEpisodeSelectedListener mCallback;
 
     interface onEpisodeSelectedListener {
@@ -76,28 +71,24 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
 
     private void retrofitCaller(String feedUrl) {
 
-        // database
-        DatabaseHelper mDbHelper = new DatabaseHelper(getActivity());
-        final SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
         ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<RSS> call = service.feed(feedUrl);
         call.enqueue(new Callback<RSS>() {
             @Override
             public void onResponse(Call<RSS> call, Response<RSS> response) {
                 View view = getView();
-                if (view != null) {
+                if (view != null)
                     view.findViewById(R.id.episode_progressbar).setVisibility(View.INVISIBLE);
-                }
-                feed = response.body(); // <-- this is the feed!
-                if (feed != null) {
-                    Log.d("feed", "feed is not null: \n" + feed.toString());
-                    EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) feed.getChannel().itemList);
+
+                mFeed = response.body(); // <-- this is the mFeed!
+                if (mFeed != null) {
+                    Log.d("mFeed", "mFeed is not null: \n" + mFeed.toString());
+                    EpisodeBaseAdapter adapter = new EpisodeBaseAdapter(getActivity(), (ArrayList) mFeed.getChannel().itemList);
                     setListAdapter(adapter);
 
                 } else
                     try {
-                        Log.e("feed", response.errorBody().string());
+                        Log.e("mFeed", response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -113,7 +104,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
     }
 
 
-    private long databaseHelper(SQLiteDatabase db, String title, String link, String description, String url) {
+    /*private long databaseHelper(SQLiteDatabase db, String title, String link, String description, String url) {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
@@ -156,12 +147,13 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
-    }
+    }*/
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         mCallback.onEpisodeSelected(position);
-        Channel.Item item = feed.getChannel().getItemList().get(position);
+
+        Channel.Item item = mFeed.getChannel().getItemList().get(position);
 
         DialogFragment dialogFragment = new EpisodeDialogFragment();
         Bundle args = new Bundle();

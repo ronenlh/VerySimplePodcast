@@ -2,7 +2,6 @@ package com.ronen.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,15 +14,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ronen.studio08.verysimplepodcast.database.DbHelper;
-import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
-import com.ronen.studio08.verysimplepodcast.itunesSearchModelClass.Result;
-import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Entry;
-import com.ronen.studio08.verysimplepodcast.itunesSearchModelClass.Search;
-import com.ronen.studio08.verysimplepodcast.retrofit.ApiService;
-import com.ronen.studio08.verysimplepodcast.retrofit.Channel;
-import com.ronen.studio08.verysimplepodcast.retrofit.RSS;
-import com.ronen.studio08.verysimplepodcast.retrofit.ServiceGenerator;
+import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
+import com.ronen.studio08.verysimplepodcast.model.PodcastLab;
+import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
+import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Entry;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.ApiService;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.Channel;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.RSS;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.ServiceGenerator;
 
 import java.io.IOException;
 
@@ -94,8 +92,6 @@ public class ItunesActivity extends AppCompatActivity
 
     private void retrofitCaller(final Result result) {
         ApiService service = ServiceGenerator.createService(ApiService.class);
-        DbHelper dbHelper = new DbHelper(this);
-        final SQLiteDatabase db = dbHelper.getWritableDatabase();
         Call<RSS> call = service.feed(result.getFeedUrl());
         call.enqueue(new Callback<RSS>() {
             @Override
@@ -109,14 +105,18 @@ public class ItunesActivity extends AppCompatActivity
                     Log.d("feed", "feed is not null: \n" + rss.toString());
 
                     Channel channel = rss.getChannel();
-                    String feedUrl = result.getFeedUrl();
-                    String title = channel.getTitle();
-                    String creator;
-                    if ((creator = channel.getAuthor()) == null)
-                        creator = channel.getItemList().get(0).getAuthorList().get(0);
-                    String subtitle = channel.getSubtitle();
-                    String thumbnail = channel.getImage();
-                    databaseHelper(db, title, creator, feedUrl, subtitle, thumbnail);
+
+                    FeedSnippet mFeed = new FeedSnippet();
+
+                    mFeed.setFeedUrl(result.getFeedUrl());
+                    mFeed.setTitle(channel.getTitle());
+                    String creator = (channel.getAuthor() != null) ? channel.getAuthor() :
+                        channel.getItemList().get(0).getAuthorList().get(0);
+                    mFeed.setCreator(creator);
+                    mFeed.setSubtitle(channel.getSubtitle());
+                    mFeed.setThumbnail(channel.getImage());
+
+                    PodcastLab.get(ItunesActivity.this).insertFeed(mFeed);
 
                     Toast.makeText(ItunesActivity.this, "Feed Added to Playlist.", Toast.LENGTH_SHORT).show();
                 } else
@@ -135,25 +135,7 @@ public class ItunesActivity extends AppCompatActivity
         });
     }
 
-    private long databaseHelper(SQLiteDatabase db, String title, String creator, String feedUrl, String subtitle, String thumbnail) {
 
-        // Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
-        values.put(FeedsContract.FeedEntry.COLUMN_NAME_TITLE, title);
-        values.put(FeedsContract.FeedEntry.COLUMN_NAME_CREATOR, creator);
-        values.put(FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL, feedUrl);
-        values.put(FeedsContract.FeedEntry.COLUMN_NAME_SUBTITLE, subtitle);
-        values.put(FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL, thumbnail);
-
-        // Insert the new row, returning the primary key value of the new row
-        Log.d("databaseHelper()", title);
-        // insertWithConflict instead of insert.
-
-        return db.insertWithOnConflict(
-                FeedsContract.FeedEntry.TABLE_NAME,
-                FeedsContract.FeedEntry.COLUMN_NAME_NULLABLE,
-                values, SQLiteDatabase.CONFLICT_IGNORE);
-    }
 
     @Override
     public void onItemSelected(Result result) {

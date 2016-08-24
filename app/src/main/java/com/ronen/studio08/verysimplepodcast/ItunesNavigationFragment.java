@@ -17,9 +17,9 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Entry;
-import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.ItunesTopApi;
-import com.ronen.studio08.verysimplepodcast.itunesNavModelClass.Top;
+import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Entry;
+import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.ItunesTopApi;
+import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Top;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;

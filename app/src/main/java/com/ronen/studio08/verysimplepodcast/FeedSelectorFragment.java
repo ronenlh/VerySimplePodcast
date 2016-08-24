@@ -20,8 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.ronen.studio08.verysimplepodcast.database.DbHelper;
-import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
+import com.ronen.studio08.verysimplepodcast.model.PodcastLab;
 
 
 /**
@@ -72,9 +71,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        DbHelper dbHelper = new DbHelper(getActivity());
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = cursor(db);
+        Cursor cursor = PodcastLab.get(getContext()).queryFeeds();
         adapter = FeedCursorAdapter.get(getActivity(), cursor);
 
         setListAdapter(adapter);
@@ -82,32 +79,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         getListView().setOnItemLongClickListener(this);
     }
 
-    private Cursor cursor(SQLiteDatabase db) {
 
-        // Defines a projection that specifies which columns from the database
-        // you will actually use after this query.
-        String[] projection = {
-                FeedsContract.FeedEntry._ID,                    // 0
-                FeedsContract.FeedEntry.COLUMN_NAME_TITLE,      // 1
-                FeedsContract.FeedEntry.COLUMN_NAME_CREATOR,    // 2
-                FeedsContract.FeedEntry.COLUMN_NAME_FEED_URL,   // 3
-                FeedsContract.FeedEntry.COLUMN_NAME_SUBTITLE,   // 4
-                FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL   // 5
-        };
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder = null; //FeedReaderContract.FeedEntry.TABLE_NAME + " DESC";
-
-        return db.query(
-                FeedsContract.FeedEntry.TABLE_NAME,     // The table to query
-                projection,                             // The columns to return
-                null,                                   // The columns for the WHERE clause
-                null,                                   // The values for the WHERE clause
-                null,                                   // don't group the rows
-                null,                                   // don't filter by row groups
-                sortOrder                               // The sort order
-        );
-    }
 
 
     @Override
@@ -142,12 +114,8 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.delete:
-                    DbHelper dbHelper = new DbHelper(getActivity());
-//                    (new DbHelper(getContext())).deleteRow((String) mode.getTag());
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    String deleteQuery = "DELETE FROM  "+ FeedsContract.FeedEntry.TABLE_NAME +" where "+FeedsContract.FeedEntry._ID+"='" +  mode.getTag() + "'";
-                    Log.d("Query", deleteQuery);
-                    db.execSQL(deleteQuery);
+
+                    PodcastLab.get(getContext()).deleteFeed(mode.getTag().toString());
 
                     // UI feedback on UI thread:
                     dCallback.feedDeletedFeedback();
@@ -168,10 +136,12 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         }
     };
 
+
+
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-//        DialogFragment dialogFragment = FeedDialogFragment.newInstance(cursor.getString(1));
+//        DialogFragment dialogFragment = FeedDialogFragment.newInstance(queryFeeds.getString(1));
 //        dialogFragment.show(getFragmentManager(), "dialog");
         long rowId = cursor.getLong(cursor.getColumnIndex("_id"));
 

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.ronen.studio08.verysimplepodcast.retrofitCloud.SampleFeed;
+import com.ronen.studio08.verysimplepodcast.model.retrofitCloud.SampleFeed;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 
-import com.ronen.studio08.verysimplepodcast.database.FeedsContract;
+import com.ronen.studio08.verysimplepodcast.model.database.FeedReaderContract;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -41,8 +41,8 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
     }
 
     static public FeedCursorAdapter get(Context context, Cursor c) {
-        String[] from = {FeedsContract.FeedEntry.COLUMN_NAME_TITLE,
-                FeedsContract.FeedEntry.COLUMN_NAME_CREATOR};
+        String[] from = {FeedReaderContract.Feed.COLUMN_NAME_TITLE,
+                FeedReaderContract.Feed.COLUMN_NAME_CREATOR};
         int[] to = {R.id.title_textView,
                 R.id.creator_textView};
         int layout = R.layout.main_row;
@@ -57,7 +57,7 @@ public class FeedCursorAdapter extends SimpleCursorAdapter {
         super.bindView(view, context, cursor);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.thumbnail_imageView);
-         String imageHref = cursor.getString(cursor.getColumnIndex(FeedsContract.FeedEntry.COLUMN_NAME_THUMBNAIL));
+         String imageHref = cursor.getString(cursor.getColumnIndex(FeedReaderContract.Feed.COLUMN_NAME_THUMBNAIL));
         // This cursor is from the projection in the cursor of FeedSelectorFragment
          Picasso.with(context)
                  .load(imageHref)
