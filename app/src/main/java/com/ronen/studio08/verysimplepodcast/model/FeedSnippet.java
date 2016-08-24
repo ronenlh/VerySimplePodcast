@@ -26,6 +26,14 @@ public class FeedSnippet {
         return mDate;
     }
 
+    public void setUUID(UUID UUID) {
+        mUUID = UUID;
+    }
+
+    public void setDate(Date date) {
+        mDate = date;
+    }
+
     public String getFeedUrl() {
         return feedUrl;
     }

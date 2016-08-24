@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.ronen.studio08.verysimplepodcast.model.FeedSnippetCursorWrapper;
 import com.ronen.studio08.verysimplepodcast.model.PodcastLab;
 
 
@@ -71,7 +72,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Cursor cursor = PodcastLab.get(getContext()).queryFeeds();
+        FeedSnippetCursorWrapper cursor = PodcastLab.get(getContext()).queryFeeds();
         adapter = FeedCursorAdapter.get(getActivity(), cursor);
 
         setListAdapter(adapter);

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 import com.ronen.studio08.verysimplepodcast.model.database.DatabaseHelper;
@@ -33,11 +34,11 @@ public class PodcastLab {
         this.mDatabase = new DatabaseHelper(mContext).getWritableDatabase();
     }
 
-    public Cursor queryFeeds() {
+    public FeedSnippetCursorWrapper queryFeeds() {
 
         // Defines a projection that specifies which columns from the database
         // you will actually use after this query.
-        String[] projection = {
+/*        String[] projection = {
                 FeedReaderContract.Feed._ID,                    // 0
                 FeedReaderContract.Feed.COLUMN_NAME_TITLE,      // 1
                 FeedReaderContract.Feed.COLUMN_NAME_CREATOR,    // 2
@@ -49,15 +50,31 @@ public class PodcastLab {
         // How you want the results sorted in the resulting Cursor
         String sortOrder = FeedReaderContract.Feed.COLUMN_NAME_TITLE;
 
-        return mDatabase.query(
+        return new FeedSnippetCursorWrapper(mDatabase.query(
                 FeedReaderContract.Feed.TABLE_NAME,     // The table to query
-                projection,                             // The columns to return
+                null,                             // The columns to return
                 null,                                   // The columns for the WHERE clause
                 null,                                   // The values for the WHERE clause
                 null,                                   // don't group the rows
                 null,                                   // don't filter by row groups
                 sortOrder                               // The sort order
-        );
+        ));*/
+
+        SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
+        builder.setTables(FeedReaderContract.Feed.TABLE_NAME);
+        DatabaseHelper mDatabaseOpenHelper = new DatabaseHelper(mContext);
+
+        Cursor cursor = builder.query(mDatabaseOpenHelper.getReadableDatabase(),
+                null, null, null, null, null, FeedReaderContract.Feed.COLUMN_NAME_TITLE);
+
+        if (cursor == null) {
+            return null;
+        } else if (!cursor.moveToFirst()) {
+            // cursor is empty
+            cursor.close();
+            return null;
+        }
+        return new FeedSnippetCursorWrapper(cursor);
     }
 
     public void deleteFeed(String feedId) {

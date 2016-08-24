@@ -11,7 +11,7 @@ public final class FeedReaderContract {
     public FeedReaderContract() {}
 
     /* Inner class that defines the table contents */
-    public static abstract class Entry implements BaseColumns {
+/*    public static abstract class Entry implements BaseColumns {
         public static final String TABLE_NAME = "entry";
 //        public static final String COLUMN_NAME_ENTRY_ID = "entryid";
         public static final String COLUMN_NAME_TITLE = "title";
@@ -20,7 +20,7 @@ public final class FeedReaderContract {
         public static final String COLUMN_NAME_MEDIA_URL = "url";
         public static final String COLUMN_NAME_NULLABLE = "nullable";
 
-    }
+    }*/
 
     public static abstract class Feed implements BaseColumns {
         public static final String TABLE_NAME = "feeds";
@@ -31,7 +31,8 @@ public final class FeedReaderContract {
         public static final String COLUMN_NAME_SUBTITLE = "subtitle";
         public static final String COLUMN_NAME_THUMBNAIL = "thumbnail";
         public static final String COLUMN_NAME_NULLABLE = "nullable";
-
+        public static final String COLUMN_NAME_DATE = "date";
+        public static final String COLUMN_NAME_UUID = "uuid";
     }
 
 
