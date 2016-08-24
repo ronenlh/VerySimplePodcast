@@ -72,7 +72,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        FeedSnippetCursorWrapper cursor = PodcastLab.get(getContext()).queryFeeds();
+        FeedSnippetCursorWrapper cursor = PodcastLab.get(getContext()).queryFeeds(null, null);
         adapter = FeedCursorAdapter.get(getActivity(), cursor);
 
         setListAdapter(adapter);

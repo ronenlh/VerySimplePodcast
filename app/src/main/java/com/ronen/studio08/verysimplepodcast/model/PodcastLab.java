@@ -34,7 +34,7 @@ public class PodcastLab {
         this.mDatabase = new DatabaseHelper(mContext).getWritableDatabase();
     }
 
-    public FeedSnippetCursorWrapper queryFeeds() {
+    public FeedSnippetCursorWrapper queryFeeds(String selection, String[] selectionArgs) {
 
         // Defines a projection that specifies which columns from the database
         // you will actually use after this query.
@@ -65,7 +65,12 @@ public class PodcastLab {
         DatabaseHelper mDatabaseOpenHelper = new DatabaseHelper(mContext);
 
         Cursor cursor = builder.query(mDatabaseOpenHelper.getReadableDatabase(),
-                null, null, null, null, null, FeedReaderContract.Feed.COLUMN_NAME_TITLE);
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                FeedReaderContract.Feed.COLUMN_NAME_TITLE);
 
         if (cursor == null) {
             return null;
