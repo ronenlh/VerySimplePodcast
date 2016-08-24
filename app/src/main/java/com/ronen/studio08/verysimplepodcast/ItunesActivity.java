@@ -2,6 +2,7 @@ package com.ronen.studio08.verysimplepodcast;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +32,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ItunesActivity extends AppCompatActivity implements ItunesSearchFragment.OnSearchItemSelectedListener,
-        ItunesNavigationFragment.OnNavigationItemClickedListener {
+public class ItunesActivity extends AppCompatActivity
+        implements ItunesSearchFragment.OnSearchItemSelectedListener,
+        ItunesNavigationFragment.OnNavigationItemClickedListener,
+        ItunesDialogFragment.onPlaySelectedListener,
+        ItunesDialogFragment.onInfoSelectedListener {
 
     private static final String TAG = "ItunesActivity";
 
@@ -41,8 +45,6 @@ public class ItunesActivity extends AppCompatActivity implements ItunesSearchFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itunes_search);
         Log.d(TAG, "onCreate()");
-
-
 
         if(findViewById(R.id.itunes_selector_container) != null && savedInstanceState == null) {
             ItunesNavigationFragment itunesNavigationFragment = new ItunesNavigationFragment();
@@ -204,5 +206,15 @@ public class ItunesActivity extends AppCompatActivity implements ItunesSearchFra
     @Override
     public void OnNavigationItemClicked(Entry entry) {
         search(entry);
+    }
+
+    @Override
+    public void onPlaySelected(String itemUrl) {
+        Log.d(TAG, "onPlaySelectedListener");
+    }
+
+    @Override
+    public void onInfoSelected(String itemUrl) {
+        Log.d(TAG, "onInfoSelectedListener");
     }
 }

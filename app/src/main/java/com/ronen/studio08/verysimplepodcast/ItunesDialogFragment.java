@@ -46,10 +46,15 @@ public class ItunesDialogFragment extends DialogFragment {
         super.onAttach(context);
         try {
             playCallback = (onPlaySelectedListener) context;
-            infoCallback = (onInfoSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement onPlaySelectedListener");
+        }
+        try {
+            infoCallback = (onInfoSelectedListener) context;
+        } catch (ClassCastException e) {
+        throw new ClassCastException(context.toString()
+                + " must implement onInfoSelectedListener");
         }
     }
 
@@ -95,14 +100,14 @@ public class ItunesDialogFragment extends DialogFragment {
 
         ((TextView) content.findViewById(R.id.dialog_description)).setText("" + description);
 
-        if (!itemUrl.equals("")) {
+        if (!itemUrl.equals(""))
             builder.setNeutralButton(R.string.dialog_info, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     infoCallback.onInfoSelected(itemUrl);
                 }
             });
-        }
+
         builder.setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -115,6 +120,7 @@ public class ItunesDialogFragment extends DialogFragment {
 
                     }
                 });
+
         // Create the AlertDialog object and return it
         return builder.create();
     }
