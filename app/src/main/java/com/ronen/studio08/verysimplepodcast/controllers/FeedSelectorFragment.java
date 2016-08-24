@@ -1,13 +1,14 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.util.Log;
@@ -20,7 +21,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.ronen.studio08.verysimplepodcast.model.FeedSnippetCursorWrapper;
+import com.ronen.studio08.verysimplepodcast.FeedCursorAdapter;
+import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.PodcastLab;
 
 
@@ -33,6 +35,10 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     private FeedDeletedListener dCallback;
     private FeedCursorAdapter adapter;
     private ActionMode mActionMode;
+    protected SwipeRefreshLayout swLayout;
+    private View rootView;
+
+
 
     interface OnFeedSelectedListener {
         void onFeedSelected(int position, String feedUrl);
@@ -65,22 +71,39 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.feed_selector_listfragment, container, false);
+        rootView = inflater.inflate(R.layout.feed_selector_listfragment, container, false);
+        return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        FeedSnippetCursorWrapper cursor = PodcastLab.get(getContext()).queryFeeds(null, null);
+        refreshUI();
+
+        swLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swlayout);
+        swLayout.setColorSchemeResources(R.color.colorAccent,R.color.colorPrimary);
+        swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshUI();
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        swLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
+    }
+
+    private void refreshUI() {
+        Cursor cursor = PodcastLab.get(getContext()).queryFeeds(null, null);
         adapter = FeedCursorAdapter.get(getActivity(), cursor);
 
         setListAdapter(adapter);
 
         getListView().setOnItemLongClickListener(this);
     }
-
-
 
 
     @Override
@@ -121,7 +144,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
                     // UI feedback on UI thread:
                     dCallback.feedDeletedFeedback();
 
-                    adapter.notifyDataSetInvalidated();
+                    refreshUI();
 
                     mode.finish(); // Action picked, so close the CAB
                     return true;
@@ -159,7 +182,8 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
     public void onResume() {
         super.onResume();
 
-        adapter.notifyDataSetInvalidated();
-        setListAdapter(adapter);
+        refreshUI();
     }
+
+
 }

@@ -1,7 +1,7 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
 import com.ronen.studio08.verysimplepodcast.model.PodcastLab;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
@@ -90,7 +91,7 @@ public class ItunesActivity extends AppCompatActivity
     }
 
 
-    private void retrofitCaller(final Result result) {
+    private void getFeedAndAddItToDb(final Result result) {
         ApiService service = ServiceGenerator.createService(ApiService.class);
         Call<RSS> call = service.feed(result.getFeedUrl());
         call.enqueue(new Callback<RSS>() {
@@ -142,16 +143,11 @@ public class ItunesActivity extends AppCompatActivity
 
         DialogFragment dialogFragment = new ItunesDialogFragment();
         Bundle args = new Bundle();
-        args.putString("title", result.getCollectionName());
-        args.putString("author", result.getArtistName());
-        args.putString("description",result.getKind());
-        args.putString("itemUrl",result.getFeedUrl());
-        args.putString("mediaUrl",result.getArtworkUrl600());
-        args.putString("pubDate",result.getReleaseDate());
+        args.putSerializable("result", result);
         dialogFragment.setArguments(args);
         dialogFragment.show(getSupportFragmentManager(), result.getCollectionId().toString());
 
-        // this calls and adds the feed: retrofitCaller(result);
+        // this calls and adds the feed: getFeedAndAddItToDb(result);
     }
 
     @Override
@@ -191,12 +187,20 @@ public class ItunesActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPlaySelected(String itemUrl) {
-        Log.d(TAG, "onPlaySelectedListener");
+    public void onPlaySelected(Result result) {
+        getFeedAndAddItToDb(result);
+        Log.d(TAG, "onPlaySelectedListener: " + result.getCollectionName());
+
+        finish();
     }
 
     @Override
-    public void onInfoSelected(String itemUrl) {
-        Log.d(TAG, "onInfoSelectedListener");
+    public void onInfoSelected(Result result) {
+
+        Log.d(TAG, "onInfoSelectedListener" + result.getCollectionName());
+        String url = result.getFeedUrl();
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }

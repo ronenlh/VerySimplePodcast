@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.ronen.studio08.verysimplepodcast.MainActivity;
+import com.ronen.studio08.verysimplepodcast.controllers.MainActivity;
 
 /**
  * Created by Ronen on 27/5/16.

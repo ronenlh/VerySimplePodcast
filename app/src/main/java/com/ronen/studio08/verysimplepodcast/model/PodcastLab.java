@@ -10,6 +10,9 @@ import android.util.Log;
 import com.ronen.studio08.verysimplepodcast.model.database.DatabaseHelper;
 import com.ronen.studio08.verysimplepodcast.model.database.FeedReaderContract;
 
+import java.util.Date;
+import java.util.UUID;
+
 /**
  * Created by Ronen on 24/8/16.
  */
@@ -34,25 +37,25 @@ public class PodcastLab {
         this.mDatabase = new DatabaseHelper(mContext).getWritableDatabase();
     }
 
-    public FeedSnippetCursorWrapper queryFeeds(String selection, String[] selectionArgs) {
+    public Cursor queryFeeds(String selection, String[] selectionArgs) {
 
         // Defines a projection that specifies which columns from the database
         // you will actually use after this query.
-/*        String[] projection = {
-                FeedReaderContract.Feed._ID,                    // 0
-                FeedReaderContract.Feed.COLUMN_NAME_TITLE,      // 1
-                FeedReaderContract.Feed.COLUMN_NAME_CREATOR,    // 2
-                FeedReaderContract.Feed.COLUMN_NAME_FEED_URL,   // 3
-                FeedReaderContract.Feed.COLUMN_NAME_SUBTITLE,   // 4
-                FeedReaderContract.Feed.COLUMN_NAME_THUMBNAIL   // 5
-        };
-
+//       String[] projection = {
+//                FeedReaderContract.Feed._ID,                    // 0
+//                FeedReaderContract.Feed.COLUMN_NAME_TITLE,      // 1
+//                FeedReaderContract.Feed.COLUMN_NAME_CREATOR,    // 2
+//                FeedReaderContract.Feed.COLUMN_NAME_FEED_URL,   // 3
+//                FeedReaderContract.Feed.COLUMN_NAME_SUBTITLE,   // 4
+//                FeedReaderContract.Feed.COLUMN_NAME_THUMBNAIL   // 5
+//        };
+/*
         // How you want the results sorted in the resulting Cursor
         String sortOrder = FeedReaderContract.Feed.COLUMN_NAME_TITLE;
 
         return new FeedSnippetCursorWrapper(mDatabase.query(
                 FeedReaderContract.Feed.TABLE_NAME,     // The table to query
-                null,                             // The columns to return
+                projection,                             // The columns to return
                 null,                                   // The columns for the WHERE clause
                 null,                                   // The values for the WHERE clause
                 null,                                   // don't group the rows
@@ -79,7 +82,7 @@ public class PodcastLab {
             cursor.close();
             return null;
         }
-        return new FeedSnippetCursorWrapper(cursor);
+        return cursor;
     }
 
     public void deleteFeed(String feedId) {
@@ -106,15 +109,18 @@ public class PodcastLab {
         values.put(FeedReaderContract.Feed.COLUMN_NAME_CREATOR, feed.getCreator());
         values.put(FeedReaderContract.Feed.COLUMN_NAME_FEED_URL, feed.getFeedUrl());
         values.put(FeedReaderContract.Feed.COLUMN_NAME_SUBTITLE, feed.getSubtitle());
+        values.put(FeedReaderContract.Feed.COLUMN_NAME_UUID, feed.getUUID().toString());
+        values.put(FeedReaderContract.Feed.COLUMN_NAME_DATE, feed.getDate().toString());
         values.put(FeedReaderContract.Feed.COLUMN_NAME_THUMBNAIL, feed.getThumbnail());
 
         // Insert the new row, returning the primary key value of the new row
-        Log.d("insertFeed()", feed.getTitle());
+        Log.d(TAG, feed.getTitle());
         // insertWithConflict instead of insert.
 
         return mDatabase.insertWithOnConflict(
                 FeedReaderContract.Feed.TABLE_NAME,
                 FeedReaderContract.Feed.COLUMN_NAME_NULLABLE,
-                values, SQLiteDatabase.CONFLICT_IGNORE);
+                values,
+                SQLiteDatabase.CONFLICT_IGNORE);
     }
 }

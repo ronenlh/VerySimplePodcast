@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.app.AlertDialog;
 

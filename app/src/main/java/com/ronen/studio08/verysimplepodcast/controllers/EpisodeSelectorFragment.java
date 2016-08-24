@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ronen.studio08.verysimplepodcast.EpisodeBaseAdapter;
+import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.ApiService;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.Channel;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.RSS;

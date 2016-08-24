@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.app.Dialog;
 
@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import com.ronen.studio08.verysimplepodcast.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

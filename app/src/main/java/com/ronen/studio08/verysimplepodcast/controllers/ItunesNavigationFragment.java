@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Entry;
 import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.ItunesTopApi;
 import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Top;

@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Search;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.SearchAPI;

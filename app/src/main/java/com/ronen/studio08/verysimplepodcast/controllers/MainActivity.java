@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -18,6 +18,7 @@ import android.view.View;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.ronen.studio08.verysimplepodcast.R;
 
 public class MainActivity extends AppCompatActivity
         implements FeedSelectorFragment.OnFeedSelectedListener,

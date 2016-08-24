@@ -1,10 +1,11 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
+import com.ronen.studio08.verysimplepodcast.R;
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
 /**

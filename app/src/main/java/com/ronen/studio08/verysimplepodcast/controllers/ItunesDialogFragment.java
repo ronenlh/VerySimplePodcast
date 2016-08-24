@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,9 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ronen.studio08.verysimplepodcast.R;
+import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -21,22 +26,16 @@ import java.util.Locale;
  */
 public class ItunesDialogFragment extends DialogFragment {
 
-    private String title;
-    private String description;
-    private String itemUrl;
-    private String mediaUrl;
-    private String author;
-    private String pubDate;
-
     private onPlaySelectedListener playCallback;
     private onInfoSelectedListener infoCallback;
+    private Result mResult;
 
     interface onPlaySelectedListener {
-        void onPlaySelected(String itemUrl);
+        void onPlaySelected(Result itemUrl);
     }
 
     interface onInfoSelectedListener {
-        void onInfoSelected(String itemUrl);
+        void onInfoSelected(Result itemUrl);
     }
 
     @Override
@@ -61,12 +60,21 @@ public class ItunesDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        title = getArguments().getString("title");
-        description = getArguments().getString("description");
-        itemUrl = getArguments().getString("itemUrl");
-        mediaUrl = getArguments().getString("mediaUrl");
-        author = getArguments().getString("author");
-        pubDate = getArguments().getString("pubDate");
+        mResult = (Result) getArguments().getSerializable("result");
+
+        String title = mResult.getCollectionName();
+        List<String> descriptionList = mResult.getGenres();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < descriptionList.size(); i++) {
+            stringBuilder.append(descriptionList.get(i));
+            if (i < descriptionList.size() - 1)
+                stringBuilder.append(", ");
+        }
+        String description = stringBuilder.toString();
+        String itemUrl = "";
+        String mediaUrl = mResult.getArtworkUrl600();
+        String author = mResult.getArtistName();
+        String pubDate = mResult.getReleaseDate();
 
         /** TODO: disable webview button if itemURL is "" */
 
@@ -85,13 +93,9 @@ public class ItunesDialogFragment extends DialogFragment {
 
         // date parser and formatter
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z ", Locale.ENGLISH);
-            SimpleDateFormat newFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-            Date pubDateParsed = dateFormat.parse(pubDate);
-            String newFormatDate = newFormat.format(pubDateParsed);
+            ((TextView) content.findViewById(R.id.dialog_date)).setText(formatDate(pubDate));
 
-            ((TextView) content.findViewById(R.id.dialog_date)).setText(""+newFormatDate);
         } catch (ParseException e) {
 //            e.printStackTrace();
             Log.w("EpisodeDialogFragment", "problem parsing the date, displaying unparsed date.");
@@ -104,14 +108,14 @@ public class ItunesDialogFragment extends DialogFragment {
             builder.setNeutralButton(R.string.dialog_info, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    infoCallback.onInfoSelected(itemUrl);
+                    infoCallback.onInfoSelected(mResult);
                 }
             });
 
-        builder.setPositiveButton(R.string.dialog_play, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                playCallback.onPlaySelected(mediaUrl);
+                playCallback.onPlaySelected(mResult);
             }
         })
                 .setNegativeButton(R.string.dialog_close, new DialogInterface.OnClickListener() {
@@ -123,5 +127,14 @@ public class ItunesDialogFragment extends DialogFragment {
 
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    private String formatDate(String pubDate) throws ParseException {
+
+        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z ", Locale.ENGLISH);
+        Date parsedDate = dateFormat.parse(pubDate);
+
+        DateFormat newFormat = DateFormat.getDateInstance();
+        return newFormat.format(parsedDate);
     }
 }

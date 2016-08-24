@@ -3,6 +3,7 @@ package com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by Ronen on 5/6/16.
  */
 
-public class Result {
+public class Result implements Serializable {
 
     @SerializedName("wrapperType")
     @Expose

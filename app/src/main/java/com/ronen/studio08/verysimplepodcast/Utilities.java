@@ -3,7 +3,7 @@ package com.ronen.studio08.verysimplepodcast;
 /**
  * Created by Ronen on 22/5/16.
  */
-class Utilities {
+public class Utilities {
 
     /**
      * Function to convert milliseconds time to

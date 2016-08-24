@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast;
+package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ronen.studio08.verysimplepodcast.R;
+import com.ronen.studio08.verysimplepodcast.Utilities;
 
 import java.io.IOException;
 
