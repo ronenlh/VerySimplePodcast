@@ -24,13 +24,6 @@ public class ItunesGalleryActivity extends SingleFragmentActivity
         setContentView(R.layout.activity_fragment);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_menu, menu);
-        return true;
-    }
 
     @Override
     public void OnItunesItemClicked(Entry entry) {

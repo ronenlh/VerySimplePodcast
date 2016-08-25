@@ -11,6 +11,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -57,6 +59,14 @@ public class ItunesGalleryFragment  extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        setHasOptionsMenu(true);
+        setRetainInstance(true);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://itunes.apple.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        topService = retrofit.create(ItunesTopApi.class);
     }
 
     @Nullable
@@ -64,11 +74,6 @@ public class ItunesGalleryFragment  extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_itunes_gallery, container, false);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://itunes.apple.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        topService = retrofit.create(ItunesTopApi.class);
         loadTopFeeds();
 
         // set number of rows according to orientation
@@ -94,6 +99,12 @@ public class ItunesGalleryFragment  extends Fragment {
 
         return v;
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_menu, menu);
     }
 
     private void loadTopFeeds() {
