@@ -126,7 +126,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             // Inflate a menu resource providing context menu items
             MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.feed_menu, menu);
+            inflater.inflate(R.menu.delete_menu, menu);
             return true;
         }
 

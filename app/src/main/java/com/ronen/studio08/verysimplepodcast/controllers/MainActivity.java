@@ -148,10 +148,10 @@ public class MainActivity extends AppCompatActivity
         Log.d("onLongEpisodeClick", "long click");
         // nothing yet
     }
-
+/*
     public void addFeed(View view) {
-        startActivity(new Intent(this, ItunesActivity.class));
-    }
+        startActivity(new Intent(this, ItunesGalleryActivity.class));
+    }*/
 
     @Override
     public void onPlaySelected(String mediaUrl) {
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 return true;
             case R.id.add_item:
-                Intent intent = new Intent(this, ItunesActivity.class);
+                Intent intent = new Intent(this, ItunesGalleryActivity.class);
                 startActivity(intent);
                 return true;
             default:

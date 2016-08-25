@@ -31,7 +31,7 @@ public class ItunesDialogFragment extends DialogFragment {
     private Result mResult;
 
     interface onPlaySelectedListener {
-        void onPlaySelected(Result itemUrl);
+        void onAddSelected(Result itemUrl);
     }
 
     interface onInfoSelectedListener {
@@ -115,7 +115,7 @@ public class ItunesDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                playCallback.onPlaySelected(mResult);
+                playCallback.onAddSelected(mResult);
             }
         })
                 .setNegativeButton(R.string.dialog_close, new DialogInterface.OnClickListener() {
