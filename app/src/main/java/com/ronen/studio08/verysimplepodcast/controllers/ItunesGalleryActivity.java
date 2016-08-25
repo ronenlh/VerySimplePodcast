@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Entry;
@@ -35,5 +36,18 @@ public class ItunesGalleryActivity extends SingleFragmentActivity
     @Override
     public void OnItunesItemClicked(Result result) {
         Log.d(TAG, "OnItunesItemClicked: " + result.getCollectionName());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.itunes_selector_container, new SettingsFragment())
+                        .commit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

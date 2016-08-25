@@ -1,6 +1,7 @@
 package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
