@@ -73,4 +73,59 @@ public class FeedSnippet implements Serializable {
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
+
+    static public class Episode implements Serializable {
+        private String title, description, itemUrl, mediaUrl, author, pubDate;
+
+        public Episode() {
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getItemUrl() {
+            return itemUrl;
+        }
+
+        public void setItemUrl(String itemUrl) {
+            this.itemUrl = itemUrl;
+        }
+
+        public String getMediaUrl() {
+            return mediaUrl;
+        }
+
+        public void setMediaUrl(String mediaUrl) {
+            this.mediaUrl = mediaUrl;
+        }
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public void setAuthor(String author) {
+            this.author = author;
+        }
+
+        public String getPubDate() {
+            return pubDate;
+        }
+
+        public void setPubDate(String pubDate) {
+            this.pubDate = pubDate;
+        }
+    }
 }

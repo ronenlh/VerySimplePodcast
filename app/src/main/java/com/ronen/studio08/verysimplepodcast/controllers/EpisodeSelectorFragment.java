@@ -160,20 +160,20 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
 
         DialogFragment dialogFragment = new EpisodeDialogFragment();
         Bundle args = new Bundle();
-        args.putString("title", item.getTitle());
-        if (item.getAuthorList() != null) {
-            String author = item.getAuthorList().get(0);
-            args.putString("author", author);
-        } else {
-            args.putString("author", "");
-        }
-        args.putString("description",item.getDescription());
-        args.putString("itemUrl",item.getLink());
-        args.putString("mediaUrl",item.getEnclosure().getUrl());
-        args.putString("pubDate",item.getPubDate());
+
+
+        FeedSnippet.Episode mEpisode = new FeedSnippet.Episode();
+        mEpisode.setTitle(item.getTitle());
+        if (item.getAuthorList() != null)
+            mEpisode.setAuthor(item.getAuthorList().get(0));
+        mEpisode.setDescription(item.getDescription());
+        mEpisode.setItemUrl(item.getLink());
+        mEpisode.setItemUrl(item.getEnclosure().getUrl());
+        mEpisode.setPubDate(item.getPubDate());
+
+        args.putSerializable("episode", mEpisode);
         dialogFragment.setArguments(args);
-        dialogFragment.show(getFragmentManager(), "Episode "+position);
-//        super.onListItemClick(l, v, position, id);
+        dialogFragment.show(getFragmentManager(), "Episode " + position);
     }
 
     @Override
