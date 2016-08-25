@@ -123,7 +123,7 @@ public class ItunesSearchFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Result result = search.getResults().get(getAdapterPosition());
-            Log.d("SearchViewHolder",result.getCollectionName());
+            Log.d("ItunesSearchHolder",result.getCollectionName());
 
             if (onSearchItemSelectedListener != null) {
                 onSearchItemSelectedListener.onItemSelected(result);

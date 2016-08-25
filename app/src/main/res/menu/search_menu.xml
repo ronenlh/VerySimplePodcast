@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_item_search"
         android:title="@string/search"
-          android:actionViewClass="android.support.v7.widget.SearchView"
+          app:actionViewClass="android.support.v7.widget.SearchView"
           android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/menu_item_clear"
           android:title="@string/clear_search"
-          android:actionViewClass="android.support.v7.widget.SearchView"
           app:showAsAction="never"/>
     <item android:id="@+id/settings"
         android:title="@string/settings"
