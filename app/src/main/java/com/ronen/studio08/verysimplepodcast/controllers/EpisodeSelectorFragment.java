@@ -168,7 +168,7 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
             mEpisode.setAuthor(item.getAuthorList().get(0));
         mEpisode.setDescription(item.getDescription());
         mEpisode.setItemUrl(item.getLink());
-        mEpisode.setItemUrl(item.getEnclosure().getUrl());
+        mEpisode.setMediaUrl(item.getEnclosure().getUrl());
         mEpisode.setPubDate(item.getPubDate());
 
         args.putSerializable("episode", mEpisode);
