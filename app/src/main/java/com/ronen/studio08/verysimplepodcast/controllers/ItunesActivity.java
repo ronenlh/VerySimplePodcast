@@ -20,8 +20,8 @@
 //import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
 //import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Entry;
 //import com.ronen.studio08.verysimplepodcast.model.retrofit.ApiService;
-//import com.ronen.studio08.verysimplepodcast.model.retrofit.Channel;
-//import com.ronen.studio08.verysimplepodcast.model.retrofit.RSS;
+//import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Channel;
+//import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.RSS;
 //import com.ronen.studio08.verysimplepodcast.model.retrofit.ServiceGenerator;
 //
 //import java.io.IOException;
@@ -34,7 +34,7 @@
 //public class ItunesActivity extends AppCompatActivity
 //        implements ItunesSearchFragment.OnSearchItemSelectedListener,
 //        ItunesNavigationFragment.OnNavigationItemClickedListener,
-//        ItunesDialogFragment.onPlaySelectedListener,
+//        ItunesDialogFragment.onAddSelectedListener,
 //        ItunesDialogFragment.onInfoSelectedListener {
 //
 //    // class to delete
@@ -193,7 +193,7 @@
 //    @Override
 //    public void onAddSelected(Result result) {
 //        getFeedAndAddItToDb(result);
-//        Log.d(TAG, "onPlaySelectedListener: " + result.getCollectionName());
+//        Log.d(TAG, "onAddSelectedListener: " + result.getCollectionName());
 //
 //        finish();
 //    }

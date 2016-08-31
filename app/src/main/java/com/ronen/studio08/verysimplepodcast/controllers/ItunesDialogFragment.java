@@ -26,11 +26,11 @@ import java.util.Locale;
  */
 public class ItunesDialogFragment extends DialogFragment {
 
-    private onPlaySelectedListener playCallback;
+    private onAddSelectedListener playCallback;
     private onInfoSelectedListener infoCallback;
     private Result mResult;
 
-    interface onPlaySelectedListener {
+    interface onAddSelectedListener {
         void onAddSelected(Result itemUrl);
     }
 
@@ -44,10 +44,10 @@ public class ItunesDialogFragment extends DialogFragment {
         // The Fragment captures the interface implementation during its onAttach() lifecycle method and can then call the Interface methods in order to communicate with the Activity.
         super.onAttach(context);
         try {
-            playCallback = (onPlaySelectedListener) context;
+            playCallback = (onAddSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement onPlaySelectedListener");
+                    + " must implement onAddSelectedListener");
         }
         try {
             infoCallback = (onInfoSelectedListener) context;

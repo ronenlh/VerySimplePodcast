@@ -19,8 +19,8 @@ import com.ronen.studio08.verysimplepodcast.EpisodeBaseAdapter;
 import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.ApiService;
-import com.ronen.studio08.verysimplepodcast.model.retrofit.Channel;
-import com.ronen.studio08.verysimplepodcast.model.retrofit.RSS;
+import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Channel;
+import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.RSS;
 import com.ronen.studio08.verysimplepodcast.model.retrofit.ServiceGenerator;
 
 import java.io.IOException;

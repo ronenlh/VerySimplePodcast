@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast.model.retrofit;
+package com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass;
 
 /**
  * Created by Ronen on 17/4/16.

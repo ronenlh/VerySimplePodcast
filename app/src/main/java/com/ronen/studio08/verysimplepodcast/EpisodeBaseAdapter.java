@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.ronen.studio08.verysimplepodcast.model.retrofit.Channel;
+import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Channel;
 
 import java.util.ArrayList;
 

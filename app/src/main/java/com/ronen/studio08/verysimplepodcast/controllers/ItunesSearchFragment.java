@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Search;
-import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.SearchAPI;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.SearchAPI;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;

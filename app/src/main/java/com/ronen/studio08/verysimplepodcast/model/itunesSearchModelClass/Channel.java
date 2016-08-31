@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast.model.retrofit;
+package com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;

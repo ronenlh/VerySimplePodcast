@@ -50,7 +50,7 @@ public class EpisodeDialogFragment extends DialogFragment {
             infoCallback = (onInfoSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement onPlaySelectedListener");
+                    + " must implement onAddSelectedListener");
         }
     }
 

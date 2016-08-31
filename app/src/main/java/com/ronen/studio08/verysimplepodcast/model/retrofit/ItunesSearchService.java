@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass;
+package com.ronen.studio08.verysimplepodcast.model.retrofit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

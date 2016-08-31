@@ -1,7 +1,6 @@
 package com.ronen.studio08.verysimplepodcast.controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -26,7 +25,7 @@ import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.ItunesTopA
 import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Top;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Search;
-import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.SearchAPI;
+import com.ronen.studio08.verysimplepodcast.model.retrofit.SearchAPI;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
