@@ -13,11 +13,12 @@
         android:id="@+id/playImageView"
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
-        android:layout_height="30dp"/>
+        android:layout_height="30dp"
+        android:tag="0"/>
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
@@ -39,5 +40,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/infoImageView"
-        app:srcCompat="@android:drawable/ic_menu_info_details"/>
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:tag="1"/>
 </LinearLayout>

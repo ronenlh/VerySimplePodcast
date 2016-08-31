@@ -29,16 +29,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InfoActivity extends AppCompatActivity {
+public class InfoActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "InfoActivity";
 
     ImageView imageView;
     TextView nameTextView, artistTextView, subtitleTextView;
     //    Button addButton;
     ListView mListView;
+    ImageView playImageView, infoImageView;
 
     FeedSnippet mFeedSnippet;
     RSS mFeed;
+
+    @Override
+    public void onClick(View view) {
+        if (view.getTag() == 0) {
+            // play
+
+        } else if (view.getTag() == 1) {
+            // info
+
+        }
+    }
 
 
     interface onAddSelectedListener {
@@ -68,7 +80,8 @@ public class InfoActivity extends AppCompatActivity {
         subtitleTextView = (TextView) findViewById(R.id.subtitleTextView);
 //        addButton       = (Button) findViewById(R.id.addButton);
         mListView = (ListView) findViewById(R.id.infoListView);
-
+        playImageView = (ImageView) findViewById(R.id.playImageView);
+        infoImageView = (ImageView) findViewById(R.id.infoImageView);
     }
 
     private void setContent() {
@@ -81,6 +94,9 @@ public class InfoActivity extends AppCompatActivity {
         subtitleTextView.setText(mFeedSnippet.getSubtitle());
 
         retrofitCaller(mFeedSnippet.getFeedUrl());
+
+        playImageView.setOnClickListener(this);
+        infoImageView.setOnClickListener(this);
     }
 
     private void retrofitCaller(String feedUrl) {
