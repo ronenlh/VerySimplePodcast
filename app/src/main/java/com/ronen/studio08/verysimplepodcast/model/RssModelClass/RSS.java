@@ -1,4 +1,4 @@
-package com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass;
+package com.ronen.studio08.verysimplepodcast.model.RssModelClass;
 
 /**
  * Created by Ronen on 17/4/16.

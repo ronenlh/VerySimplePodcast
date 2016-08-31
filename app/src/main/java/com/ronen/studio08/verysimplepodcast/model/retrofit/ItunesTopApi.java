@@ -1,4 +1,6 @@
-package com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass;
+package com.ronen.studio08.verysimplepodcast.model.retrofit;
+
+import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Top;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

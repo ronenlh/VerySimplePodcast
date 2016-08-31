@@ -19,7 +19,7 @@
 //
 //import com.ronen.studio08.verysimplepodcast.R;
 //import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Entry;
-//import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.ItunesTopApi;
+//import com.ronen.studio08.verysimplepodcast.model.retrofit.ItunesTopApi;
 //import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Top;
 //import com.squareup.picasso.Picasso;
 //

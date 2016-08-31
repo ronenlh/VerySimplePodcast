@@ -5,13 +5,18 @@ import java.util.UUID;
 
 /**
  * Created by Ronen on 24/8/16.
+ * This has the basic information to be queried into and from any other model object
+ * there are 3 model object:
+ *  1. The itunes navigation one from their Top Charts API: Entry.class / Feed.class
+ *  2. the itunes search from the itunes search API: Result.class / Search.class
+ *  3. the RSS from the canonical RSS feed of the podcast: RSS.class / Channel.class
  */
 
 public class FeedSnippet implements Serializable {
 
     private UUID mUUID;
     private long mTimeAdded;
-    private String feedUrl, title, creator, subtitle, thumbnail;
+    private String feedUrl, website, title, creator, subtitle, thumbnail;
 
     public FeedSnippet() {
         mUUID = UUID.randomUUID();
@@ -72,6 +77,14 @@ public class FeedSnippet implements Serializable {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     static public class Episode implements Serializable {

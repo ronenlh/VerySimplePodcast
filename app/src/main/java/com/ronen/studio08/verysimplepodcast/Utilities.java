@@ -6,7 +6,7 @@ package com.ronen.studio08.verysimplepodcast;
 public class Utilities {
 
     /**
-     * Function to convert milliseconds time to
+     * Function to getResult milliseconds time to
      * Timer Format
      * Hours:Minutes:Seconds
      * */

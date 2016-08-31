@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ronen.studio08.verysimplepodcast.R;
+import com.ronen.studio08.verysimplepodcast.model.Converter;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
 
 import java.text.DateFormat;
@@ -64,13 +65,7 @@ public class ItunesDialogFragment extends DialogFragment {
 
         String title = mResult.getCollectionName();
         List<String> descriptionList = mResult.getGenres();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < descriptionList.size(); i++) {
-            stringBuilder.append(descriptionList.get(i));
-            if (i < descriptionList.size() - 1)
-                stringBuilder.append(", ");
-        }
-        String description = stringBuilder.toString();
+        String description = Converter.getGenresList(descriptionList);
         String itemUrl = "";
         String mediaUrl = mResult.getArtworkUrl600();
         String author = mResult.getArtistName();

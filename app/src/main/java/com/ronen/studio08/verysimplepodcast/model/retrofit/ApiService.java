@@ -3,7 +3,7 @@ package com.ronen.studio08.verysimplepodcast.model.retrofit;
 
 
 
-import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.RSS;
+import com.ronen.studio08.verysimplepodcast.model.RssModelClass.RSS;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

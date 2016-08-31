@@ -20,8 +20,8 @@
 //import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
 //import com.ronen.studio08.verysimplepodcast.model.itunesNavModelClass.Entry;
 //import com.ronen.studio08.verysimplepodcast.model.retrofit.ApiService;
-//import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Channel;
-//import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.RSS;
+//import com.ronen.studio08.verysimplepodcast.model.RssModelClass.Channel;
+//import com.ronen.studio08.verysimplepodcast.model.RssModelClass.RSS;
 //import com.ronen.studio08.verysimplepodcast.model.retrofit.ServiceGenerator;
 //
 //import java.io.IOException;

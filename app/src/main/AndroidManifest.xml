@@ -41,6 +41,8 @@
 
         <activity android:name=".controllers.ItunesGalleryActivity">
         </activity>
+        <activity android:name=".controllers.InfoActivity">
+        </activity>
     </application>
 
 </manifest>

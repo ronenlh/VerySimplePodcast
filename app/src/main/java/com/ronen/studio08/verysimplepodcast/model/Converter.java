@@ -7,6 +7,7 @@ import com.ronen.studio08.verysimplepodcast.model.retrofit.LookupAPI;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Result;
 import com.ronen.studio08.verysimplepodcast.model.itunesSearchModelClass.Search;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,18 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Ronen on 30/8/16.
  */
 
-public class EntryToResultConverter {
-    private final String TAG = "EntryToResultConverter";
-    private static EntryToResultConverter sharedInstance;
+public class Converter {
+    private final String TAG = "Converter";
+    private static Converter sharedInstance;
     OnResultReceivedListener mCallback;
 
-    public static EntryToResultConverter get(OnResultReceivedListener mCallback) {
-        if (sharedInstance == null)
-            sharedInstance = new EntryToResultConverter(mCallback);
-        return sharedInstance;
-    }
 
-    private EntryToResultConverter(OnResultReceivedListener mCallback) {
+    public Converter(OnResultReceivedListener mCallback) {
         this.mCallback = mCallback;
     }
 
@@ -45,7 +41,7 @@ public class EntryToResultConverter {
         Get the "feedUrl" from this json file.
         The &entity=podcast is not necessary but it may help */
 
-    public Result convert(Entry entry) {
+    public Result getResult(Entry entry) {
         String id;
 
         // 1. Extract the Id from the link with a regex or something else
@@ -62,6 +58,30 @@ public class EntryToResultConverter {
 
         Log.d(TAG, "RegEx didn't find a match");
         return null;
+    }
+
+    public FeedSnippet getFeedSnippet(Result result) {
+        FeedSnippet mFeedSnippet = new FeedSnippet();
+        mFeedSnippet.setTitle(result.getCollectionName());
+        mFeedSnippet.setThumbnail(result.getArtworkUrl100());
+        mFeedSnippet.setCreator(result.getArtistName());
+        mFeedSnippet.setWebsite(result.getFeedUrl());
+        mFeedSnippet.setFeedUrl(result.getFeedUrl());
+
+        List<String> descriptionList = result.getGenres();
+        mFeedSnippet.setSubtitle(getGenresList(descriptionList));
+
+        return mFeedSnippet;
+    }
+
+    public static String getGenresList(List<String> descriptionList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < descriptionList.size(); i++) {
+            stringBuilder.append(descriptionList.get(i));
+            if (i < descriptionList.size() - 1)
+                stringBuilder.append(", ");
+        }
+        return stringBuilder.toString();
     }
 
     private void retrofitCaller(String id) {
