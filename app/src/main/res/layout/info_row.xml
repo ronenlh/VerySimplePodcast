@@ -7,17 +7,17 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/mr_ic_play_light"
-        android:id="@+id/imageButton"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"/>
+    <ImageView
+        android:layout_width="30dp"
+        app:srcCompat="@drawable/quantum_ic_play_circle_filled_grey600_36"
+        android:id="@+id/playImageView"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_height="30dp"/>
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
@@ -35,10 +35,9 @@
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_cast_off_light"
-        android:id="@+id/imageButton2"
-        android:layout_weight="1"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/infoImageView"
+        app:srcCompat="@android:drawable/ic_menu_info_details"/>
 </LinearLayout>
