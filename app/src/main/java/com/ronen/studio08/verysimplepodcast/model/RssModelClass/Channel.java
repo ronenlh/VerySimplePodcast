@@ -209,13 +209,13 @@ public class Channel {
     }
     public static class Enclosure {
         @Attribute(required = true)
-        public String url;
+        private String url;
 
         @Attribute(required = false)
-        public String type;
+        private String type;
 
         @Attribute(required = false)
-        public long length;
+        private long length;
 
         public String getUrl() {
             return url;

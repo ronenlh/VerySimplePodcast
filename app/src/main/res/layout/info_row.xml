@@ -5,7 +5,7 @@
               android:orientation="horizontal"
               android:gravity="center_vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="40dp">
 
     <ImageView
         android:layout_width="30dp"
@@ -14,7 +14,7 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
         android:layout_height="30dp"
-        android:tag="0"/>
+        android:tag="play"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,12 +25,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dip"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textAlignment="viewStart"
             tools:text="Title of the Episode"
             android:id="@+id/titleRowTextView"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@android:id/text1"
+            android:layout_alignStart="@android:id/text1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAlignment="viewStart"
             tools:text="Description of the Episode"
             android:id="@+id/descriptionRowTextView"
             android:layout_gravity="center_vertical"/>
@@ -41,5 +48,5 @@
         android:layout_height="30dp"
         android:id="@+id/infoImageView"
         app:srcCompat="@android:drawable/ic_menu_info_details"
-        android:tag="1"/>
+        android:tag="info"/>
 </LinearLayout>
