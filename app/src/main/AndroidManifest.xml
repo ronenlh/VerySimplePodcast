@@ -5,6 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
     <application
         android:name=".VerySimplePodcast"
         android:allowBackup="true"
@@ -14,11 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"> <!-- android:theme="@style/PreferenceFixTheme.DayNight -->
         <activity android:name=".controllers.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -42,6 +42,17 @@
         <activity android:name=".controllers.ItunesGalleryActivity">
         </activity>
         <activity android:name=".controllers.InfoActivity">
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
+        </activity>
+        <activity android:name=".controllers.OAuthActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 
