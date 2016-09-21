@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -24,25 +25,27 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.ronen.studio08.verysimplepodcast.BuildConfig;
 import com.ronen.studio08.verysimplepodcast.R;
 
 public class OAuthActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 11212;
     private static final String TAG = "OAuthActivity";
-    private SignInButton mSignInButton;
+//    private SignInButton mSignInButton;
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInOptions gso;
     private GoogleSignInAccount acct;
 
+    private FirebaseUser user;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_oauth);
+//        setContentView(R.layout.activity_oauth);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -60,43 +63,60 @@ public class OAuthActivity extends AppCompatActivity implements View.OnClickList
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        mSignInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
-        mSignInButton.setSize(SignInButton.SIZE_STANDARD);
-        mSignInButton.setScopes(gso.getScopeArray());
-        mSignInButton.setOnClickListener(this);
+//        mSignInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
+//        mSignInButton.setSize(SignInButton.SIZE_STANDARD);
+//        mSignInButton.setScopes(gso.getScopeArray());
+//        mSignInButton.setOnClickListener(this);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    updateUI(true);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
+                    startActivityForResult(
+                            // Get an instance of AuthUI based on the default app
+
+                            // https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setProviders(
+                                            AuthUI.EMAIL_PROVIDER,
+                                            AuthUI.GOOGLE_PROVIDER,
+                                            AuthUI.FACEBOOK_PROVIDER)
+                                    .setTosUrl("https://superapp.example.com/terms-of-service.html")
+                                    .setIsSmartLockEnabled(!BuildConfig.DEBUG)
+                                    .build(),
+                            RC_SIGN_IN);
+
+                    // TODO: Implement sign-out https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md
                 }
             }
         };
 
-        OptionalPendingResult<GoogleSignInResult> pendingResult =
-                Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (pendingResult.isDone()) {
-            // There's immediate result available.
-            updateButtonsAndStatusFromSignInResult(pendingResult.get());
-        } else {
-            // There's no immediate result ready, displays some progress indicator and waits for the
-            // async callback.
-            showProgressIndicator();
-            pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(@NonNull GoogleSignInResult result) {
-                    updateButtonsAndStatusFromSignInResult(result);
-                    hideProgressIndicator();
-                }
-
-            });
-        }
+//        OptionalPendingResult<GoogleSignInResult> pendingResult =
+//                Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+//        if (pendingResult.isDone()) {
+//            // There's immediate result available.
+//            updateButtonsAndStatusFromSignInResult(pendingResult.get());
+//        } else {
+//            // There's no immediate result ready, displays some progress indicator and waits for the
+//            // async callback.
+//            showProgressIndicator();
+//            pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+//                @Override
+//                public void onResult(@NonNull GoogleSignInResult result) {
+//                    updateButtonsAndStatusFromSignInResult(result);
+//                    hideProgressIndicator();
+//                }
+//
+//            });
+//        }
 
 
     }
@@ -181,7 +201,7 @@ public class OAuthActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(boolean authenticated) {
         if (authenticated) {
-            Toast.makeText(this, "Welcome " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {

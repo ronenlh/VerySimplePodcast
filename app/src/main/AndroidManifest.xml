@@ -19,6 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"> <!-- android:theme="@style/PreferenceFixTheme.DayNight -->
         <activity android:name=".controllers.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -43,16 +48,9 @@
         </activity>
         <activity android:name=".controllers.InfoActivity">
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
-        <activity android:name=".controllers.OAuthActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        <activity android:name=".controllers.OAuthActivity">
+
         </activity>
     </application>
 

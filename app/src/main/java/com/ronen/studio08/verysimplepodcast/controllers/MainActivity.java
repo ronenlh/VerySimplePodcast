@@ -18,6 +18,8 @@ import android.view.View;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ronen.studio08.verysimplepodcast.R;
 import com.ronen.studio08.verysimplepodcast.model.FeedSnippet;
 
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     @Override
@@ -185,6 +188,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.add_item:
                 Intent intent = new Intent(this, ItunesGalleryActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.login:
+                Intent loginIntent = new Intent(this, OAuthActivity.class);
+                startActivity(loginIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

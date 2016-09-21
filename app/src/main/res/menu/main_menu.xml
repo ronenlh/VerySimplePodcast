@@ -5,6 +5,10 @@
         android:title="@string/add_podcast"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_add_24dp"/>
+    <item android:id="@+id/login"
+          android:title="@string/login"
+          app:showAsAction="never"
+          />
     <item android:id="@+id/settings"
         android:title="@string/settings"
         app:showAsAction="never"
