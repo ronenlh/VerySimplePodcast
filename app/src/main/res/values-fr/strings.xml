@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VerySimplePodcast</string>
+    <string name="action_sign_in">Connectez-vous ou inscrivez-vous</string>
+    <string name="action_sign_in_short">Connexion</string>
+    <string name="add">ajouter</string>
+    <string name="add_feed">Ajouter un Feed</string>
+    <string name="add_feed_url">Ajouter un Feed URL</string>
+    <string name="add_podcast">Ajouter Podcast</string>
+    <string name="clear_search">Effacer la recherche</string>
+    <string name="delete">effacer</string>
+    <string name="dialog_close">fermer</string>
+    <string name="dialog_info">site Internet</string>
+    <string name="dialog_play">" jouer"</string>
+    <string name="done">Ajouter</string>
+    <string name="episode_error">une erreur est survenue, essayez de recharger l\'application.</string>
+    <string name="episode_error2">Quelque-chose s\'est mal passé. Vérifiez si l\'URL de l\'alimentation est ok.</string>
+    <string name="episode_info">Episode info</string>
+    <string name="episode_selected">Episode sélectionné</string>
+    <string name="error_feed">Il y avait une erreur avec l\'alimentation.</string>
+    <string name="error_field_required">Ce champ est requis</string>
+    <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="feed_deleted">Feed supprimé</string>
+    <string name="error_invalid_password">Ce mot de passe est trop court</string>
+    <string name="feed_restored">Se Restauré</string>
+    <string name="feed_selected">Feed sélectionnées</string>
+    <string name="nothing_to_show">Rien à afficher</string>
+    <string name="login">Connexion</string>
+    <string name="title_activity_login">Connexion</string>
+    <string name="permission_rationale">Les contacts autorisations sont nécessaires pour fournir email achèvements.</string>
+    <string name="prompt_email">E-mail</string>
+    <string name="prompt_password">Mot de passe (facultatif)</string>
+    <string name="search">Chercher</string>
+    <string name="settings">Paramètres</string>
+    <string name="skip">Passer Montant</string>
+    <string name="skip10">10 secondes</string>
+    <string name="skip30">30 secondes</string>
+    <string name="skip5">5 secondes</string>
+</resources>

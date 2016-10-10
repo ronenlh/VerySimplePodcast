@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VerySimplePodcast</string>
+    <string name="action_sign_in">Anmelden oder registrieren</string>
+    <string name="action_sign_in_short">Anmelden</string>
+    <string name="add_feed">Feed hinzufügen</string>
+    <string name="add_feed_url">Feed URL hinzufügen</string>
+    <string name="add_podcast">Podcast hinzufügen</string>
+    <string name="delete">Löschen</string>
+    <string name="dialog_close">Schließen</string>
+    <string name="dialog_info">web</string>
+    <string name="dialog_play">Spiel</string>
+    <string name="add">Hinzufügen</string>
+    <string name="done">Hinzufügen</string>
+    <string name="episode_error">Ein Fehler aufgetreten ist, versuchen Sie die App erneut zu laden.</string>
+    <string name="episode_error2">Etwas ist schief gelaufen. Überprüfen Sie, ob die URL des Feeds in Ordnung ist.</string>
+    <string name="episode_info">Folge Info</string>
+    <string name="episode_selected">Folge Ausgewählte</string>
+    <string name="error_feed">Es war mit dem Futter ein Fehler.</string>
+    <string name="error_field_required">Dieses Feld wird benötigt</string>
+    <string name="error_incorrect_password">Dieses Passwort ist falsch</string>
+    <string name="error_invalid_email">Diese E-Mail-Adresse ist ungültig</string>
+    <string name="error_invalid_password">Dieses Passwort ist zu kurz</string>
+    <string name="feed_deleted">Feed Gelöschte</string>
+    <string name="feed_restored">Feed Restauriert</string>
+    <string name="feed_selected">Feed Ausgewählte</string>
+    <string name="login">Anmelden</string>
+    <string name="nothing_to_show">Nichts zu zeigen</string>
+    <string name="permission_rationale">Kontakte Berechtigungen werden für die Bereitstellung von E-Mail-Ergänzungen erforderlich.</string>
+    <string name="prompt_email">E-mail</string>
+    <string name="prompt_password">Kennwort (optional)</string>
+    <string name="search">Suche</string>
+    <string name="settings">Einstellungen</string>
+    <string name="skip">überspringen Betrag</string>
+    <string name="skip10">10 Sekunden</string>
+    <string name="skip30">30 Sekunden</string>
+    <string name="skip5">5 Sekunden</string>
+    <string name="title_activity_login">Anmelden</string>
+    <string name="clear_search">Löschen Suchen</string>
+</resources>
