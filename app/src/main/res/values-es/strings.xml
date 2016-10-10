@@ -22,4 +22,19 @@
     <string name="skip10">10 segundos</string>
     <string name="skip30">30 segundos</string>
     <string name="skip5">5 segundos</string>
+    <string name="action_sign_in">Iniciar Sesión o Regístrate</string>
+    <string name="action_sign_in_short">Iniciar Sesión</string>
+    <string name="add">Añadir</string>
+    <string name="add_podcast">Añade Podcast</string>
+    <string name="clear_search">Limpia la búsqueda</string>
+    <string name="error_field_required">Este campo es obligatorio</string>
+    <string name="error_incorrect_password">La contraseña es incorrecta</string>
+    <string name="error_invalid_password">La contrasea es demasiado corta</string>
+    <string name="error_invalid_email">Este e-mail es incorrecto</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="permission_rationale">Permite acceso a los contactos para que podamos autocompletar E-mails</string>
+    <string name="prompt_email">E-mail</string>
+    <string name="prompt_password">Contraseña (Opcional)</string>
+    <string name="search">Busca</string>
+    <string name="title_activity_login">Iniciar Sesión</string>
 </resources>

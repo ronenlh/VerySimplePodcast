@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#80cbc4</color>
-    <color name="colorPrimaryDark">#26A69A</color>
-    <color name="colorAccent">#f44336</color>
+    <color name="colorPrimary">#79C9C5</color>
+    <color name="colorPrimaryDark">#509D95</color>
+    <color name="colorAccent">#CE2E37</color>
+
+    <!-- Same thing different name because it's hardcoded in takisoft dependency or something -->
+    <color name="primary">#79C9C5</color>
+    <color name="primary_dark">#509D95</color>
+    <color name="accent">#CE2E37</color>
+
     <color name="preference_accent">#f44336</color>
 </resources>

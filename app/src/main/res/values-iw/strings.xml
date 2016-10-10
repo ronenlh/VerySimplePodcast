@@ -22,4 +22,19 @@
     <string name="skip10">10 שניות</string>
     <string name="skip30">30 שניות</string>
     <string name="skip5">5 שניות</string>
+    <string name="action_sign_in">התחבר</string>
+    <string name="action_sign_in_short">התחבר</string>
+    <string name="add">הוסף</string>
+    <string name="add_podcast">בוסף תחנה</string>
+    <string name="clear_search">נקה חיפוש</string>
+    <string name="error_field_required">השדה חובה</string>
+    <string name="error_incorrect_password">הסיסמה שגויה</string>
+    <string name="error_invalid_email">המייל שגוי</string>
+    <string name="error_invalid_password">הסיסמה קצרה מדי</string>
+    <string name="login">התחבר</string>
+    <string name="permission_rationale">הרשה כניסה לאנשי קשר בשביל שנוכל להשלים לך מיילים</string>
+    <string name="prompt_email">מייל</string>
+    <string name="prompt_password">סיסמה (לא חובה)</string>
+    <string name="search">חפש</string>
+    <string name="title_activity_login">התחבר</string>
 </resources>

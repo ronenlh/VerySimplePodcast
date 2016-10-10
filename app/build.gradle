@@ -32,7 +32,8 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:support-annotations:24.2.1'
     // bugfix for android support preference http://stackoverflow.com/questions/32070670/preferencefragmentcompat-requires-preferencetheme-to-be-set
-    compile 'com.takisoft.fix:preference-v7:23.4.0.4'
+    // https://github.com/Gericop/Android-Support-Preference-V7-Fix
+    compile 'com.takisoft.fix:preference-v7:24.2.1.0'
     // https://github.com/chrisjenx/Calligraphy
     //    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.google.android.gms:play-services:9.6.1'
