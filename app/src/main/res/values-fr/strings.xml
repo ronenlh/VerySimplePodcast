@@ -37,4 +37,6 @@
     <string name="skip10">10 secondes</string>
     <string name="skip30">30 secondes</string>
     <string name="skip5">5 secondes</string>
+    <string name="English">Anglais</string>
+    <string name="Japanese">Japonais</string>
 </resources>

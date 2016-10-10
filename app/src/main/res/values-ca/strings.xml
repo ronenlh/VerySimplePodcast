@@ -37,4 +37,6 @@
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Contrasenya (Opcional)</string>
     <string name="permission_rationale">Permet accés als contactes perquè puguem autocompletar E-mails</string>
+    <string name="English">"Anglès "</string>
+    <string name="Japanese">Japanese</string>
 </resources>

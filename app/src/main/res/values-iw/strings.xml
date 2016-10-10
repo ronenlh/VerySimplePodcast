@@ -37,4 +37,6 @@
     <string name="prompt_password">סיסמה (לא חובה)</string>
     <string name="search">חפש</string>
     <string name="title_activity_login">התחבר</string>
+    <string name="English">אנגלית</string>
+    <string name="Japanese">יַפָּנִית</string>
 </resources>

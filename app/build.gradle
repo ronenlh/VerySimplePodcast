@@ -1,23 +1,29 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'MyAndroidKey'
+            keyPassword 'DTpaX9JzCBo&$}>6'
+            storeFile file('/Users/Ronen/vspodcast.jks')
+            storePassword '},Js3i>tA4Ywh$rh'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion '24.0.2'
-
     defaultConfig {
         applicationId "com.ronen.studio08.verysimplepodcast"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-
-        // Enabling multidex support.
         multiDexEnabled true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -42,9 +48,8 @@ dependencies {
     compile 'com.firebaseui:firebase-ui:0.5.3'
     compile 'com.google.firebase:firebase-auth:9.4.0'
     //    compile 'com.google.firebase:firebase-crash:9.0.1'
-        compile 'com.google.firebase:firebase-database:9.0.1'
+    compile 'com.google.firebase:firebase-database:9.0.1'
     //    compile 'com.google.firebase:firebase-messaging:9.0.0'
-
     compile 'com.google.android.gms:play-services-auth:9.6.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit2:retrofit:2.0.1'

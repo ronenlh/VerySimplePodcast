@@ -37,4 +37,6 @@
     <string name="prompt_password">Contraseña (Opcional)</string>
     <string name="search">Busca</string>
     <string name="title_activity_login">Iniciar Sesión</string>
+    <string name="English">Inglés</string>
+    <string name="Japanese">Japones</string>
 </resources>

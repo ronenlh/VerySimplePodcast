@@ -37,4 +37,6 @@
     <string name="skip5">5 Sekunden</string>
     <string name="title_activity_login">Anmelden</string>
     <string name="clear_search">Löschen Suchen</string>
+    <string name="English">Englisch</string>
+    <string name="Japanese">Japanisch</string>
 </resources>

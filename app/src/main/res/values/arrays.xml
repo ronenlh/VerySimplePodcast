@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="pref_skip_entries">
-        <item>30 seconds</item>
-        <item>10 seconds</item>
-        <item>5 seconds</item>
+        <item>@string/skip30</item>
+        <item>@string/skip10</item>
+        <item>@string/skip5</item>
     </string-array>
     <string-array name="pref_skip_values">
         <item>30</item>
@@ -518,11 +518,12 @@ PA
     Zimbabwe </item>
     </string-array>
 <string-array name="lang">
-    <item>English</item>
-    <item>Japanese</item>
+    <item>@string/English</item>
+    <item>@string/Japanese</item>
 </string-array>
 <string-array name="lang_codes">
     <item>en_us</item>
     <item>ja_jp</item>
 </string-array>
+
 </resources>
