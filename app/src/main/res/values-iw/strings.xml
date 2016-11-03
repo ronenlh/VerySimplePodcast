@@ -195,5 +195,5 @@
     <string name="Vietnam">Vietnam</string>
     <string name="Yemen">Yemen</string>
     <string name="SouthAfrica">South Africa</string>
-    <string name="Zimbabwe" translatable="false">Zimbabwe</string>
+    <string name="Zimbabwe">Zimbabwe</string>
 </resources>

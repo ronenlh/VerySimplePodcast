@@ -6,9 +6,9 @@
         <item>@string/skip5</item>
     </string-array>
     <string-array name="pref_skip_values">
-        <item>30</item>
-        <item>10</item>
-        <item>5</item>
+        <item>@string/value30</item>
+        <item>@string/value10</item>
+        <item>@string/value5</item>
     </string-array>
     <string-array name="country_names">
         <item>@string/UnitedArabEmirates</item>
@@ -332,4 +332,7 @@
         <item>@string/en_us</item>
         <item>@string/ja_jp</item>
     </string-array>
+    <string name="value30" translatable="false">30</string>
+    <string name="value10" translatable="false">10</string>
+    <string name="value5" translatable="false">5</string>
 </resources>
