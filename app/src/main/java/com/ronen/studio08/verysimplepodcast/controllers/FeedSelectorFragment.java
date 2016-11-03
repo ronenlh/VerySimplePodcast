@@ -106,6 +106,7 @@ public class FeedSelectorFragment extends ListFragment implements AdapterView.On
         setListAdapter(adapter);
 
         getListView().setOnItemLongClickListener(this);
+        getListView().setEmptyView(rootView.findViewById(android.R.id.empty));
     }
 
 
