@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">VerySimplePodcast</string>
-    <string name="nothing_to_show">No Feeds Added</string>
+    <string name="nothing_to_show">Nothing to show</string>
     <string name="add_feed_url">Add feed URL</string>
     <string name="done">Add</string>
     <string name="episode_selected">Episode Selected</string>
@@ -23,8 +23,6 @@
     <string name="search">Search</string>
     <string name="clear_search">Clear Search</string>
     <string name="title_activity_login">Sign in</string>
-
-    <!-- Strings related to login -->
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -40,4 +38,321 @@
     <string name="skip5">5 Seconds</string>
     <string name="English">English</string>
     <string name="Japanese">Japanese</string>
+
+    <!-- country names -->
+    <string name="UnitedArabEmirates">United Arab Emirates</string>
+    <string name="AntiguaandBarbuda">Antigua and Barbuda</string>
+    <string name="Anguilla">Anguilla</string>
+    <string name="Albania">Albania</string>
+    <string name="Armenia">Armenia</string>
+    <string name="Angola">Angola</string>
+    <string name="Argentina">Argentina</string>
+    <string name="Austria">Austria</string>
+    <string name="Australia">Australia</string>
+    <string name="Azerbaijan">Azerbaijan</string>
+    <string name="Barbados">Barbados</string>
+    <string name="Belgium">Belgium</string>
+    <string name="BurkinaFaso">Burkina Faso</string>
+    <string name="Bulgaria">Bulgaria</string>
+    <string name="Bahrain">Bahrain</string>
+    <string name="Benin">Benin</string>
+    <string name="Bermuda">Bermuda</string>
+    <string name="Brunei">Brunei</string>
+    <string name="Bolivia">Bolivia</string>
+    <string name="Brazil">Brazil</string>
+    <string name="Bahamas">Bahamas</string>
+    <string name="Bhutan">Bhutan</string>
+    <string name="Botswana">Botswana</string>
+    <string name="Belarus">Belarus</string>
+    <string name="Belize">Belize</string>
+    <string name="Canada">Canada</string>
+    <string name="RepublicOfCongo">Republic Of Congo</string>
+    <string name="Switzerland">Switzerland</string>
+    <string name="Chile">Chile</string>
+    <string name="China">China</string>
+    <string name="Colombia">Colombia</string>
+    <string name="CostaRica">Costa Rica</string>
+    <string name="CapeVerde">Cape Verde</string>
+    <string name="Cyprus">Cyprus</string>
+    <string name="CzechRepublic">Czech Republic</string>
+    <string name="Germany">Germany</string>
+    <string name="Denmark">Denmark</string>
+    <string name="Dominica">Dominica</string>
+    <string name="DominicanRepublic">Dominican Republic</string>
+    <string name="Algeria">Algeria</string>
+    <string name="Ecuador">Ecuador</string>
+    <string name="Estonia">Estonia</string>
+    <string name="Egypt">Egypt</string>
+    <string name="Spain">Spain</string>
+    <string name="Finland">Finland</string>
+    <string name="Fiji">Fiji</string>
+    <string name="FederatedStatesOfMicronesia">Federated States Of Micronesia</string>
+    <string name="France">France</string>
+    <string name="UnitedKingdom">United Kingdom</string>
+    <string name="Grenada">Grenada</string>
+    <string name="Ghana">Ghana</string>
+    <string name="Gambia">Gambia</string>
+    <string name="Greece">Greece</string>
+    <string name="Guatemala">Guatemala</string>
+    <string name="GuineaBissau">Guinea-Bissau</string>
+    <string name="Guyana">Guyana</string>
+    <string name="HongKong">Hong Kong</string>
+    <string name="Honduras">Honduras</string>
+    <string name="Croatia">Croatia</string>
+    <string name="Hungary">Hungary</string>
+    <string name="Indonesia">Indonesia</string>
+    <string name="Ireland">Ireland</string>
+    <string name="Israel">Israel</string>
+    <string name="India">India</string>
+    <string name="Iceland">Iceland</string>
+    <string name="Italy">Italy</string>
+    <string name="Jamaica">Jamaica</string>
+    <string name="Jordan">Jordan</string>
+    <string name="Japan">Japan</string>
+    <string name="Kenya">Kenya</string>
+    <string name="Kyrgyzstan">Kyrgyzstan</string>
+    <string name="Cambodia">Cambodia</string>
+    <string name="StKittsandNevis">St. Kitts and Nevis</string>
+    <string name="RepublicOfKorea">Republic Of Korea</string>
+    <string name="Kuwait">Kuwait</string>
+    <string name="CaymanIslands">Cayman Islands</string>
+    <string name="Kazakstan">Kazakstan</string>
+    <string name="LaoPeoplesDemocraticRepublic">Lao People’s Democratic Republic</string>
+    <string name="Lebanon">Lebanon</string>
+    <string name="StLucia">St. Lucia</string>
+    <string name="SriLanka">Sri Lanka</string>
+    <string name="Liberia">Liberia</string>
+    <string name="Lithuania">Lithuania</string>
+    <string name="Luxembourg">Luxembourg</string>
+    <string name="Latvia">Latvia</string>
+    <string name="RepublicOfMoldova">Republic Of Moldova</string>
+    <string name="Madagascar">Madagascar</string>
+    <string name="Macedonia">Macedonia</string>
+    <string name="Mali">Mali</string>
+    <string name="Mongolia">Mongolia</string>
+    <string name="Macau">Macau</string>
+    <string name="Mauritania">Mauritania</string>
+    <string name="Montserrat">Montserrat</string>
+    <string name="Malta">Malta</string>
+    <string name="Mauritius">Mauritius</string>
+    <string name="Malawi">Malawi</string>
+    <string name="Mexico">Mexico</string>
+    <string name="Malaysia">Malaysia</string>
+    <string name="Mozambique">Mozambique</string>
+    <string name="Namibia">Namibia</string>
+    <string name="Niger">Niger</string>
+    <string name="Nigeria">Nigeria</string>
+    <string name="Nicaragua">Nicaragua</string>
+    <string name="Netherlands">Netherlands</string>
+    <string name="Norway">Norway</string>
+    <string name="Nepal">Nepal</string>
+    <string name="NewZealand">New Zealand</string>
+    <string name="Oman">Oman</string>
+    <string name="Panama">Panama</string>
+    <string name="Peru">Peru</string>
+    <string name="PapuaNewGuinea">Papua New Guinea</string>
+    <string name="Philippines">Philippines</string>
+    <string name="Pakistan">Pakistan</string>
+    <string name="Poland">Poland</string>
+    <string name="Portugal">Portugal</string>
+    <string name="Palau">Palau</string>
+    <string name="Paraguay">Paraguay</string>
+    <string name="Qatar">Qatar</string>
+    <string name="Romania">Romania</string>
+    <string name="Russia">Russia</string>
+    <string name="SaudiArabia">Saudi Arabia</string>
+    <string name="SolomonIslands">Solomon Islands</string>
+    <string name="Seychelles">Seychelles</string>
+    <string name="Sweden">Sweden</string>
+    <string name="Singapore">Singapore</string>
+    <string name="Slovenia">Slovenia</string>
+    <string name="Slovakia">Slovakia</string>
+    <string name="SierraLeone">Sierra Leone</string>
+    <string name="Senegal">Senegal</string>
+    <string name="Suriname">Suriname</string>
+    <string name="SaoTomeandPrincipe">Sao Tome and Principe</string>
+    <string name="ElSalvador">El Salvador</string>
+    <string name="Swaziland">Swaziland</string>
+    <string name="TurksandCaicos">Turks and Caicos</string>
+    <string name="Chad">Chad</string>
+    <string name="Thailand">Thailand</string>
+    <string name="Tajikistan">Tajikistan</string>
+    <string name="Turkmenistan">Turkmenistan</string>
+    <string name="Tunisia">Tunisia</string>
+    <string name="Turkey">Turkey</string>
+    <string name="TrinidadandTobago">Trinidad and Tobago</string>
+    <string name="Taiwan">Taiwan</string>
+    <string name="Tanzania">Tanzania</string>
+    <string name="Ukraine">Ukraine</string>
+    <string name="Uganda">Uganda</string>
+    <string name="UnitedStates">United States</string>
+    <string name="Uruguay">Uruguay</string>
+    <string name="Uzbekistan">Uzbekistan</string>
+    <string name="StVincentandTheGrenadines">St. Vincent and The Grenadines</string>
+    <string name="Venezuela">Venezuela</string>
+    <string name="BritishVirginIslands">British Virgin Islands</string>
+    <string name="Vietnam">Vietnam</string>
+    <string name="Yemen">Yemen</string>
+    <string name="SouthAfrica">South Africa</string>
+    <string name="Zimbabwe">Zimbabwe</string>
+
+    <!-- country codes -->
+    <string name="AE" translatable="false">AE</string>
+    <string name="AG" translatable="false">AG</string>
+    <string name="AI" translatable="false">AI</string>
+    <string name="AL" translatable="false">AL</string>
+    <string name="AM" translatable="false">AM</string>
+    <string name="AO" translatable="false">AO</string>
+    <string name="AR" translatable="false">AR</string>
+    <string name="AT" translatable="false">AT</string>
+    <string name="AU" translatable="false">AU</string>
+    <string name="AZ" translatable="false">AZ</string>
+    <string name="BB" translatable="false">BB</string>
+    <string name="BE" translatable="false">BE</string>
+    <string name="BF" translatable="false">BF</string>
+    <string name="BG" translatable="false">BG</string>
+    <string name="BH" translatable="false">BH</string>
+    <string name="BJ" translatable="false">BJ</string>
+    <string name="BM" translatable="false">BM</string>
+    <string name="BN" translatable="false">BN</string>
+    <string name="BO" translatable="false">BO</string>
+    <string name="BR" translatable="false">BR</string>
+    <string name="BS" translatable="false">BS</string>
+    <string name="BT" translatable="false">BT</string>
+    <string name="BW" translatable="false">BW</string>
+    <string name="BY" translatable="false">BY</string>
+    <string name="BZ" translatable="false">BZ</string>
+    <string name="CA" translatable="false">CA</string>
+    <string name="CG" translatable="false">CG</string>
+    <string name="CH" translatable="false">CH</string>
+    <string name="CL" translatable="false">CL</string>
+    <string name="CN" translatable="false">CN</string>
+    <string name="CO" translatable="false">CO</string>
+    <string name="CR" translatable="false">CR</string>
+    <string name="CV" translatable="false">CV</string>
+    <string name="CY" translatable="false">CY</string>
+    <string name="CZ" translatable="false">CZ</string>
+    <string name="DE" translatable="false">DE</string>
+    <string name="DK" translatable="false">DK</string>
+    <string name="DM" translatable="false">DM</string>
+    <string name="DO" translatable="false">DO</string>
+    <string name="DZ" translatable="false">DZ</string>
+    <string name="EC" translatable="false">EC</string>
+    <string name="EE" translatable="false">EE</string>
+    <string name="EG" translatable="false">EG</string>
+    <string name="ES" translatable="false">ES</string>
+    <string name="FI" translatable="false">FI</string>
+    <string name="FJ" translatable="false">FJ</string>
+    <string name="FM" translatable="false">FM</string>
+    <string name="FR" translatable="false">FR</string>
+    <string name="GB" translatable="false">GB</string>
+    <string name="GD" translatable="false">GD</string>
+    <string name="GH" translatable="false">GH</string>
+    <string name="GM" translatable="false">GM</string>
+    <string name="GR" translatable="false">GR</string>
+    <string name="GT" translatable="false">GT</string>
+    <string name="GW" translatable="false">GW</string>
+    <string name="GY" translatable="false">GY</string>
+    <string name="HK" translatable="false">HK</string>
+    <string name="HN" translatable="false">HN</string>
+    <string name="HR" translatable="false">HR</string>
+    <string name="HU" translatable="false">HU</string>
+    <string name="ID" translatable="false">ID</string>
+    <string name="IE" translatable="false">IE</string>
+    <string name="IL" translatable="false">IL</string>
+    <string name="IN" translatable="false">IN</string>
+    <string name="IS" translatable="false">IS</string>
+    <string name="IT" translatable="false">IT</string>
+    <string name="JM" translatable="false">JM</string>
+    <string name="JO" translatable="false">JO</string>
+    <string name="JP" translatable="false">JP</string>
+    <string name="KE" translatable="false">KE</string>
+    <string name="KG" translatable="false">KG</string>
+    <string name="KH" translatable="false">KH</string>
+    <string name="KN" translatable="false">KN</string>
+    <string name="KR" translatable="false">KR</string>
+    <string name="KW" translatable="false">KW</string>
+    <string name="KY" translatable="false">KY</string>
+    <string name="KZ" translatable="false">KZ</string>
+    <string name="LA" translatable="false">LA</string>
+    <string name="LB" translatable="false">LB</string>
+    <string name="LC" translatable="false">LC</string>
+    <string name="LK" translatable="false">LK</string>
+    <string name="LR" translatable="false">LR</string>
+    <string name="LT" translatable="false">LT</string>
+    <string name="LU" translatable="false">LU</string>
+    <string name="LV" translatable="false">LV</string>
+    <string name="MD" translatable="false">MD</string>
+    <string name="MG" translatable="false">MG</string>
+    <string name="MK" translatable="false">MK</string>
+    <string name="ML" translatable="false">ML</string>
+    <string name="MN" translatable="false">MN</string>
+    <string name="MO" translatable="false">MO</string>
+    <string name="MR" translatable="false">MR</string>
+    <string name="MS" translatable="false">MS</string>
+    <string name="MT" translatable="false">MT</string>
+    <string name="MU" translatable="false">MU</string>
+    <string name="MW" translatable="false">MW</string>
+    <string name="MX" translatable="false">MX</string>
+    <string name="MY" translatable="false">MY</string>
+    <string name="MZ" translatable="false">MZ</string>
+    <string name="NA" translatable="false">NA</string>
+    <string name="NE" translatable="false">NE</string>
+    <string name="NG" translatable="false">NG</string>
+    <string name="NI" translatable="false">NI</string>
+    <string name="NL" translatable="false">NL</string>
+    <string name="NO" translatable="false">NO</string>
+    <string name="NP" translatable="false">NP</string>
+    <string name="NZ" translatable="false">NZ</string>
+    <string name="OM" translatable="false">OM</string>
+    <string name="PA" translatable="false">PA</string>
+    <string name="PE" translatable="false">PE</string>
+    <string name="PG" translatable="false">PG</string>
+    <string name="PH" translatable="false">PH</string>
+    <string name="PK" translatable="false">PK</string>
+    <string name="PL" translatable="false">PL</string>
+    <string name="PT" translatable="false">PT</string>
+    <string name="PW" translatable="false">PW</string>
+    <string name="PY" translatable="false">PY</string>
+    <string name="QA" translatable="false">QA</string>
+    <string name="RO" translatable="false">RO</string>
+    <string name="RU" translatable="false">RU</string>
+    <string name="SA" translatable="false">SA</string>
+    <string name="SB" translatable="false">SB</string>
+    <string name="SC" translatable="false">SC</string>
+    <string name="SE" translatable="false">SE</string>
+    <string name="SG" translatable="false">SG</string>
+    <string name="SI" translatable="false">SI</string>
+    <string name="SK" translatable="false">SK</string>
+    <string name="SL" translatable="false">SL</string>
+    <string name="SN" translatable="false">SN</string>
+    <string name="SR" translatable="false">SR</string>
+    <string name="ST" translatable="false">ST</string>
+    <string name="SV" translatable="false">SV</string>
+    <string name="SZ" translatable="false">SZ</string>
+    <string name="TC" translatable="false">TC</string>
+    <string name="TD" translatable="false">TD</string>
+    <string name="TH" translatable="false">TH</string>
+    <string name="TJ" translatable="false">TJ</string>
+    <string name="TM" translatable="false">TM</string>
+    <string name="TN" translatable="false">TN</string>
+    <string name="TR" translatable="false">TR</string>
+    <string name="TT" translatable="false">TT</string>
+    <string name="TW" translatable="false">TW</string>
+    <string name="TZ" translatable="false">TZ</string>
+    <string name="UA" translatable="false">UA</string>
+    <string name="UG" translatable="false">UG</string>
+    <string name="US" translatable="false">US</string>
+    <string name="UY" translatable="false">UY</string>
+    <string name="UZ" translatable="false">UZ</string>
+    <string name="VC" translatable="false">VC</string>
+    <string name="VE" translatable="false">VE</string>
+    <string name="VG" translatable="false">VG</string>
+    <string name="VN" translatable="false">VN</string>
+    <string name="YE" translatable="false">YE</string>
+    <string name="ZA" translatable="false">ZA</string>
+    <string name="ZW" translatable="false">ZW</string>
+
+    <string name="en_us" translatable="false">en_us</string>
+    <string name="ja_jp" translatable="false">ja_jp</string>
 </resources>
