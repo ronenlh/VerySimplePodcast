@@ -8,15 +8,20 @@
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp">
+    android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="dialog_title"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/dialog_title" />
+        android:id="@+id/dialog_title"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp" />
 
     <TextView
     android:layout_width="wrap_content"
@@ -25,7 +30,10 @@
     android:textAppearance="?android:attr/textAppearanceSmall"
     android:id="@+id/dialog_author"
     android:layout_weight="1"
-    android:capitalize="characters" />
+    android:capitalize="characters"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,7 +41,11 @@
         tools:text="dialog_date"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/dialog_date"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp" />
 
 
     <TextView
@@ -41,7 +53,11 @@
             android:layout_height="wrap_content"
             tools:text="dialog_description"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/dialog_description" />
+            android:id="@+id/dialog_description"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp" />
 
 </LinearLayout>
     </ScrollView>

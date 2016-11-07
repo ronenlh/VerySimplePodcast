@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ronen.studio08.verysimplepodcast.EpisodeBaseAdapter;
@@ -98,9 +99,14 @@ public class EpisodeSelectorFragment extends ListFragment implements AdapterView
             }
 
             @Override
-            public void onFailure(Call<RSS> call, Throwable t)
-            {
-                Toast.makeText(getActivity(), R.string.episode_error2, Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<RSS> call, Throwable t) {
+//                Toast.makeText(getActivity(), R.string.episode_error2, Toast.LENGTH_SHORT).show();
+                View view = getView();
+                if (view != null) {
+                    view.findViewById(R.id.loading_error).setVisibility(View.VISIBLE);
+                    ((TextView) view.findViewById(R.id.loading_error)).setText(R.string.episode_error2);
+                    view.findViewById(R.id.episode_progressbar).setVisibility(View.GONE);
+                }
                 Log.d("failure", t.toString());
             }
         });

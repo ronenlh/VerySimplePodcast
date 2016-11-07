@@ -2,24 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp"
     android:layout_height="match_parent"
     android:background="#ffffff">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:maxLines="1"
         android:id="@+id/episode_title"
-        tools:text="Episode Title"/>
+        tools:text="Episode Title"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/episode_description"
-        android:maxLines="2"
-        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas vestibulum diam, quis eleifend sapien gravida varius. Etiam convallis massa vitae erat volutpat, at volutpat orci venenatis. Ut vel nisl facilisis, commodo tellus pellentesque, pellentesque lorem. Pellentesque sed consequat orci. Vestibulum pretium bibendum augue, quis luctus nibh interdum at. In est neque, dignissim vel pharetra dignissim, tristique a massa. Donec volutpat molestie nunc, non ultricies tellus lobortis sed. Vestibulum et sapien urna. Sed tincidunt libero nunc, nec sollicitudin augue pretium at. Suspendisse dictum ultricies magna ut bibendum. Curabitur condimentum neque in erat lobortis, vitae convallis risus tristique."/>
+        android:maxLines="3"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas vestibulum diam, quis eleifend sapien gravida varius. Etiam convallis massa vitae erat volutpat, at volutpat orci venenatis. Ut vel nisl facilisis, commodo tellus pellentesque, pellentesque lorem. Pellentesque sed consequat orci. Vestibulum pretium bibendum augue, quis luctus nibh interdum at. In est neque, dignissim vel pharetra dignissim, tristique a massa. Donec volutpat molestie nunc, non ultricies tellus lobortis sed. Vestibulum et sapien urna. Sed tincidunt libero nunc, nec sollicitudin augue pretium at. Suspendisse dictum ultricies magna ut bibendum. Curabitur condimentum neque in erat lobortis, vitae convallis risus tristique."
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="18sp"
+        android:minLines="1" />
 </LinearLayout>
