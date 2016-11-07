@@ -16,8 +16,23 @@
 #   public *;
 #}
 
-# Add this global rule
+-dontwarn rx.**
+
+-dontwarn okio.**
+
+-dontwarn com.squareup.okhttp.*
+
+-dontwarn retrofit.appengine.UrlFetchClient
+
+
+-keep class retrofit.** { *; }
+
+-keepclasseswithmembers class * {
+
+@retrofit.http.* <methods>; }
+
 -keepattributes Signature
+-keepattributes *Annotation*
 
 # This rule will properly ProGuard all the model classes in
 # the package com.yourcompany.models. Modify to fit the structure

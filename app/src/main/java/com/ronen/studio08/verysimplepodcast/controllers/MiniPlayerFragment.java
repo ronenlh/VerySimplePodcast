@@ -52,6 +52,7 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.miniplayer_fragment, container, false);
     }
 
@@ -225,18 +226,19 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
             // https://stackoverflow.com/questions/17168215/seekbar-and-media-player-in-android
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (mp != null && fromUser) {
+                if (fromUser) {
                     mp.seekTo(progress);
                 }
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                Log.v(TAG, "onStartTrackingTouch() " + seekBar.toString());
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                Log.v(TAG, "onStopTrackingTouch() " + seekBar.toString());
             }
         });
     }
@@ -244,18 +246,32 @@ public class MiniPlayerFragment extends Fragment implements MediaPlayer.OnPrepar
     @Override
     public void onPause() {
         super.onPause();
-        Log.d(TAG, "onPause()");
+        Log.v(TAG, "onPause()");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume()");
+        Log.v(TAG, "onResume()");
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null) {
+                    long currentPosition = mediaPlayer.getCurrentPosition();
+                    Log.d(TAG, "currentPosition: " + currentPosition);
+                    seekBar.setMax(mediaPlayer.getDuration());
+                    seekBar.setProgress((int) currentPosition);
+                }
+            }
+        });
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy()");
+        Log.v(TAG, "onDestroy()");
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
     }
 }
