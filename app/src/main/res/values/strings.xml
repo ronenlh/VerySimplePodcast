@@ -355,4 +355,6 @@
 
     <string name="en_us" translatable="false">en_us</string>
     <string name="ja_jp" translatable="false">ja_jp</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="website">Website</string>
 </resources>

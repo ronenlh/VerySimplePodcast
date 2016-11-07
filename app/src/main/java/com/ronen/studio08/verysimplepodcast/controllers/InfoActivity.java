@@ -96,17 +96,25 @@ public class InfoActivity extends AppCompatActivity {
 
 //                    Channel.Item[] items = mFeed.getChannel().getItemList().toArray(new Channel.Item[mFeed.getChannel().getItemList().size()]);
 
+                    findViewById(R.id.info_episode_progressbar).setVisibility(View.GONE);
+                    findViewById(R.id.infoListView).setVisibility(View.VISIBLE);
                     InfoListBaseAdapter adapter = new InfoListBaseAdapter(InfoActivity.this, mFeed.getChannel().getItemList());
 
 //                    ArrayAdapter adapter = new ArrayAdapter(InfoActivity.this, android.R.layout.simple_list_item_1, items);
                     mListView.setAdapter(adapter);
 
-                } else
+                } else {
+
+                    findViewById(R.id.info_loading_error).setVisibility(View.VISIBLE);
+                    ((TextView) findViewById(R.id.info_loading_error)).setText(R.string.episode_error2);
+                    findViewById(R.id.info_episode_progressbar).setVisibility(View.GONE);
+
                     try {
                         Log.e("mFeed", response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
             }
 
             @Override

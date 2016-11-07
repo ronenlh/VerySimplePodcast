@@ -4,17 +4,20 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="horizontal"
               android:gravity="center_vertical"
-              android:layout_width="match_parent"
-              android:layout_height="40dp">
+    android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+    android:layout_margin="20dp">
 
     <ImageView
         android:layout_width="30dp"
-        app:srcCompat="@drawable/quantum_ic_play_circle_filled_grey600_36"
+        android:src="@drawable/ic_play_circle_filled_black_24dp"
         android:id="@+id/playImageView"
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
         android:layout_height="30dp"
-        android:tag="play"/>
+        android:contentDescription="play button"
+        android:tag="play"
+        android:alpha="0.5" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,7 +28,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dip"
             android:textAppearance="?android:attr/textAppearanceListItem"
             android:textAlignment="viewStart"
             tools:text="Title of the Episode"
@@ -34,10 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@android:id/text1"
-            android:layout_alignStart="@android:id/text1"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textAlignment="viewStart"
             tools:text="Description of the Episode"
             android:id="@+id/descriptionRowTextView"
             android:layout_gravity="center_vertical"/>
@@ -47,6 +46,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/infoImageView"
+        android:contentDescription="info button"
         app:srcCompat="@android:drawable/ic_menu_info_details"
         android:tag="info"/>
 </LinearLayout>

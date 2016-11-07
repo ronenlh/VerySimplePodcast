@@ -8,12 +8,6 @@ import android.util.Log;
 
 import java.util.Locale;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
-//import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-//import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
 /**
  * Created by studio08 on 5/19/2016.
  * Base class for maintaining global application state.
@@ -42,11 +36,6 @@ public class VerySimplePodcast extends Application {
         sDefSystemLanguage = Locale.getDefault().getLanguage();
         Log.d("sDefSystemLanguage", sDefSystemLanguage);
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Alef-Regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
     }
 
     @Override
@@ -58,8 +47,7 @@ public class VerySimplePodcast extends Application {
 
     @Override
     protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(base);
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(base));
+        super.attachBaseContext(base);
         MultiDex.install(this);
     }
 }
