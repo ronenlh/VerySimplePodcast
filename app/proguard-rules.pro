@@ -24,8 +24,12 @@
 
 -dontwarn retrofit.appengine.UrlFetchClient
 
+-dontwarn org.simpleframework.xml.stream.*
+
 
 -keep class retrofit.** { *; }
+
+-dontwarn retrofit2.Platform$Java8
 
 -keepclasseswithmembers class * {
 
